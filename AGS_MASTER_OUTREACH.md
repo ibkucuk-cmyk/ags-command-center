@@ -4,7 +4,7 @@
 > **Service Area:** 90 min drive from Edgewood, MD (21040)  
 > **Coverage:** MD (all counties within range), PA (York, Lancaster, Harrisburg, Chester Co, Gettysburg, Reading), DE (New Castle)  
 > **Sources:** Baltimore Magazine, NKBA, Houzz, Google, MBIA, Web Research  
-> **Total Active Prospects:** 681  
+> **Total Active Prospects:** 731  
 > **Existing customers and companies we refuse to work with are EXCLUDED from prospect counts but tracked at bottom for reference.**
 
 ---
@@ -3889,7 +3889,67 @@
 
 > **✅ PHASE 7B (MHIC "remodel") — 40 cherry-picked from 1,184 results (#647-686).**
 > **Selection criteria:** Only remodelers in Cockeysville/Hunt Valley/Harford Co/Lutherville/Towson.
-> **Skipped:** ~1,144 general remodelers outside AGS core territory.
+
+### MHIC "REMODEL" EXTENDED — Broader Metro for Email Outreach
+
+> **Strategy shift:** Email outreach has near-zero marginal cost. Including all verified
+> remodelers in the Baltimore metro / service radius for email blast campaigns.
+
+| # | Company | Owner | City | MHIC # | Expires | AGS Angle |
+|---|---|---|---|---|---|---|
+| 706 | Modern Remodeling Inc ⭐ | Jonathan Ballard | Baltimore, MD | — | 2028-06-03 | 5020 Campbell Blvd Ste B — est. company. |
+| 707 | Mooney Construction & Remodeling | Stephen Mooney | Freeland, MD | — | 2026-08-26 | 21510 Orwig Rd — north Baltimore Co. |
+| 708 | Moyas Painting and Remodeling | Angel Castro | Aberdeen, MD | — | 2027-04-01 | 37 Raymond Ave — Harford Co. |
+| 709 | New Image Building & Remodeling ⭐ | Dale Turner | Fallston, MD | 01-41925 | 2027-02-09 | 2522 Burgundy Dr — Harford Co. |
+| 710 | New Images Remodeling Services | Robert Twist | Perryville, MD | 01-71743 | 2027-10-14 | 45 Greenbank Ct — Cecil Co. |
+| 711 | Next Phase Exterior Remodeling ⭐ | Nicholas Giorgi | Bel Air, MD | 05-164396 | 2027-07-10 | 1205 Royal Meadow Ct — Harford Co. |
+| 712 | Oak & Iron Remodeling LLC ⭐ | Vincent Howlett | Bel Air, MD | 05-163492 | 2027-05-07 | 453 Darby Ln — Harford Co. |
+| 713 | Oak Hill Remodeling LLC | Roger Frix | Parkton, MD | 05-158244 | 2028-04-17 | 339 Stablers Church Rd. |
+| 714 | Omni Remodeling / Kitchen Saver ⭐⭐ | Brett Cohen | Owings Mills, MD | 05-28743 | 2027-04-12 | 10315 S Dolfield Rd — FRANCHISE! |
+| 715 | Peak Custom Remodeling Corp | David Stavinoha | Owings Mills, MD | 05-132406 | 2027-05-18 | 300 Red Brook Blvd. |
+| 716 | Qualified Remodelers Inc | Antonio Barone | Parkton, MD | 05-136307 | 2026-10-03 | 26 Patricks Ct — north Balto Co. |
+| 717 | Remodel Max LLC ⭐ | Wayne Huller Jr | Forest Hill, MD | 05-126436 | 2027-12-26 | 1153 Walters Mill Rd — Harford Co. |
+| 718 | Remodel Repair.Com | George Waldhauser | Fallston, MD | — | 2027-05-13 | 603 Millwood Dr — Harford Co. |
+| 719 | Remodeling M D LLC ⭐ | Douglas Miller | Phoenix, MD | 05-130993 | 2027-08-19 | 3313 Paper Mill Rd — near AGS! |
+| 720 | Robin Ford Bldg & Remodeling | Robin Ford | Hampstead, MD | — | 2026-12-10 | 2900 Shiloh Rd — Carroll Co. |
+| 721 | Rogers Remodeling & Exteriors ⭐ | Justin Rogers | Havre de Grace, MD | 05-150725 | 2026-10-28 | 204 N Earlton Rd — Harford Co. |
+| 722 | Rustic Remodeling LLC | George Padusi | Bel Air, MD | 05-144321 | 2027-05-12 | 2019 Fairland Rd. |
+| 723 | SC Home Remodeling LLC | Sebastian Czubernat | Fallston, MD | 05-148663 | 2028-03-24 | 1208 Hillsboro Ct — Harford Co. |
+| 724 | SG Complete Home Care ⭐ | Samuel Gurkin | Phoenix, MD | — | 2028-05-29 | 14419 Katie Rd — near AGS! |
+| 725 | Shared Stories Home & Remodeling | Virgil Murphy | White Marsh, MD | 05-145309 | 2027-07-12 | 10521 Industrial Park Rd. |
+| 726 | Star Choice Remodeling Inc ⭐ | Cezary Moscianica | Bel Air, MD | 05-140327 | 2026-10-15 | 1441 E Macphail Rd — Bel Air! |
+| 727 | SSK Remodeling LLC | Shukhrat Kasimov | Finksburg, MD | 05-136590 | 2027-01-10 | 1951 Polaris Rd — Carroll Co. |
+| 728 | Sunshine Remodeling LLC | Vita Zonis | Finksburg, MD | 05-134470 | 2027-02-10 | 2919 Industrial Park Dr. |
+| 729 | T.J. Plumbing and Remodeling ⭐ | Jeffrey Peeples | Fallston, MD | 05-165000 | 2027-08-26 | 2600 Gunpowder Farms Rd. |
+| 730 | Tidewater Remodeling & Const ⭐ | Robert Degraw | Baldwin, MD | 01-12152 | 2027-06-17 | 14308 Dairydale Rd — near AGS! |
+| 731 | T D G Building and Remodeling ⭐ | Matthew Dontell | Jarrettsville, MD | 05-125365 | 2027-09-17 | 3816 Salem Church Rd — Harford Co. |
+| 732 | Urso Remodeling Inc | Darryl Fallis | Bel Air, MD | 05-129753 | 2028-02-16 | 501 Country Ridge Cir. |
+| 733 | Valley Mill Remodeling LLC | William Boone | Freeland, MD | 05-140956 | 2026-11-19 | 14C Kirsim Ct — north Balto Co. |
+| 734 | Vivid Spaces Remodeling | Matthew Shifflett | Upperco, MD | 05-154032 | 2027-09-15 | 14921 Old Hanover Rd. |
+| 735 | W J Scott Remodeling LLC | Wade Scott | Street, MD | 05-162679 | 2027-03-23 | 3347A Ady Rd — Harford Co. |
+| 736 | WM Remodeling LLC | William McDonald | Bel Air, MD | 05-128314 | 2028-06-11 | 208 Highland Rd — Harford Co. |
+| 737 | 360 Remodeling LLC | Ivan Somerlik | Towson, MD | 05-134503 | 2027-05-05 | 1300 Midmeadow Rd — Towson. |
+| 738 | Excel Remodeling Corp ⭐ | Todd Pruitt | Owings Mills, MD | — | 2027-12-19 | 110 Painters Mill Rd — est. company. |
+| 739 | Four Gen Remodeling ⭐ | Richard Kotlas | Ellicott City, MD | 05-124582 | 2026-11-28 | 9319 Balto Natl Pike — Howard Co. |
+| 740 | Gebhardt Brothers Remodeling Inc | Mark Gebhardt | Pasadena, MD | 05-123807 | 2027-12-30 | 8337 Ritchie Hwy — Anne Arundel. |
+| 741 | Empire Home Remodeling Inc | Carlos Placidon | Middle River, MD | 05-133999 | 2026-11-21 | 42 Stabilizer Dr — near AGS! |
+| 742 | Eurovista Remodeling LLC | Kestutis Baronas | Rosedale, MD | 05-131555 | 2028-04-28 | 8402 Rocky Mount Rd. |
+| 743 | Evans Contracting & Remodeling ⭐ | Roger Evans | White Hall, MD | 05-122570 | 2028-04-12 | 20612 Kirkwood Shop Rd. |
+| 744 | Dream Craft Remodeling LLC | Todor Hvoynev | Parkton, MD | 05-163013 | 2027-04-11 | 218 Turner Crossing Rd. |
+| 745 | Franz Custom Remodeling LLC | Mark Franz | Rosedale, MD | 05-142152 | 2027-01-28 | 8918 Philadelphia Rd. |
+| 746 | Loch Raven Remodeling ⭐ | Gene Dedeo | Jarrettsville, MD | 05-122607 | 2027-06-29 | 3940 Madonna Rd — Harford Co. |
+| 747 | Joy Remodeling LLC | Jeffrey Joy | Manchester, MD | 05-137622 | 2027-09-11 | 3536 Beckleysville Rd. |
+| 748 | Prime Contracting & Remodeling | Paul Pomocka | Street, MD | — | 2027-05-30 | 4509 Oak Ridge Dr — Harford Co. |
+| 749 | SMP Construction & Remodeling | Steven Pugh | Conowingo, MD | — | 2028-04-22 | 237 Geralds Way — Cecil Co. |
+| 750 | United Remodeling LLC | Ronald Behr | Street, MD | 05-126511 | 2026-09-12 | 3007 Blue House Rd — Harford Co. |
+| 751 | Dogwood Remodeling LLC ⭐ | Jason Mills | Millersville, MD | 05-164921 | 2027-08-19 | 270 W Pasadena Rd — Anne Arundel. |
+| 752 | Elevated Remodeling LLC | Luke Vane | Hanover, MD | 05-146926 | 2027-11-02 | 6225 2nd Ave — Anne Arundel. |
+| 753 | Elmer Remodeling LLC | Elmer Flores | Lothian, MD | 05-148672 | 2028-03-24 | 73 Cougar Cir — Anne Arundel. |
+| 754 | Dreamspace Remodeling LLC ⭐ | Parviz Khalikov | Reisterstown, MD | 05-155952 | 2028-01-09 | 10 Cornfield Ct — Baltimore Co. |
+| 755 | DR Remodeling LLC | Amilcar Sanchez | Dundalk, MD | 05-162107 | 2027-02-16 | 8522 Kavanagh Rd — Baltimore Co. |
+
+> **✅ PHASE 7B-EXT (MHIC "remodel" extended) — 50 additional email outreach targets (#706-755).**
+> **Wider net:** Includes all of Baltimore Co, Harford Co, Howard Co, Carroll Co, Anne Arundel, Cecil Co.
 
 ---
 
@@ -4018,8 +4078,8 @@
 | 🗺️ **Tier 11-GM — Google Maps Phase 4** | **21** | **General Contractors** |
 | 🗺️ **Tier 12-GM — Google Maps Phase 5** | **36** | **Custom Home Builders** |
 | 🗺️ **Tier 13-SL — Phase 6: Supplier Locators** | **41** | **Cambria + Cosentino + Caesarstone + Fabuwood + Wolf + Daltile** |
-| 🏛️ **Tier 14-MHIC — Phase 7: MHIC Licensees** | **102** | **kitchen (43) + remodel (40) + bath (6) + cabinet (13)** |
-| **TOTAL ACTIVE PROSPECTS** | **681** | **✅ PHASES 1-7D COMPLETE** |
+| 🏛️ **Tier 14-MHIC — Phase 7: MHIC Licensees** | **152** | **kitchen (43) + remodel (90) + bath (6) + cabinet (13)** |
+| **TOTAL ACTIVE PROSPECTS** | **731** | **✅ PHASES 1-7D COMPLETE** |
 | ❌ Competitors/DNR | 37 | Do not contact |
 | ✅ Existing Customers | 32 | Maintain relationship |
 
