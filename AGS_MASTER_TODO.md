@@ -1,6 +1,6 @@
 # AGS Master TODO — Execution Checklist
 
-> **Last Updated:** 2026-05-16
+> **Last Updated:** 2026-05-17
 > This is the **step-by-step execution list** in priority order. Work top to bottom.
 > For strategic context behind each task, see `AGS_STRATEGIC_PLAN.md`.
 > For messaging rules, see `STRATEGY_RULES.md` Section 10.
@@ -89,6 +89,10 @@
 - `[ ]` **8.4** Print 50 copies of "Why AGS" one-pager (~$20-30 at print shop)
 - `[ ]` **8.5** Start LinkedIn Sales Navigator 30-day free trial
 - `[x]` **8.6** ✅ Build Google Maps prospecting list — **538 prospects across 5 phases** (K&B stores, remodelers, designers, GCs, custom builders) in MD/PA/DE → `AGS_MASTER_OUTREACH.md` + `.csv`
+- `[x]` **8.6b** ✅ Phase 6: Supplier locator sweep — 41 new prospects from Cambria, Cosentino, Caesarstone, Fabuwood, Wolf, Daltile
+- `[x]` **8.6c** ✅ Phase 7: MHIC licensee sweep — **152 new prospects** from kitchen (43), remodel (90), bath (6), cabinet (13) searches. 36 granite/marble competitors added to DNR. **Total: 730 active prospects.**
+- `[ ]` **8.6d** MHIC "construction" + "stone" search — cherry-pick K&B-relevant contractors from results. Add to master outreach.
+- `[ ]` **8.6e** Phase 8: Mine MBIA + NARI trade association directories for net-new prospects
 - `[ ]` **8.7** Start cold calling small contractors (5-10 calls/day, 3 days/week)
 - `[ ]` **8.8** Start K&B store walk-in visits (2-3 stores/week)
 - `[ ]` **8.9** Start LinkedIn outreach (10-15 touches/week to med/large GCs)
@@ -103,7 +107,7 @@
 - `[ ]` **9.3** Set up email accounts on new domain (Google Workspace or Zoho)
 - `[ ]` **9.4** Configure DNS records (SPF, DKIM, DMARC) — see setup guide in `AGS_EMAIL_OUTBOUND.md`
 - `[ ]` **9.5** Sign up for Instantly.ai ($30/mo) → connect email accounts → start auto-warmup
-- `[x]` **9.6** ✅ Build 538-prospect target list (K&B stores, designers, GCs, builders from Google Maps + NKBA + Houzz) → synced to `AGS_MASTER_OUTREACH.csv`
+- `[x]` **9.6** ✅ Build 730-prospect target list (K&B stores, designers, GCs, builders, remodelers, cabinet shops from Google Maps + NKBA + Houzz + MHIC) → synced to `AGS_MASTER_OUTREACH.csv`
 - `[ ]` **9.7** Verify emails using Hunter.io (free tier: 25/month)
 - `[ ]` **9.8** After warmup (3 weeks) → load sequence into Instantly → launch outbound
 
