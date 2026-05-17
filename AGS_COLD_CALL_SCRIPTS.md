@@ -1,148 +1,184 @@
-# AGS Cold Call & Walk-In Scripts
+# AGS Outreach Conversations — 5 Approaches
 
-> **Purpose:** Phone scripts for Google Maps outbound to small contractors, and walk-in scripts for K&B store visits.  
-> **Last Updated:** 2026-05-15  
-> **Messaging Compliance:** All claims verified against `STRATEGY_RULES.md` §10.
-
----
-
-## Script 1: Cold Call — Small Contractor (Google Maps Method)
-
-**Context:** You found this contractor on Google Maps. They do 1-2 kitchens/month. They may not have a website. They probably buy retail or use whatever fabricator picks up the phone.
-
-**Before calling:** Note their business name, location, any reviews that mention kitchens/bathrooms/remodeling.
+> **Purpose:** 5 distinct owner-to-owner conversation frameworks for phone, walk-in, coffee, and lunch outreach.  
+> **Last Updated:** 2026-05-17  
+> **Philosophy:** See `STRATEGY_RULES.md` §13 — "Owner to Owner, Not Salesman to Prospect"  
+> **Rule:** If it sounds like a pitch, you've already lost.
 
 ---
 
-### Opening (10 seconds — don't lose them)
+## How to Use This Document
 
-> *"Hey [first name], this is [your name] from Advanced Granite Solutions. We're a stone fabrication shop in [your city]. I'll be quick — do you do any kitchen or bathroom work that involves countertops?"*
+Pick **one approach per prospect** based on what feels right for the person. Test all 5 over the first 2 weeks and track which gets the best response rate. You can mix and match elements across approaches — these are conversation guides, not scripts.
 
-**If YES →** Continue to pitch.  
-**If NO →** *"No worries. If you ever run into a project that needs stone, keep us in mind. Have a great day."* (Hang up. Don't waste their time.)
-
----
-
-### The Pitch (30 seconds)
-
-> *"Cool. So we've been doing this for 20 years — we fabricate and install granite, quartz, marble, all of it. Everything's in-house, we don't sub anything out.*
->
-> *The reason I'm calling — we have an indoor slab yard where your customers can come pick their exact stone. A lot of contractors bring their clients here and it makes the whole process easier. No arguing about what color they're getting — they picked it themselves.*
->
-> *Would you be interested in taking a look at what we've got? No commitment — just come see the yard."*
+**Never read from this page on a call.** Internalize the approach. Speak naturally.
 
 ---
 
-### Handling Objections
+## Approach 1: "Industry Talk" — The Market Observer
 
-**"I already have a stone guy."**
-> *"Totally get it. Just out of curiosity — are you happy with their turnaround time and quality? We hear a lot from contractors who came to us because their old fabricator was either slow or the installs were inconsistent. If you ever need a backup or want to compare, the door's open."*
+**Best for:** Established K&B store owners, mid-size GCs, anyone who's been in business 10+ years.  
+**Where:** Phone call, coffee, lunch, office visit.  
+**Vibe:** Two veterans comparing notes on where the industry is heading.
 
-**"What are your prices?"**
-> *"It depends on the material and the scope, but I'll tell you this — we're not the cheapest and we're not trying to be. What we give you is reliability. Everything's in-house, so there's no 'the sub didn't show up' situation. If price is the only factor, we're probably not the right fit. But if you want a partner who makes you look good to your clients, let's talk."*
+### Opening
+> *"Hey [name], this is Serhan — I run Advanced Granite Solutions out in Edgewood. Been in the stone game about 20 years now. I was actually just driving through [their area] and realized I've never connected with you. How's business been for you this year?"*
 
-**"Send me some info."**
-> *"Sure. What's the best email? I'll send over a quick one-pager about what we do. And if you're ever in the area, the yard's always open for a walk-through."*  
-> *(Get email → add to Instantly.ai outbound list → follow up in 3 days)*
+### Let Them Talk
+This is the most important part. **Listen.** Ask follow-up questions. Be genuinely curious. Don't think about stone yet.
 
-**"I'm too small for that."**
-> *"We work with everyone — guys doing 1 kitchen a month all the way up to GCs doing 50-unit apartment buildings. No job is too small. If you've got a project coming up, bring your customer to the yard and we'll take care of the rest."*
+### Conversation Threads to Pull
+- "Are you seeing the same thing I'm seeing with material lead times? It's been wild."
+- "How are you handling the labor situation? We've had to get creative with retention."
+- "I feel like the customer expectations have changed — everyone wants everything yesterday now."
+- "What's your mix looking like? More new construction or remodel work?"
+- "Who's your biggest headache right now — suppliers, labor, or customers?" *(laugh)*
 
----
+### The Natural Bridge (Only if it flows)
+> *"Yeah, we've been dealing with a lot of that too. One thing that's actually been working well for us — we brought everything in-house. No subs on anything. It was a pain to set up but it's been a game changer for consistency. You should swing by sometime and see the operation — we've got a nice indoor yard where your clients could come pick their stone. No pressure though, just if you're ever in the area."*
 
-### Closing
+### If It Doesn't Flow — Don't Force It
+> *"Man, great talking to you. We should grab coffee or lunch sometime — I don't get to talk to other owners enough. My number is [number], shoot me a text if you ever want to get together."*
 
-> *"Listen, I appreciate your time. If you've got a project coming up in the next few weeks, give us a call or just swing by the yard. We're at [address]. It's all indoor, so rain or shine doesn't matter. Have a good one."*
-
----
-
-### Post-Call Tracking
-
-| Field | What to Record |
-|---|---|
-| Company Name | From Google Maps |
-| Contact Name | Who you spoke to |
-| Phone | From Google Maps |
-| Email | If they gave it |
-| Outcome | Interested / Send Info / Not Interested / Voicemail |
-| Follow-Up Date | 3 days for "send info", 2 weeks for voicemail |
-| Notes | What they said, any projects mentioned |
+**Key:** This approach may take 2-3 touchpoints before stone comes up. That's fine. The relationship is the goal.
 
 ---
 
-## Script 2: Voicemail (15 seconds max)
+## Approach 2: "The Future / AI Talk" — The Forward Thinker
 
-> *"Hey [name], this is [your name] from Advanced Granite Solutions. We're a 20-year stone fabrication shop in [city] — everything in-house, no subs. If you ever do kitchens or bathrooms and need a stone partner, give us a call at [number]. Thanks."*
+**Best for:** Younger owners (30-45), tech-savvy contractors, designers, anyone with a good website/social media.  
+**Where:** Phone call, coffee, LinkedIn message → coffee.  
+**Vibe:** Two business owners geeking out about where things are heading.
 
-**Rule:** ONE voicemail. If they don't call back, add to email list. Don't call again for 30 days.
+### Opening
+> *"Hey [name], Serhan here — I run a stone fab shop, Advanced Granite Solutions. I've been in this industry 20-plus years and I have to say, the last couple years have been the most interesting. Have you been paying attention to how fast AI is changing our world?"*
 
----
+### Conversation Threads
+- "We've actually been experimenting with AI for quoting and scheduling. It's not perfect yet but the potential is insane."
+- "I've been building a portal where contractors can just log in, browse our slabs, and get pricing instantly. No phone calls, no waiting. Self-serve everything."
+- "Do you use any tech tools in your business? I'm always looking for what's working for other people."
+- "I think in 5 years, the businesses that don't adopt technology are going to get left behind. The guys still doing everything on paper — they're the new Blockbuster."
+- "What do you think the next 10 years look like for this industry?"
 
-## Script 3: K&B Store Walk-In Visit
+### The Natural Bridge
+> *"Yeah, that's exactly why I started building our Pro Portal — I realized the old way of doing business, where you call for a quote and wait 3 days, is dead. We're making it so your team can literally browse slabs, build a quote, and submit it without ever picking up the phone. I'd love to show you what we're building — want to grab a coffee this week?"*
 
-**Context:** You're walking into a Kitchen & Bath store to introduce AGS as a fabrication partner. You have the "Why AGS" one-pager in hand.
-
----
-
-### Arrival
-
-- Ask for the **owner or manager** (not a sales associate)
-- If they're not available, leave the one-pager with a business card and ask for their name/email
-
-### When You Meet the Owner/Manager
-
-> *"Hi, I'm [your name] from Advanced Granite Solutions. We're a stone fabrication shop — been around for about 20 years now. I wanted to introduce myself because we work with a lot of K&B stores in the area as their fabrication partner.*
->
-> *The way it usually works is — your customer picks their countertop material here, and we handle the fabrication and installation directly. Everything's in-house, no subcontractors.*
->
-> *What makes us a little different is we have a fully indoor slab yard. So if your customers want to see the actual stone before they commit, you can send them to us — or we can bring samples here. Either way, it gives your customers confidence in what they're getting.*
->
-> *We're also building out a Pro Portal where your team can log in, browse our inventory, and build quotes instantly without having to call or email us every time. It's basically self-serve.*
->
-> *Here — this is a quick overview of what we do. [hand over one-pager]*
->
-> *Would you be open to coming by the yard sometime? A lot of store owners like to see the operation before sending their customers over. No commitment — just a tour."*
+### The Coffee/Lunch Close
+> *"Honestly, I just like connecting with other owners who think about the future. Most people in this industry are heads-down just trying to survive. It's rare to meet someone who's actually planning for what's next."*
 
 ---
 
-### If They Already Have a Fabricator
+## Approach 3: "The Shared Struggle" — The Empathizer
 
-> *"Totally understand. Most stores have an existing relationship. I'm not asking you to switch — I just want to be on your radar as an option. A lot of our partners use us as their backup or for specific materials we carry that their main guy doesn't.*
->
-> *If nothing else, send your tougher customers to our indoor yard — the ones who want to see every slab before they decide. We'll take good care of them and make you look good."*
+**Best for:** Small contractors (1-5 person shops), owner-operators, anyone who seems stressed or overworked.  
+**Where:** Phone call, walk-in visit, job site encounter.  
+**Vibe:** Two people in the same boat — validating each other's challenges.
+
+### Opening
+> *"Hey [name], Serhan from Advanced Granite. I'll be real with you — I'm not calling to sell you anything. I run a stone shop, been doing it 20 years, and honestly some days I wonder why I do this to myself. *(laugh)* How's your world going?"*
+
+### Conversation Threads
+- "Finding good people is the hardest thing in this business, right? I can find stone all day long but finding reliable installers... man."
+- "How are you handling the cash flow cycles? The gap between when you pay for materials and when you get paid... it's brutal sometimes."
+- "Do your customers ever pick the most expensive option and then complain about the price? *(laugh)* Every. Single. Time."
+- "What's your biggest bottleneck right now? For us it was quoting — we were spending so much time on estimates that we couldn't focus on actually running the business."
+- "Are you in any local business groups or associations? I've been thinking about finding other owners to bounce ideas off of."
+
+### The Natural Bridge
+> *"You know what, I think we should help each other out. I've got 730 contractors and K&B stores in my network — if I hear of someone looking for a [their specialty], I'll send them your way. And if you ever get a project that needs countertops, keep us in mind. No formal arrangement — just two business owners looking out for each other."*
+
+### The Follow-Up
+> *"Let me buy you lunch next week. I'd love to hear more about your business. Sometimes it helps just to talk to someone who gets it."*
 
 ---
+
+## Approach 4: "The Community Builder" — The Connector
+
+**Best for:** K&B showroom owners, designers, anyone with a physical storefront.  
+**Where:** Walk-in visit, office visit, local business event.  
+**Vibe:** A neighbor introducing himself, building the local business network.
+
+### Walk-In Opening
+> *"Hi, I'm Serhan — I run Advanced Granite Solutions. We're a stone fabrication shop over in Edgewood, been here about 20 years. I've driven past your place a bunch of times and kept telling myself I need to stop in and introduce myself. Beautiful showroom, by the way."*
+
+### Conversation Threads
+- "How long have you been in this location? I love what you've done with the space."
+- "Who's your typical customer? Homeowners doing full remodels, or more kitchen-only?"
+- "We're really trying to get more connected with the local business community. I feel like there's a lot of potential for businesses like ours to refer work to each other."
+- "Do you ever go to any of the MBIA events? Or the local chamber stuff?"
+- "What's the biggest change you've seen in customer behavior in the last few years?"
+
+### The Natural Bridge
+> *"You know, a lot of the K&B stores I've gotten to know — what they love is being able to send their customers to our indoor slab yard. The customer picks the exact stone they want, and it takes the pressure off your team. Nobody's arguing about 'that's not the color I picked.' But honestly, before any of that — I just wanted to put a face to the name. Can I leave you my card? And if you're ever free for a coffee, I'd love to keep the conversation going."*
 
 ### Before Leaving
-
-1. **Get a business card** or the owner's name + email
-2. **Leave the "Why AGS" one-pager** + your business card
-3. **Add them to the tracking spreadsheet**
-4. **Follow up by email 3 days later** (use the Email Outreach cadence from `AGS_EMAIL_OUTBOUND.md`)
+- **Do NOT hand them a one-pager on the first visit.** Just a business card.
+- The one-pager comes on the **second touchpoint** after trust is established.
+- Say: *"Great meeting you. I'll shoot you an email so you have my info."*
 
 ---
 
-## Script 4: Cold Call — Interior Designer
+## Approach 5: "The Direct Value" — The Straight Shooter
 
-**Context:** You found this designer on Houzz, Google, or Instagram. They do high-end residential projects and specify countertop materials.
+**Best for:** Busy GCs, project managers, no-nonsense types who hate small talk.  
+**Where:** Phone call (keep it under 2 minutes), concise email.  
+**Vibe:** Respect their time. Lead with value. Get to the point.
 
-> *"Hi [name], this is [your name] from Advanced Granite Solutions. I saw your work on [Houzz/Instagram/their website] — really impressive stuff, especially the [mention a specific project if possible].*
->
-> *I'm reaching out because we work with several designers in the area as their stone fabrication partner. We've been doing this for 20 years and we have a fully indoor slab yard — which a lot of designers love because they can bring clients in and do material selections in a controlled, clean environment regardless of weather.*
->
-> *Everything we do is in-house — no subcontractors on any install. So there's no quality surprise on install day.*
->
-> *Would you be open to a quick visit to see the yard? A lot of designers use it almost as an extension of their own showroom for client presentations."*
+### Opening
+> *"Hey [name], Serhan from Advanced Granite Solutions. I'll take 60 seconds — you do kitchens and baths, right?"*
 
-**Key for designers:** Lead with the indoor slab yard experience. Designers care about the client experience. The yard IS the selling point for this segment.
+**If YES →**
+
+> *"Cool. I'm a 20-year stone fab shop. Everything in-house, no subs. Two things that matter to you: One — we have an indoor slab yard, so your clients can pick their exact stone and stop arguing with you about color. Two — we're building a portal where your team can get quotes instantly without calling anyone.*
+> 
+> *I'm not trying to sell you. I just want to be someone you know exists when you need stone done right. Can I buy you a coffee this week?"*
+
+**If they're busy:**
+> *"Totally get it. I'll shoot you a text with my info. When you've got a project that needs stone, hit me up. No games."*
+
+### Why This Works for the Right Person
+Some people hate the warm-up. They respect directness. This approach:
+- Respects their time (60 seconds)
+- Leads with what matters to THEM (client selection + instant quoting)
+- Closes with coffee, not a contract
+- Still ends relationship-first — not transaction-first
 
 ---
 
-## ⚠️ MESSAGING COMPLIANCE NOTES
+## 📊 Testing Framework — Track What Works
 
-- ✅ All scripts use approved messaging from `STRATEGY_RULES.md` §10
-- ❌ No slab count mentioned anywhere
-- ❌ No price guarantees or "cheapest" positioning
-- ❌ No install date guarantees
-- ❌ No financial strength claims
-- ❌ No competitor bashing — positioning is always about what AGS does, not what others don't
+### For the first 2 weeks, rotate approaches and log results:
+
+| Date | Prospect | Approach Used | Channel | Outcome | Notes |
+|---|---|---|---|---|---|
+| | | 1/2/3/4/5 | Phone/Visit/Coffee | Next Step / Dead | What resonated? |
+
+### What to Track
+- **Response rate** — which approach gets the most callbacks/replies?
+- **Second meeting rate** — which leads to a coffee/lunch?
+- **Time to stone conversation** — how many touchpoints before countertops come up naturally?
+- **Conversion** — which approach ultimately leads to a partnership?
+
+### After 2 Weeks
+- **Double down** on the top 2 approaches
+- **Retire or modify** the bottom 2
+- **Customize** based on what you've learned about each prospect type
+
+---
+
+## Voicemail — Universal (15 seconds max)
+
+> *"Hey [name], Serhan from Advanced Granite. I run a stone shop in Edgewood — been at it 20 years. Just wanted to introduce myself. Give me a call back if you get a chance — [number]. No rush. Have a good one."*
+
+**Rule:** ONE voicemail. No follow-up call for 30 days. Add to email list instead.
+
+---
+
+## ⚠️ COMPLIANCE — `STRATEGY_RULES.md` §10 + §13
+
+- ✅ All approaches comply with §13 Owner-to-Owner philosophy
+- ✅ No slab counts, no price guarantees, no install date promises
+- ✅ No financial strength claims
+- ✅ No competitor bashing — positioning is always about AGS, never against others
+- ✅ Every approach ends with a relationship step (coffee/lunch/visit), NOT a transaction
+- ❌ NEVER read from these pages on a call — internalize and speak naturally

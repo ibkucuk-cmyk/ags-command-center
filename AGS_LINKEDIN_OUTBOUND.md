@@ -1,8 +1,9 @@
 # AGS LinkedIn Outbound Strategy & Message Templates
 
-> **Purpose:** LinkedIn Sales Navigator config and outreach cadence for medium-to-large GCs.  
-> **Last Updated:** 2026-05-15  
-> **Messaging Compliance:** Verified against `STRATEGY_RULES.md` §10.
+> **Purpose:** LinkedIn connection cadence aligned with the Owner-to-Owner philosophy.  
+> **Last Updated:** 2026-05-17  
+> **Philosophy:** See `STRATEGY_RULES.md` §13 — "Owner to Owner, Not Salesman to Prospect"  
+> **Rule:** Every message should feel like one business owner reaching out to another. Never sound corporate or scripted.
 
 ---
 
@@ -30,31 +31,84 @@ Geography: MD/PA/DE (50mi) | Industry: Interior Design | Title: Owner, Principal
 
 ---
 
-## 2. Outreach Cadence — 4 Touches
+## 2. Connection Request — 5 Variations (Match to Prospect Type)
 
-**Rules:** Personalize every message. No copy-paste blasts. 10-15 new touches/week. ~1 hr/week total.
+> **Choose ONE per prospect.** Rotate to test which performs best.
 
-### Touch 1: Connection Request (Day 1)
-> Hi [First Name] — I noticed you manage projects in the MD/PA/DE area. I run a 20-year stone fabrication shop nearby. Would be great to connect.
+### V1 — The Fellow Owner
+> Hey [First Name] — I run a stone shop in Edgewood, been at it 20 years. Just trying to connect with other business owners in the area. No pitch — just believe in knowing the people around me.
 
-### Touch 2: Intro Message (Day 3, if accepted)
-> [First Name], thanks for connecting. I run Advanced Granite Solutions — 20+ years of stone fabrication in the MD/PA/DE area. Everything 100% in-house, no subcontracted installs. No pitch — just wanted to introduce myself in case you ever need a reliable fabrication partner. Happy to give you a tour of our indoor slab yard anytime.
+### V2 — The Curious One
+> Hi [First Name] — saw your work on [their page/project]. Impressive stuff. I run a fabrication shop in MD — 20 years in. Always like connecting with people doing interesting things in this industry.
 
-### Touch 3: Value-Add (Day 7-10, if no response)
-> Quick follow-up — we're rolling out a Pro Partner Portal where B2B partners can browse our live slab inventory and build quotes instantly. No waiting on an estimating department. If you'd like to see a demo or tour the yard, I'm around anytime.
+### V3 — The Industry Observer
+> [First Name] — fellow business owner here (stone fabrication, 20 years). I've been connecting with contractors and K&B owners in MD/PA to compare notes on where the industry is headed. Would be good to connect.
 
-### Touch 4: Soft Close (Day 21)
-> Last note from me — if the timing isn't right, no worries. We're here whenever you need a stone fabrication partner. Door's always open.
+### V4 — The Neighbor
+> Hi [First Name] — I'm Serhan, I run Advanced Granite Solutions in Edgewood. I've been meaning to connect with more local business owners. Let's be in each other's network.
+
+### V5 — The Direct
+> [First Name] — Serhan, 20-year stone fab shop. If you ever do projects involving countertops, I want to be someone you know. Happy to connect.
 
 ---
 
-## 3. Segment-Specific Variations
+## 3. Post-Connection Messages — 3-Touch Cadence
 
-### For K&B Stores (Touch 2)
-> We partner with K&B stores as their fabrication team. Your customer picks the material, we handle everything — fabrication, templating, install. All in-house. We have a fully indoor slab yard your customers can visit — a lot of our partner stores use it as an extension of their own showroom. Open to a tour?
+> **Only send after they accept the connection.** If they don't accept, do nothing. Never follow up on a pending request.
 
-### For Interior Designers (Touch 2)
-> We work with several designers as their stone fabrication partner. Our fully indoor slab yard is a premium setting for client material selections — regardless of weather. Everything in-house, no subs, so the quality you specify is what you get. Could be a great asset for your client presentations.
+### Touch 1: The Warm Hello (Day 2-3 after accepting)
+
+**For K&B Store Owners:**
+> Thanks for connecting, [First Name]. I checked out [their store/website] — really nice showroom. How long have you been in that location?
+> 
+> I run a stone fab shop — been at it 20+ years. A lot of K&B stores in the area use our indoor slab yard as a resource for their clients. But honestly, before any business talk, I just like knowing the other owners around me. 
+>
+> If you're ever up for a coffee, I'm around.
+
+**For GC Owners / Project Managers:**
+> Appreciate the connection, [First Name]. I run a stone fabrication shop — 20 years, everything in-house. 
+>
+> I've been trying to get out of my shop more and actually talk to other people in this industry. How's the year been treating you? Busy or slow?
+>
+> Would love to grab a coffee sometime if you're in the [their area / your area].
+
+**For Designers:**
+> Thanks for connecting, [First Name]. I took a look at some of your projects — beautiful work, especially [mention something specific if possible].
+> 
+> I run a stone fabrication shop with a fully indoor slab yard. A lot of designers use it for client presentations — controlled lighting, no weather issues, the stone looks exactly like it will in the home.
+>
+> If you're ever curious, you've got a standing invite to come see the space. No agenda.
+
+**For Remodelers / Small Contractors:**
+> Thanks for connecting! How's business been this year? I run a stone shop in Edgewood — been doing this 20 years. Some days I love it, some days... well, you know how it goes. 😄
+>
+> If you ever need countertops done right on a project, keep me in mind. But more importantly — if you ever want to grab a coffee and just talk business, I'm always down for that.
+
+---
+
+### Touch 2: The Value Drop (Day 7-10, only if no response to Touch 1)
+
+**Universal:**
+> Hey [First Name] — not trying to blow up your inbox. Just wanted to mention one thing:
+
+> We're building a Pro Portal where contractors and K&B stores can browse our live slab inventory and get pricing instantly. No phone calls, no waiting. Self-serve everything.
+
+> If you're interested in seeing what that looks like, I'd love to show you. And the coffee offer still stands.
+
+**Alternative — Industry Talk:**
+> Hey [First Name] — have you been paying attention to how fast AI is changing our industry? We've been experimenting with some tools on the quoting and scheduling side and it's been eye-opening.
+
+> Would love to compare notes sometime. Most people in this business don't want to talk about tech — refreshing when someone does.
+
+---
+
+### Touch 3: The Soft Close (Day 21, only if still no response)
+
+> Last note from me, [First Name]. Not going to be that person who messages you every week.
+>
+> If the timing is ever right — whether it's for a project, a conversation, or just a coffee — I'm here. 20 years, indoor slab yard, everything in-house.
+>
+> Wishing you a great rest of the year.
 
 ---
 
@@ -62,31 +116,44 @@ Geography: MD/PA/DE (50mi) | Industry: Interior Design | Title: Owner, Principal
 
 | Response | Action |
 |---|---|
-| Positive/Interested | Schedule yard tour → move to CRM |
-| "Send me info" | Send one-pager → email follow-up in 3 days |
-| No response | Nurture list → touch again in 60 days |
-| "Not interested" | Respect it → check back in 6 months |
-| "Have a fabricator" | "Happy to be a backup. Door's open." |
+| Positive/Interested | Schedule coffee, lunch, or yard tour. Personal follow-up by Serhan. |
+| "Tell me more" | Reply conversationally. Do NOT send one-pager yet — save for 2nd meeting. |
+| "Not right now" | "Totally get it. The door's open whenever." → Check back in 90 days. |
+| "Have a fabricator" | "Good to hear. Everyone needs a backup though — keep my number." |
+| No response (all 3 touches) | Nurture list → engage their content occasionally → try again in 6 months. |
 
 ---
 
 ## 5. Weekly Schedule
-- **Monday:** 5 new connection requests + follow up pending conversations (20 min)
-- **Wednesday:** Send Touch 2/3 messages + check replies (20 min)
+- **Monday:** 5-7 new connection requests (mix of V1-V5) + follow up pending conversations (20 min)
+- **Wednesday:** Send Touch 1/2 messages to new connections + reply to conversations (20 min)
 - **Friday:** Review pipeline, add prospects, post 1 content piece (20 min)
 
 ---
 
-## 6. Content Ideas (Post 1-2x/week)
-1. Indoor slab yard photo — "20 years of curating stone. Every slab stored indoors."
-2. Before/after install — "[Material] with [edge]. 100% in-house."
-3. Shop floor behind-the-scenes — "No outsourcing, no shortcuts."
-4. Partner spotlight (with permission)
-5. Pro Portal preview — "Build your own quotes instantly. Coming soon."
+## 6. Content Strategy (Post 1-2x/week)
+
+> **Content should reinforce the Owner-to-Owner brand.** You're a 20-year business owner sharing real knowledge — not a company posting marketing.
+
+### Content Types
+1. **Industry observations** — "Here's what I'm seeing in the stone/K&B market right now..."
+2. **Tech/AI experiments** — "We've been testing AI for quoting. Here's what happened..."
+3. **Behind the scenes** — Indoor slab yard, fabrication process, your team at work
+4. **Business philosophy** — Thoughts on partnerships, quality vs. price, the future of trades
+5. **Community** — Highlight a partner, share a local business event, celebrate a project
+
+### Tone Rules
+- Write as Serhan the owner, not "Advanced Granite Solutions the company"
+- Use first person ("I've been thinking about..." not "We are pleased to announce...")
+- Be honest and real — vulnerability performs better than corporate polish on LinkedIn
+- Ask questions — posts with questions get 2-3x more engagement
 
 ---
 
-## ⚠️ Compliance
-- ❌ No slab count | ❌ No "quotes in 24hrs" | ❌ No install guarantees
-- ❌ No financial claims | ❌ No competitor names | ❌ No generic fluff
-- ✅ Every message tied to real AGS differentiators
+## ⚠️ Compliance — `STRATEGY_RULES.md` §10 + §13
+
+- ✅ All messages comply with §13 Owner-to-Owner philosophy
+- ✅ No slab counts, no price guarantees, no install date promises
+- ✅ No financial claims, no competitor names
+- ✅ Every message reads like a personal note from Serhan
+- ❌ Never send the same message to multiple people — personalize everything
