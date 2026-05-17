@@ -4,7 +4,7 @@
 > **Service Area:** 90 min drive from Edgewood, MD (21040)  
 > **Coverage:** MD (all counties within range), PA (York, Lancaster, Harrisburg, Chester Co, Gettysburg, Reading), DE (New Castle)  
 > **Sources:** Baltimore Magazine, NKBA, Houzz, Google, MBIA, Web Research  
-> **Total Active Prospects:** 647  
+> **Total Active Prospects:** 662  
 > **Existing customers and companies we refuse to work with are EXCLUDED from prospect counts but tracked at bottom for reference.**
 
 ---
@@ -3871,10 +3871,25 @@
 | 669 | Mid-Atlantic Remodeling Company LLC | Steven Schmidt | Forest Hill, MD | 05-135409 | 2028-03-12 | 1012 Saddle View Way — Harford Co. |
 | 670 | Andrews Building & Remodeling LLC | Brian Andrews | Forest Hill, MD | 05-136283 | 2026-09-27 | 2404 Bailey Rd — Harford Co. |
 | 671 | Andersen Custom Kitchens ⭐ | Mark Andersen | Catonsville, MD | 05-156585 | 2026-12-19 | DBA Andersen Woodworking — K&B focus! |
+| 672 | Mocal Remodeling LLC ⭐ | Salvador Cerros | Cockeysville, MD | 05-154562 | 2027-08-01 | 10326 Greenside Dr — Cockeysville! |
+| 673 | Molinas Pro Remodeling ⭐ | Josue Molina | Cockeysville, MD | 05-167081 | 2028-02-12 | 15 Bridgelake Cir — Cockeysville! |
+| 674 | Ripple Remodel LLC ⭐ | Kevin Tignall | Cockeysville, MD | 05-167405 | 2028-03-04 | 10810 Royal Mews Rd — Cockeysville! |
+| 675 | Reimagine Remodeling ⭐⭐ | Chet Hendricks | Joppatowne, MD | — | 2027-08-25 | 400 Philadelphia Rd — near AGS! |
+| 676 | Orr Remodeling ⭐ | Ryan Orr | Belcamp, MD | 05-152626 | 2027-03-21 | 1259 Allison Ct — Harford Co! |
+| 677 | Thomas Laminates & Remodeling ⭐⭐ | Joseph Thomas Jr | Bel Air, MD | — | 2026-07-19 | 1300 Enterprise Ct — LAMINATES = countertops! |
+| 678 | Top Quality Remodeling ⭐ | Dino Broccoli | Abingdon, MD | 05-150706 | 2026-10-18 | 2617 E Rhododendron Dr — Harford Co. |
+| 679 | Oakmont Remodeling Company ⭐ | Bryan Melanson | Fallston, MD | 05-151846 | 2027-01-29 | 2008 Fallsgrove Way — Harford Co. |
+| 680 | T D G Building and Remodeling ⭐ | Matthew Dontell | Jarrettsville, MD | 05-125365 | 2027-09-17 | 3816 Salem Church Rd — Harford Co. |
+| 681 | T J M Concrete & Remodeling ⭐ | Thomas Matthew | Jarrettsville, MD | 05-132088 | 2026-12-19 | 1459 W Jarrettsville Rd. |
+| 682 | Pennington Home Remodeling | Matthew Webster | Bel Air, MD | 05-146824 | 2027-10-12 | 2322 Pennington Rd. |
+| 683 | Portwell Home Remodeling ⭐ | Joseph Davenport | Glen Arm, MD | 05-136818 | 2027-03-05 | 12000 Harford Rd — near AGS! |
+| 684 | White Knight Remodeling ⭐ | Robert Knight | Hunt Valley, MD | 01-45887 | 2026-10-26 | 400 Symphony Ci — Hunt Valley! |
+| 685 | Steck Remodeling ⭐ | David Steck | Forest Hill, MD | 05-127647 | 2026-12-14 | 2428 Edwards Manor Dr — Harford Co. |
+| 686 | Trademark Woodworks & Remodeling ⭐ | Timothy Miller | Lutherville, MD | — | 2026-10-26 | 1450 Burton Ave — AGS area. |
 
-> **✅ PHASE 7B (MHIC "remodel") — 25 cherry-picked from 1,184 results (#647-671).**
+> **✅ PHASE 7B (MHIC "remodel") — 40 cherry-picked from 1,184 results (#647-686).**
 > **Selection criteria:** Only remodelers in Cockeysville/Hunt Valley/Harford Co/Lutherville/Towson.
-> **Skipped:** ~1,159 general remodelers outside AGS core territory.
+> **Skipped:** ~1,144 general remodelers outside AGS core territory.
 
 ---
 
@@ -3964,8 +3979,8 @@
 | 🗺️ **Tier 11-GM — Google Maps Phase 4** | **21** | **General Contractors** |
 | 🗺️ **Tier 12-GM — Google Maps Phase 5** | **36** | **Custom Home Builders** |
 | 🗺️ **Tier 13-SL — Phase 6: Supplier Locators** | **41** | **Cambria + Cosentino + Caesarstone + Fabuwood + Wolf + Daltile** |
-| 🏛️ **Tier 14-MHIC — Phase 7: MHIC Licensees** | **68** | **MHIC "kitchen" (43) + "remodel" cherry-pick (25)** |
-| **TOTAL ACTIVE PROSPECTS** | **647** | **✅ PHASES 1-7B COMPLETE** |
+| 🏛️ **Tier 14-MHIC — Phase 7: MHIC Licensees** | **83** | **MHIC "kitchen" (43) + "remodel" cherry-pick (40)** |
+| **TOTAL ACTIVE PROSPECTS** | **662** | **✅ PHASES 1-7B COMPLETE** |
 | ❌ Competitors/DNR | 37 | Do not contact |
 | ✅ Existing Customers | 32 | Maintain relationship |
 
