@@ -14,8 +14,11 @@
 
 # AGS documentation
 !AGS_*.md
-!STRATEGY_RULES.md
 !AGS_MASTER_OUTREACH.csv
+
+# EXCLUDE sensitive financial files (keep local only, never push to public repo)
+STRATEGY_RULES.md
+AGS_CASH_FLOW_AUDIT.md
 
 # Ignore build artifacts and temp files
 *.py
