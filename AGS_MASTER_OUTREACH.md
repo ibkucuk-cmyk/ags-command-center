@@ -4,7 +4,7 @@
 > **Service Area:** 90 min drive from Edgewood, MD (21040)  
 > **Coverage:** MD (all counties within range), PA (York, Lancaster, Harrisburg, Chester Co, Gettysburg, Reading), DE (New Castle)  
 > **Sources:** Baltimore Magazine, NKBA, Houzz, Google, MBIA, Web Research  
-> **Total Active Prospects:** 170  
+> **Total Active Prospects:** 579  
 > **Existing customers and companies we refuse to work with are EXCLUDED from prospect counts but tracked at bottom for reference.**
 
 ---
@@ -3692,6 +3692,88 @@
 
 ---
 
+## 🗺️ TIER 13-SL — PHASE 6: SUPPLIER DEALER LOCATORS (NEW)
+
+> **Source:** Cambria, Cosentino (Silestone/Dekton), Caesarstone, Fabuwood, Wolf Home Products, Daltile, KraftMaid dealer locators
+> **Search Date:** 2026-05-17
+> **Search Method:** Browser-based dealer locators + web search (50-mile radius from 21030)
+> **Purpose:** Find businesses authorized to sell major stone/cabinet brands — high-quality B2B prospects
+
+---
+
+### CAMBRIA DEALER LOCATOR — Net-New (29 of 38 mined)
+
+| # | Company | Location | Phone | Source | AGS Angle |
+|---|---|---|---|---|---|
+| 563 | Grandior Kitchens Baths & Closets ⭐ | 10243 York Rd, Cockeysville, MD | (410) 415-1451 | Cambria | K&B store near AGS backyard. |
+| 564 | Bray & Scarff (Cockeysville) | Timonium, MD | (301) 470-3555 | Cambria | Appliance/K&B chain. Local branch. |
+| 565 | Chesapeake Kitchen Wholesalers | Randallstown, MD | (410) 922-1400 | Cambria | Wholesale kitchen. Verify K&B focus. |
+| 566 | Forest Hill Kitchen & Bath | 1349 Jarrettsville Rd, Forest Hill, MD | (410) 927-5268 | Cambria | Harford Co K&B near AGS. |
+| 567 | Kitchen & Bath Creations LLC | 9005-C Red Branch Rd, Columbia, MD | (410) 772-3240 | Cambria | Columbia K&B store. |
+| 568 | Reico Kitchen & Bath (Timonium) | 2101 Greenspring Dr, Timonium, MD | (410) 776-2220 | Cambria | Chain K&B showroom. |
+| 569 | Reico Kitchen & Bath (Elkridge) | Elkridge, MD | — | Cambria | 2nd Reico location. |
+| 570 | Cabinet Discounters Inc | 9500 Berger Rd, Columbia, MD | (410) 381-8172 | Cambria | Cabinet discount store. |
+| 571 | J.F. Johnson Lumber Company | Millersville, MD | — | Cambria | Lumber/K&B — may sell cabinets. |
+| 572 | American Cedar & Millwork | Millersville, MD | — | Cambria + Wolf | Carries Wolf cabinetry. 2 locations. |
+| 573 | Severna Park Kitchen And Bath | Severna Park, MD | — | Cambria | Affluent area K&B store. |
+| 574 | Versa Tile and Marble Group LLC | Gambrills, MD | — | Cambria | Tile/marble — verify if fabricator. |
+| 575 | Cardigan Kitchens & Baths | 2141 Priest Bridge Dr #6, Crofton, MD | (410) 451-9340 | Cambria | Crofton K&B store. |
+| 576 | Reico Kitchen & Bath (Annapolis) | Annapolis, MD | — | Cambria | 3rd Reico location. |
+| 577 | Absolute Kitchen Distributors | 10417A Baltimore Ave, Beltsville, MD | (301) 595-4200 | Cambria | Wholesale kitchen distributor. |
+| 578 | About Kitchens & Baths LLC | 2 Hudson St, Annapolis, MD | (410) 573-0877 | Cambria + Fabuwood | Annapolis K&B store. Turn-key remodeling. |
+| 579 | Arkadia Surfaces | Annapolis, MD | — | Cambria + Caesarstone | Surfaces dealer. Verify if competitor. |
+| 580 | Kitchen & Bath Design Center | Annapolis, MD | — | Cambria | Annapolis design center. |
+| 581 | A&S Sales Inc | Frederick, MD | — | Cambria | Sales rep — verify if K&B. |
+| 582 | Kenwood Kitchens (Annapolis) | 1415 Forest Dr, Annapolis, MD | (443) 458-5484 | Cambria | K&B chain showroom. |
+| 583 | Cabinet Discounters (Gaithersburg) | Gaithersburg, MD | — | Cambria | 2nd Cabinet Discounters location. |
+| 584 | Kitchen & Bath Depot Inc | Rockville, MD | — | Cambria | Rockville K&B store. |
+| 585 | Bray & Scarff (Rockville) | Rockville, MD | — | Cambria | Appliance/K&B chain branch. |
+| 586 | Bray & Scarff (Frederick) | Frederick, MD | — | Cambria | Appliance/K&B chain branch. |
+| 587 | Friel Kitchen & Bath Design | Chester, MD | — | Cambria | Eastern Shore K&B. |
+| 588 | Henry H Ross & Son Inc ⭐ | Lititz, PA | — | Cambria Premier | Cambria Premier Partner. Lititz PA. |
+| 589 | Maryland Dream Kitchens & Baths | Aberdeen, MD | — | Cambria | Aberdeen K&B — VERIFY if same as existing customer. |
+| 590 | Cabinet Discounters (Mt. Airy) | Mt Airy, MD | — | Cambria | 3rd Cabinet Discounters location. |
+| 591 | Granite Outlet K&B Design Studio | Timonium, MD | (410) 252-5225 | Cambria + Fabuwood | VERIFY — may be competitor (fabricator). |
+
+---
+
+### COSENTINO (Silestone/Dekton) + CAESARSTONE — Net-New
+
+| # | Company | Location | Phone | Source | AGS Angle |
+|---|---|---|---|---|---|
+| 592 | National Lumber Company | Baltimore, MD | — | Cosentino + Fabuwood | Carries Cosentino + Fabuwood products. Lumber yard = serves contractors. |
+| 593 | HB Marble & Granite | Glen Burnie, MD | — | Cosentino | Fabricator — VERIFY if competitor or prospect. |
+| 594 | Granite MR | Rosedale, MD | — | Cosentino | Fabricator — VERIFY if competitor or prospect. |
+| 595 | Custom Kitchen Countertops (CKC) | Baltimore, MD | — | Cosentino | Fabricator — VERIFY if competitor or prospect. |
+| 596 | Maryland Countertop Solutions | Parkville, MD | — | Cosentino | Quartz specialist — VERIFY if competitor. |
+| 597 | Granitevision | Gaithersburg, MD | — | Caesarstone | Carries Caesarstone. Verify type. |
+| 598 | Architecture Stones | Rockville, MD | — | Caesarstone | Stone dealer. Verify if competitor. |
+
+---
+
+### FABUWOOD + WOLF HOME PRODUCTS — Net-New
+
+| # | Company | Location | Phone | Source | AGS Angle |
+|---|---|---|---|---|---|
+| 599 | Top This Inc | Baltimore, MD | — | Fabuwood | Fabuwood dealer. Verify type. |
+| 600 | Castle Wholesalers of MD Inc | 950 DeSoto Rd, Baltimore 21223 | (410) 644-4200 | Wolf | Wolf Home Products dealer. Wholesale. |
+
+---
+
+### DALTILE — Net-New
+
+| # | Company | Location | Phone | Source | AGS Angle |
+|---|---|---|---|---|---|
+| 601 | Hunt Valley Tile & Stone | Baltimore Metro | (410) 771-6441 | Daltile | Tile + stone showroom. Serves designers/contractors. |
+| 602 | The Tile Shop (Timonium) | 2301 York Rd, Timonium | — | Daltile | Tile showroom — K&B projects = countertop referrals. |
+| 603 | Daltile Sales Service Center | Linthicum, MD | — | Daltile | Official Daltile/Marazzi showroom. |
+
+> **✅ PHASE 6 — 41 new prospects added (#563-603).**
+> **Sources:** Cambria (29), Cosentino (5), Caesarstone (2), Fabuwood (1), Wolf (1), Daltile (3)
+> **Note:** Several entries need VERIFY — some may be fabricators (competitors). Phone numbers still needed for most.
+
+---
+
 ## ⚠️ COMPETITORS & DO NOT CONTACT (Tracked for Reference)
 
 | Company | Location | Reason |
@@ -3777,7 +3859,8 @@
 | 🗺️ **Tier 10-GM — Google Maps Phase 3** | **32** | **Interior/Kitchen Designers** |
 | 🗺️ **Tier 11-GM — Google Maps Phase 4** | **21** | **General Contractors** |
 | 🗺️ **Tier 12-GM — Google Maps Phase 5** | **36** | **Custom Home Builders** |
-| **TOTAL ACTIVE PROSPECTS** | **538** | **✅ ALL 5 PHASES COMPLETE** |
+| 🗺️ **Tier 13-SL — Phase 6: Supplier Locators** | **41** | **Cambria + Cosentino + Caesarstone + Fabuwood + Wolf + Daltile** |
+| **TOTAL ACTIVE PROSPECTS** | **579** | **✅ PHASES 1-6 COMPLETE** |
 | ❌ Competitors/DNR | 37 | Do not contact |
 | ✅ Existing Customers | 32 | Maintain relationship |
 
