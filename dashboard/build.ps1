@@ -1,6 +1,6 @@
 <#
     AGS Dashboard Build Script
-    Reads all MD files and generates a self-contained ags_dashboard.html
+    Reads MD files and generates a self-contained ags_dashboard.html
     Run: powershell -ExecutionPolicy Bypass -File dashboard\build.ps1
 #>
 
@@ -10,31 +10,44 @@ if (-not $agsRoot) { $agsRoot = "G:\My Drive\AGS" }
 Write-Host "AGS Dashboard Builder" -ForegroundColor Cyan
 Write-Host "Root: $agsRoot"
 
-# File mapping - all files included (protected by password gate)
+# Files to include (EXCLUDES sensitive financial data)
 $files = [ordered]@{
     'todo' = 'AGS_MASTER_TODO.md'
     'strategic' = 'AGS_STRATEGIC_PLAN.md'
-    'rules' = 'STRATEGY_RULES.md'
     'coldcall' = 'AGS_COLD_CALL_SCRIPTS.md'
     'email' = 'AGS_EMAIL_OUTBOUND.md'
     'linkedin' = 'AGS_LINKEDIN_OUTBOUND.md'
     'whyags' = 'AGS_WHY_AGS_ONEPAGER.md'
     'outreach' = 'AGS_MASTER_OUTREACH.md'
     'competitive' = 'AGS_COMPETITIVE_ANALYSIS.md'
-    'cashflow' = 'AGS_CASH_FLOW_AUDIT.md'
     'playbook' = 'AGS_MAX_B2B_PLAYBOOK.md'
 }
+# EXCLUDED from public build:
+#   STRATEGY_RULES.md     - contains debt, credit, financial constraints
+#   AGS_CASH_FLOW_AUDIT.md - contains full financial data
 
-# Read all files and build JSON-safe data
+# Helper: escape a string for embedding as a JS string literal
+function ConvertTo-JsString($text) {
+    $s = $text
+    $s = $s.Replace('\', '\\')
+    $s = $s.Replace('"', '\"')
+    $s = $s.Replace("`r`n", '\n')
+    $s = $s.Replace("`n", '\n')
+    $s = $s.Replace("`r", '\n')
+    $s = $s.Replace("`t", '\t')
+    return "`"$s`""
+}
+
+# Read all files
 $dataLines = @()
 $dataLines += "window.mdContent = {};"
 
 foreach ($key in $files.Keys) {
     $path = Join-Path $agsRoot $files[$key]
     if (Test-Path $path) {
-        $raw = Get-Content $path -Raw -Encoding UTF8
-        $jsonStr = $raw | ConvertTo-Json -Compress
-        $dataLines += "window.mdContent['$key'] = JSON.parse($jsonStr);"
+        $raw = [System.IO.File]::ReadAllText($path, [System.Text.Encoding]::UTF8)
+        $jsStr = ConvertTo-JsString $raw
+        $dataLines += "window.mdContent['$key'] = $jsStr;"
         Write-Host "  [OK] $($files[$key])" -ForegroundColor Green
     } else {
         Write-Host "  [SKIP] $($files[$key]) - not found" -ForegroundColor Yellow
@@ -45,16 +58,15 @@ $dataBlock = $dataLines -join "`n"
 
 # Read the template HTML
 $templatePath = Join-Path $PSScriptRoot "index.html"
-$template = Get-Content $templatePath -Raw -Encoding UTF8
+$template = [System.IO.File]::ReadAllText($templatePath, [System.Text.Encoding]::UTF8)
 
-# Find the main app script (after auth script) by looking for "Page titles"
+# Find the main app script (after auth script)
 $marker = '// Page titles'
 $idx = $template.IndexOf($marker)
 if ($idx -lt 0) {
     Write-Host "ERROR: Could not find injection point" -ForegroundColor Red
     exit 1
 }
-# Find the <script> tag just before it
 $scriptIdx = $template.LastIndexOf('<script>', $idx)
 $output = $template.Substring(0, $scriptIdx) + "<script>`n$dataBlock`n</script>`n" + $template.Substring($scriptIdx)
 
@@ -62,7 +74,8 @@ $output = $template.Substring(0, $scriptIdx) + "<script>`n$dataBlock`n</script>`
 $outputPath = Join-Path $PSScriptRoot "ags_dashboard.html"
 [System.IO.File]::WriteAllText($outputPath, $output, [System.Text.Encoding]::UTF8)
 
-$size = (Get-Item $outputPath).Length / 1MB
+$size = [math]::Round((Get-Item $outputPath).Length / 1MB, 1)
 Write-Host ""
-Write-Host "Built: $outputPath ($([math]::Round($size, 1)) MB)" -ForegroundColor Cyan
+Write-Host "Built: $outputPath ($size MB)" -ForegroundColor Cyan
+Write-Host "Excluded: STRATEGY_RULES.md, AGS_CASH_FLOW_AUDIT.md (sensitive)" -ForegroundColor Yellow
 Write-Host "Open in browser - password protected!" -ForegroundColor Green
