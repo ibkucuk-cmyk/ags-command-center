@@ -630,11 +630,11 @@
             <div class="nav-section">Database</div>
             <div class="nav-item" onclick="showPage('outreach')" id="nav-outreach">
                 <span class="icon">🗄️</span> Outreach Database
-                <span class="badge badge-green">538</span>
+                <span class="badge badge-green" id="nav-badge-prospects">—</span>
             </div>
             <div class="nav-item" onclick="showPage('phase6')" id="nav-phase6">
                 <span class="icon">🚀</span> Phase 6+ Prospecting
-                <span class="badge badge-amber">NEW</span>
+                <span class="badge badge-amber" id="nav-badge-phase6">—</span>
             </div>
             
             <div class="nav-section">Analysis</div>
@@ -649,8 +649,8 @@
 
         <div class="sidebar-footer">
             Total Active Prospects
-            <span class="stat">538</span>
-            Last Updated: May 16, 2026
+            <span class="stat" id="sidebar-total">—</span>
+            <span id="sidebar-updated"></span>
         </div>
     </nav>
 
@@ -665,70 +665,16 @@
         </div>
 
         <div class="content-area" id="contentArea">
-            <!-- Dashboard -->
+            <!-- Dashboard — all values populated dynamically by parseDashboardStats() -->
             <div class="page active" id="page-dashboard">
-                <div class="dashboard-grid">
-                    <div class="stat-card">
-                        <div class="label">Total Prospects</div>
-                        <div class="value green">538</div>
-                        <div class="sub">Active in database</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="label">Phases Complete</div>
-                        <div class="value blue">5/5</div>
-                        <div class="sub">All prospecting done</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="label">Existing Customers</div>
-                        <div class="value amber">32</div>
-                        <div class="sub">Tracked separately</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="label">Grand Total Tracked</div>
-                        <div class="value purple">607</div>
-                        <div class="sub">Prospects + customers + DNR</div>
-                    </div>
-                </div>
-
+                <div class="dashboard-grid" id="dash-top-stats"></div>
                 <h2 style="color: var(--text-primary); margin-bottom: 16px;">Phase Breakdown</h2>
-                <div class="dashboard-grid">
-                    <div class="stat-card">
-                        <div class="label">Phase 1</div>
-                        <div class="value blue" style="font-size: 24px;">220</div>
-                        <div class="sub">K&B Stores + Cabinets</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="label">Phase 2</div>
-                        <div class="value blue" style="font-size: 24px;">67</div>
-                        <div class="sub">K&B Remodelers</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="label">Phase 3</div>
-                        <div class="value blue" style="font-size: 24px;">32</div>
-                        <div class="sub">Interior/Kitchen Designers</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="label">Phase 4</div>
-                        <div class="value blue" style="font-size: 24px;">21</div>
-                        <div class="sub">General Contractors</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="label">Phase 5</div>
-                        <div class="value blue" style="font-size: 24px;">36</div>
-                        <div class="sub">Custom Home Builders</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="label">Original Tiers 1-7</div>
-                        <div class="value blue" style="font-size: 24px;">170</div>
-                        <div class="sub">Pre-existing prospects</div>
-                    </div>
-                </div>
-
+                <div class="dashboard-grid" id="dash-phase-grid"></div>
                 <h2 style="color: var(--text-primary); margin: 24px 0 16px;">Quick Actions</h2>
                 <div class="action-grid">
                     <div class="action-card" onclick="showPage('coldcall')">
                         <h3>📞 Start Cold Calling</h3>
-                        <p>Open call scripts and start dialing the 538 prospects</p>
+                        <p>Open call scripts and start dialing prospects</p>
                     </div>
                     <div class="action-card" onclick="showPage('email')">
                         <h3>📧 Launch Email Campaign</h3>
@@ -740,7 +686,7 @@
                     </div>
                     <div class="action-card" onclick="showPage('outreach')">
                         <h3>🗄️ Browse Database</h3>
-                        <p>View all 538 prospects with phone numbers</p>
+                        <p id="action-db-sub">View all prospects with phone numbers</p>
                     </div>
                 </div>
             </div>
@@ -821,6 +767,97 @@ window.mdContent['playbook'] = "# AGS × Max AI — B2B Customer Acquisition Pla
                 loadMarkdown(pageId);
             }
         }
+
+        // === DYNAMIC DASHBOARD STATS ===
+        function parseDashboardStats() {
+            var md = window.mdContent && window.mdContent['outreach'];
+            if (!md) return;
+
+            // Parse Last Updated from header
+            var updMatch = md.match(/\*\*Last Updated:\*\*\s*(.+?)[\s\\n]/);
+            if (updMatch) {
+                document.getElementById('sidebar-updated').textContent = 'Updated: ' + updMatch[1].trim();
+            }
+
+            // Parse the MASTER SCORECARD table
+            var lines = md.split(/\\n|\n/);
+            var scoreRows = [];
+            var inScorecard = false;
+            for (var i = 0; i < lines.length; i++) {
+                if (lines[i].indexOf('MASTER SCORECARD') !== -1) { inScorecard = true; continue; }
+                if (inScorecard && lines[i].indexOf('|') !== -1) {
+                    var cells = lines[i].split('|').map(function(c) { return c.replace(/\*/g, '').trim(); }).filter(Boolean);
+                    if (cells.length >= 2 && cells[0].indexOf('---') === -1) {
+                        scoreRows.push(cells);
+                    }
+                }
+                if (inScorecard && lines[i].indexOf('---') !== -1 && lines[i].indexOf('|') === -1) break;
+            }
+
+            // Extract key values from scorecard
+            var totalProspects = 0, customers = 0, dnr = 0, phases = [];
+            for (var j = 0; j < scoreRows.length; j++) {
+                var tier = scoreRows[j][0];
+                var count = parseInt((scoreRows[j][1] || '0').replace(/[^0-9]/g, '')) || 0;
+                var desc = scoreRows[j][2] || '';
+
+                if (tier.indexOf('TOTAL ACTIVE') !== -1) {
+                    totalProspects = count;
+                } else if (tier.indexOf('Competitors') !== -1 || tier.indexOf('DNR') !== -1) {
+                    dnr = count;
+                } else if (tier.indexOf('Existing Customers') !== -1) {
+                    customers = count;
+                } else if (count > 0 && tier.indexOf('Tier') === -1 || tier.indexOf('Tier') !== -1) {
+                    phases.push({ label: tier.replace(/[🔴🟡🟢🔵🟣🏢🟠🏔️🗺️]/g, '').trim(), count: count, desc: desc });
+                }
+            }
+
+            var grandTotal = totalProspects + customers + dnr;
+            var phasesDone = phases.filter(function(p) { return p.count > 0; }).length;
+
+            // Count how many "Phase" or "Tier" entries mention "GM" or "SL" (Google Maps / Supplier Locator phases)
+            var completedPhases = 0;
+            var totalPhases = 0;
+            for (var k = 0; k < phases.length; k++) {
+                if (phases[k].label.indexOf('Phase') !== -1 || phases[k].label.indexOf('GM') !== -1 || phases[k].label.indexOf('SL') !== -1) {
+                    totalPhases++;
+                    if (phases[k].count > 0) completedPhases++;
+                }
+            }
+            if (totalPhases === 0) totalPhases = completedPhases || 1;
+
+            // Populate sidebar
+            document.getElementById('sidebar-total').textContent = totalProspects;
+            document.getElementById('nav-badge-prospects').textContent = totalProspects;
+
+            // Phase 6 badge
+            var p6 = phases.filter(function(p) { return p.label.indexOf('Phase 6') !== -1 || p.label.indexOf('SL') !== -1; });
+            document.getElementById('nav-badge-phase6').textContent = p6.length > 0 ? p6[0].count : 'NEW';
+
+            // Top stat cards
+            var topStats = document.getElementById('dash-top-stats');
+            topStats.innerHTML = '<div class="stat-card"><div class="label">Total Prospects</div><div class="value green">' + totalProspects + '</div><div class="sub">Active in database</div></div>' +
+                '<div class="stat-card"><div class="label">Phases Complete</div><div class="value blue">' + completedPhases + '</div><div class="sub">Prospecting phases done</div></div>' +
+                '<div class="stat-card"><div class="label">Existing Customers</div><div class="value amber">' + customers + '</div><div class="sub">Tracked separately</div></div>' +
+                '<div class="stat-card"><div class="label">Grand Total Tracked</div><div class="value purple">' + grandTotal + '</div><div class="sub">Prospects + customers + DNR</div></div>';
+
+            // Phase breakdown cards
+            var phaseGrid = document.getElementById('dash-phase-grid');
+            var phaseHtml = '';
+            for (var m = 0; m < phases.length; m++) {
+                var p = phases[m];
+                if (p.label.indexOf('TOTAL') !== -1 || p.label.indexOf('Competitors') !== -1 || p.label.indexOf('Existing') !== -1) continue;
+                phaseHtml += '<div class="stat-card"><div class="label">' + p.label + '</div><div class="value blue" style="font-size:24px;">' + p.count + '</div><div class="sub">' + p.desc + '</div></div>';
+            }
+            phaseGrid.innerHTML = phaseHtml;
+
+            // Quick action sub text
+            var actionSub = document.getElementById('action-db-sub');
+            if (actionSub) actionSub.textContent = 'View all ' + totalProspects + ' prospects with phone numbers';
+        }
+
+        // Run after content is loaded
+        setTimeout(parseDashboardStats, 50);
 
         function loadMarkdown(pageId) {
             var el = document.getElementById('page-' + pageId);
