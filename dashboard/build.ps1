@@ -20,6 +20,7 @@ $files = [ordered]@{
     'whyags' = 'AGS_WHY_AGS_ONEPAGER.md'
     'outreach' = 'AGS_MASTER_OUTREACH.md'
     'competitive' = 'AGS_COMPETITIVE_ANALYSIS.md'
+    'phase6' = 'AGS_PHASE6_PROSPECTING.md'
     'playbook' = 'AGS_MAX_B2B_PLAYBOOK.md'
 }
 # EXCLUDED from public build:
