@@ -4,7 +4,7 @@
 > **Service Area:** 90 min drive from Edgewood, MD (21040)  
 > **Coverage:** MD (all counties within range), PA (York, Lancaster, Harrisburg, Chester Co, Gettysburg, Reading), DE (New Castle)  
 > **Sources:** Baltimore Magazine, NKBA, Houzz, Google, MBIA, Web Research  
-> **Total Active Prospects:** 579  
+> **Total Active Prospects:** 622  
 > **Existing customers and companies we refuse to work with are EXCLUDED from prospect counts but tracked at bottom for reference.**
 
 ---
@@ -3774,6 +3774,71 @@
 
 ---
 
+## 🏛️ TIER 14-MHIC — PHASE 7: MD HOME IMPROVEMENT COMMISSION (NEW)
+
+> **Source:** Maryland MHIC License Database — Business Name Search
+> **Search Date:** 2026-05-17
+> **Search Term:** "kitchen" (135 total results)
+> **Filter:** Active licensees within ~50 mi of 21030, excluding existing prospects/DNR/customers
+> **Purpose:** Licensed K&B contractors = verified, insured, legitimate businesses for B2B outreach
+
+---
+
+### MHIC "KITCHEN" SEARCH — Net-New (37 of 135 mined)
+
+| # | Company | Owner | City | MHIC # | Expires | AGS Angle |
+|---|---|---|---|---|---|---|
+| 604 | American Kitchen Concepts Inc ⭐ | Daniel Millard | Columbia, MD | 05-51248 | 2026-12-30 | K&B contractor in Columbia. |
+| 605 | Annapolis Kitchen and Bath / DLC Inc | Duane Dwyer | Annapolis, MD | — | 2026-08-30 | K&B contractor in Annapolis. |
+| 606 | Bel Air Kitchens Plus Inc ⭐ | Ronald Muddiman | Forest Hill, MD | 05-29182 | 2026-09-21 | Harford Co K&B — near AGS! |
+| 607 | Bowie Bath & Kitchens | Willett Hegarty | Gambrills, MD | — | 2027-01-12 | K&B contractor in Gambrills. |
+| 608 | Carefree Kitchens Inc | Rephael Yousefi | Linthicum, MD | — | 2026-12-22 | Linthicum K&B. |
+| 609 | Chesapeake Kitchens & Baths LLC | Michael Sunstrom | Brooklyn Park, MD | 05-166418 | 2027-12-22 | NEW licensee — Brooklyn Park. |
+| 610 | Classic Kitchens Inc | Walter Parkins | Eldersburg, MD | 05-51901 | 2026-10-26 | Cabinet/K&B in Eldersburg. |
+| 611 | Coastal Kitchen & Bath LLC | Nathan Florio | Severna Park, MD | 05-159188 | 2026-06-23 | Severna Park K&B. |
+| 612 | Cox Kitchens & Baths Inc | Robert Gibbs | Baltimore, MD | 01-6819 | 2026-07-12 | Baltimore K&B — 6322 Falls Rd. |
+| 613 | Design Kitchen and Bath II Inc | Angela Doganci | Severna Park, MD | 05-159398 | 2026-07-08 | 2nd location — see also #614. |
+| 614 | Design Kitchen and Bath LLC | Angela Doganci | Ellicott City, MD | 05-142915 | 2027-03-11 | K&B in Ellicott City. |
+| 615 | England Kitchen & Bath Inc ⭐ | James England | Jarrettsville, MD | — | 2026-09-25 | Harford Co — 1301 N Bend Rd! |
+| 616 | GBC Kitchen and Bath Columbia LLC | Burak Uzunkol | Columbia, MD | 05-163782 | 2027-05-28 | K&B in Columbia. |
+| 617 | Glenwood Kitchen and Bath LLC | Richard Judd | Baltimore, MD | 05-125913 | 2028-02-28 | Baltimore K&B. |
+| 618 | Horst Kitchen Company LLC | Jeremy Horst | Glen Rock, PA | 05-132701 | 2027-08-26 | PA border — MHIC licensed. |
+| 619 | Kafouri Kitchens & Remodeling | Yiasemis Kafouri | Severna Park, MD | — | 2027-11-30 | Severna Park K&B remodeler. |
+| 620 | Kenwood Kitchens Inc (Baltimore) | Steven Waldhauser | Baltimore, MD | — | 2027-06-30 | 9003 Yellow Brick Rd — 2nd location. |
+| 621 | Kitchen and Bath Outlet Inc ⭐ | Sunay Ahmedov | Rosedale, MD | 05-160758 | 2026-10-30 | Rosedale — near AGS territory! |
+| 622 | Kitchen and Bath Outfitters LLC | Karl Wenz | Annapolis, MD | 05-127650 | 2027-09-23 | Annapolis K&B. |
+| 623 | Kitchen Distributors of Maryland ⭐ | Joseph Birner | Timonium, MD | 05-49254 | 2026-10-01 | 2221 Greenspring Dr — AGS backyard! |
+| 624 | Kitchen Masters LLC | Kirill Sergeev | Baltimore, MD | 05-150064 | 2026-06-08 | Baltimore K&B. |
+| 625 | Kitchens by Request Inc ⭐ | William Arnold IV | Jarrettsville, MD | 05-43354 | 2026-10-15 | Harford Co — Jarrettsville! |
+| 626 | Kitchens RX ⭐ | Nicola Pasquinelli | Joppa, MD | 05-156491 | 2027-12-17 | Joppa — VERY close to AGS! |
+| 627 | KLT Kitchen and Remodel LLC | Krystal Brooks | Glen Burnie, MD | 05-162458 | 2027-03-06 | Glen Burnie K&B remodeler. |
+| 628 | Lux Kitchens and Baths ⭐ | William Machulcz | Abingdon, MD | — | 2028-02-23 | Abingdon — Harford Co! |
+| 629 | Marriottsville Kitchen and Bath LLC | Christian Crosby | Marriottsville, MD | 05-167794 | 2028-04-01 | NEW licensee — Marriottsville. |
+| 630 | Mimosa Kitchen and Bath LLC | Halil Gozum | Ellicott City, MD | 05-135615 | 2028-04-23 | Ellicott City K&B. |
+| 631 | N B Lee Custom Kitchen & Bath ⭐ | Nathan Booth | Bel Air, MD | — | 2027-02-06 | Bel Air — Harford Co! |
+| 632 | National Kitchens Bath & More LLC ⭐ | Allen Owens | Hunt Valley, MD | 05-150268 | 2026-07-06 | 309 International Cir — Hunt Valley! |
+| 633 | Noble Kitchen and Bath | Payam Mobin | Annapolis, MD | — | 2026-09-30 | Annapolis K&B. |
+| 634 | Omni Remodeling / Kitchen Saver | Brett Cohen | Owings Mills, MD | 05-28743 | 2027-04-12 | Franchise remodeler — Owings Mills. |
+| 635 | Pandora Kitchens Inc | Shahriar Lahimi | Columbia, MD | 05-130914 | 2027-07-23 | Columbia K&B. |
+| 636 | Peak Kitchen and Bath LLC | Nelson Laur | Ellicott City, MD | — | 2027-02-22 | Ellicott City K&B. |
+| 637 | Prestige Kitchen & Bath LLC | Carlos Escobar | Baltimore, MD | 05-165535 | 2027-10-09 | NEW licensee — Baltimore. |
+| 638 | Prodesign Kitchen & Granite Inc | Aurang Zeb | Baltimore, MD | 05-156725 | 2028-01-04 | K&B + granite — VERIFY if competitor. |
+| 639 | R&W Kitchen & Bath LLC | David Weston | Westminster, MD | 05-145192 | 2027-04-10 | Westminster K&B. |
+| 640 | Revelare Kitchens LLC | Mark Curry | York, PA | 05-150536 | 2028-02-18 | York PA — PA expansion territory. |
+| 641 | Solstice Kitchen & Bath LLC | Scott Dell | Crofton, MD | 05-127642 | 2027-09-21 | Crofton K&B. |
+| 642 | Sunset Kitchens & Baths Inc | Jack League | Catonsville, MD | 05-133474 | 2027-06-27 | Catonsville K&B — 701 Frederick Rd. |
+| 643 | Superior Kitchens & Baths Inc | Robert Tanner | Pasadena, MD | — | 2027-06-25 | Pasadena K&B. |
+| 644 | That Kitchen Place ⭐ | Nicholas Wallace | Baltimore, MD | 05-134766 | 2027-07-18 | 9321 E Phila Rd — near White Marsh! |
+| 645 | VKB Kitchen and Bath Inc | Panah Ibrahimov | Columbia, MD | 05-132301 | 2027-03-31 | Columbia K&B. |
+| 646 | Worldwide Kitchen & Bath LLC | Mena Nakhla | Eldersburg, MD | 05-153578 | 2027-05-17 | Eldersburg K&B. |
+
+> **✅ PHASE 7A (MHIC "kitchen") — 43 new prospects added (#604-646).**
+> **Source:** MD MHIC Active Licensee Database — search term "kitchen"
+> **Excluded:** 6 duplicates (About Kitchens #578, Forest Hill K&B #566, Custom Kitchen Countertops #595, O'Hanlon DNR, Stuart Kitchens DNR, MD Dream Kitchens existing customer)
+> **⭐ = High priority:** 10 prospects in Harford Co / Hunt Valley / Timonium / near AGS
+
+---
+
 ## ⚠️ COMPETITORS & DO NOT CONTACT (Tracked for Reference)
 
 | Company | Location | Reason |
@@ -3860,7 +3925,8 @@
 | 🗺️ **Tier 11-GM — Google Maps Phase 4** | **21** | **General Contractors** |
 | 🗺️ **Tier 12-GM — Google Maps Phase 5** | **36** | **Custom Home Builders** |
 | 🗺️ **Tier 13-SL — Phase 6: Supplier Locators** | **41** | **Cambria + Cosentino + Caesarstone + Fabuwood + Wolf + Daltile** |
-| **TOTAL ACTIVE PROSPECTS** | **579** | **✅ PHASES 1-6 COMPLETE** |
+| 🏛️ **Tier 14-MHIC — Phase 7: MHIC Licensees** | **43** | **MD Home Improvement Commission — "kitchen" search** |
+| **TOTAL ACTIVE PROSPECTS** | **622** | **✅ PHASES 1-7A COMPLETE** |
 | ❌ Competitors/DNR | 37 | Do not contact |
 | ✅ Existing Customers | 32 | Maintain relationship |
 
