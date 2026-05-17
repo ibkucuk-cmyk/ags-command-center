@@ -4,7 +4,7 @@
 > **Service Area:** 90 min drive from Edgewood, MD (21040)  
 > **Coverage:** MD (all counties within range), PA (York, Lancaster, Harrisburg, Chester Co, Gettysburg, Reading), DE (New Castle)  
 > **Sources:** Baltimore Magazine, NKBA, Houzz, Google, MBIA, Web Research  
-> **Total Active Prospects:** 731  
+> **Total Active Prospects:** 730  
 > **Existing customers and companies we refuse to work with are EXCLUDED from prospect counts but tracked at bottom for reference.**
 
 ---
@@ -3985,7 +3985,7 @@
 | 701 | Cooper & Sons Cabinets LLC | Jeffrey Cooper | Baltimore, MD | 05-141985 | 2027-01-14 | 7100 Ft Smallwood Rd. |
 | 702 | USA Cabinet Store (Columbia) | Mahmut Ablimit | Columbia, MD | 05-148431 | 2028-04-06 | 9400 Snowden River Pkwy. |
 | 703 | USA Cabinet Store (Annapolis) | Ali Gulsen | Annapolis, MD | 05-140299 | 2026-10-15 | 508-A Chinquapin Round Rd. |
-| 704 | KJS Granite & Cabinets LLC | Josue Lopez | Mount Airy, MD | 05-162386 | 2027-03-03 | VERIFY — also does granite. |
+| 704 | ~~KJS Granite & Cabinets LLC~~ | ~~Josue Lopez~~ | ~~Mount Airy, MD~~ | ~~05-162386~~ | ~~2027-03-03~~ | **MOVED TO DNR — granite competitor** |
 | 705 | Dill Cabinetry | Thomas Dill | Port Deposit, MD | — | 2028-05-12 | 431 Jackson Park Rd — Cecil Co. |
 
 > **✅ PHASE 7D (MHIC "cabinet/cabinetry") — 13 net-new from 55 results (#693-705).**
@@ -4017,6 +4017,33 @@
 | The Beveled Edge | Gettysburg, PA | Not interested |
 | The Countertop Shop | Wilmington, DE | Not interested — possible competitor |
 | Cabinets to Go | Claymont, DE | Not interested |
+| **— MHIC "granite" search (63 results, all competitors) —** | | |
+| Baltimore Granite Direct ⚠️ | Timonium, MD 21093 | COMPETITOR — 2197 Greenspring Dr, AGS backyard! |
+| JPS Granite LLC ⚠️ | Edgewood, MD 21237 | COMPETITOR — 2908 Pulaski Hwy, AGS territory! |
+| JPS Marble and Granite LLC ⚠️ | Forest Hill, MD 21050 | COMPETITOR — 1613 Robin Circle |
+| GraniteMR LLC ⚠️ | Rosedale, MD 21237 | COMPETITOR — 7511 Pulaski Hwy, near AGS! |
+| GranitePro LLC | Eldersburg, MD | COMPETITOR — fabricator |
+| Chesapeake Granite & Marble | Owings Mills, MD | COMPETITOR — 11417 Reisterstown Rd |
+| Granite Discounter Inc | Jessup, MD | COMPETITOR — fabricator |
+| Classic Granite & Marble Inc | Jessup, MD | COMPETITOR — fabricator |
+| Delmarva Granite & Marble | Ellicott City, MD | COMPETITOR — fabricator |
+| Granite America LLC | Frederick, MD | COMPETITOR — fabricator |
+| Granite Outlet of Maryland | Millersville, MD | COMPETITOR — fabricator |
+| Granite Towers Inc | Ellicott City, MD | COMPETITOR — fabricator |
+| United Granite LLC | Elkridge, MD | COMPETITOR — fabricator |
+| United Marble and Granite | Halethorpe, MD | COMPETITOR — fabricator |
+| Maryland Style Marble & Granite | Edgewater, MD | COMPETITOR — fabricator |
+| Flintstone Marble and Granite | Rockville, MD | COMPETITOR — fabricator |
+| Big Brother's Marble and Granite | Baltimore, MD | COMPETITOR — fabricator |
+| Gold Marble Granite & Cabinets | Baltimore, MD | COMPETITOR — fabricator |
+| ProDesign Kitchen & Granite | Baltimore, MD | COMPETITOR — fabricator |
+| R&M Granite/Marble & Home Reno | Baltimore, MD | COMPETITOR — fabricator |
+| KJS Granite & Cabinets LLC | Mount Airy, MD | COMPETITOR — was prospect #704, granite fab |
+| In Home Stone Marble & Granite | Annapolis, MD | COMPETITOR — fabricator |
+| CNF Marble & Granite LLC | Mount Airy, MD | COMPETITOR — fabricator |
+| ACMR Stone Granite LLC | Capitol Heights, MD | COMPETITOR — fabricator |
+| Castillo Granite & Tile Floors | Hyattsville, MD | COMPETITOR — fabricator |
+| Stone Accent in Marble & Granite | Frederick, MD | COMPETITOR — fabricator |
 
 ---
 
@@ -4079,8 +4106,8 @@
 | 🗺️ **Tier 12-GM — Google Maps Phase 5** | **36** | **Custom Home Builders** |
 | 🗺️ **Tier 13-SL — Phase 6: Supplier Locators** | **41** | **Cambria + Cosentino + Caesarstone + Fabuwood + Wolf + Daltile** |
 | 🏛️ **Tier 14-MHIC — Phase 7: MHIC Licensees** | **152** | **kitchen (43) + remodel (90) + bath (6) + cabinet (13)** |
-| **TOTAL ACTIVE PROSPECTS** | **731** | **✅ PHASES 1-7D COMPLETE** |
-| ❌ Competitors/DNR | 37 | Do not contact |
+| **TOTAL ACTIVE PROSPECTS** | **730** | **✅ PHASES 1-7D COMPLETE** |
+| ❌ Competitors/DNR | 63 | Do not contact (incl. 26 MHIC granite fabs) |
 | ✅ Existing Customers | 32 | Maintain relationship |
 
 ---
