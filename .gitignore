@@ -1,0 +1,26 @@
+# AGS Private Repo - .gitignore
+# Only track dashboard + MD docs + CSV
+
+# Ignore everything first
+*
+
+# Then whitelist what we want
+!.gitignore
+!README.md
+
+# Dashboard files
+!dashboard/
+!dashboard/**
+
+# AGS documentation
+!AGS_*.md
+!STRATEGY_RULES.md
+!AGS_MASTER_OUTREACH.csv
+
+# Ignore build artifacts and temp files
+*.py
+*.ps1
+*.zip
+*.html
+!dashboard/*.html
+!dashboard/*.ps1

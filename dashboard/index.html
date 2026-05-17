@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGS Command Center</title>
+    <meta name="description" content="Advanced Granite Solutions — B2B Operations Dashboard">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1a2236;
+            --bg-hover: #1e293b;
+            --border: #1e3a5f;
+            --border-active: #3b82f6;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+            --green: #10b981;
+            --green-glow: rgba(16, 185, 129, 0.15);
+            --amber: #f59e0b;
+            --amber-glow: rgba(245, 158, 11, 0.15);
+            --red: #ef4444;
+            --red-glow: rgba(239, 68, 68, 0.15);
+            --purple: #8b5cf6;
+            --sidebar-width: 260px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            display: flex;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 24px 20px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-header h1 {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .sidebar-header p {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .nav-section {
+            padding: 12px 12px 4px;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .nav-items {
+            padding: 0 8px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.15s ease;
+            margin: 2px 0;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: var(--accent-glow);
+            color: var(--accent);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+        }
+
+        .nav-item .icon {
+            font-size: 16px;
+            width: 22px;
+            text-align: center;
+        }
+
+        .nav-item .badge {
+            margin-left: auto;
+            font-size: 10px;
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        .badge-green { background: var(--green-glow); color: var(--green); }
+        .badge-amber { background: var(--amber-glow); color: var(--amber); }
+        .badge-red { background: var(--red-glow); color: var(--red); }
+        .badge-blue { background: var(--accent-glow); color: var(--accent); }
+
+        .sidebar-footer {
+            padding: 16px;
+            border-top: 1px solid var(--border);
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .sidebar-footer .stat {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--green);
+            display: block;
+        }
+
+        /* MAIN CONTENT */
+        .main {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 32px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-secondary);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .topbar h2 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .topbar .search {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 14px;
+            width: 320px;
+        }
+
+        .topbar .search input {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            width: 100%;
+        }
+
+        .topbar .search input::placeholder { color: var(--text-muted); }
+
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px;
+        }
+
+        /* DASHBOARD VIEW */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--border-active);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .stat-card .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .stat-card .value {
+            font-size: 32px;
+            font-weight: 800;
+            margin: 8px 0 4px;
+        }
+
+        .stat-card .sub {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .stat-card .value.green { color: var(--green); }
+        .stat-card .value.blue { color: var(--accent); }
+        .stat-card .value.amber { color: var(--amber); }
+        .stat-card .value.purple { color: var(--purple); }
+
+        /* MARKDOWN CONTENT */
+        .md-content {
+            max-width: 900px;
+            line-height: 1.7;
+        }
+
+        .md-content h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+            background: linear-gradient(135deg, #f1f5f9, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .md-content h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 32px 0 12px;
+            color: var(--accent);
+        }
+
+        .md-content h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 24px 0 8px;
+            color: var(--text-primary);
+        }
+
+        .md-content p {
+            margin: 8px 0;
+            color: var(--text-secondary);
+        }
+
+        .md-content strong { color: var(--text-primary); }
+
+        .md-content ul, .md-content ol {
+            padding-left: 24px;
+            margin: 8px 0;
+        }
+
+        .md-content li {
+            margin: 4px 0;
+            color: var(--text-secondary);
+        }
+
+        .md-content li code {
+            background: var(--bg-card);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .md-content blockquote {
+            border-left: 3px solid var(--accent);
+            padding: 12px 16px;
+            margin: 16px 0;
+            background: var(--accent-glow);
+            border-radius: 0 8px 8px 0;
+            color: var(--text-secondary);
+        }
+
+        .md-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+
+        .md-content thead th {
+            background: var(--bg-card);
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border);
+            position: sticky;
+            top: 0;
+        }
+
+        .md-content tbody td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .md-content tbody tr:hover {
+            background: var(--bg-hover);
+        }
+
+        .md-content code {
+            background: var(--bg-card);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--green);
+        }
+
+        .md-content pre {
+            background: var(--bg-card);
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 12px 0;
+            border: 1px solid var(--border);
+        }
+
+        .md-content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .md-content hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 24px 0;
+        }
+
+        .md-content a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .md-content a:hover { text-decoration: underline; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        /* Page tab - hidden by default */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* Quick-action cards */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .action-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .action-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .action-card h3 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .action-card p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 80px;
+            color: var(--text-muted);
+        }
+
+        .loading::after {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 32px;
+            margin: 16px auto;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main { margin-left: 0; }
+            .content-area { padding: 16px; }
+            .dashboard-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>⬡ AGS Command Center</h1>
+            <p>B2B Operations Hub</p>
+        </div>
+
+        <div class="nav-items">
+            <div class="nav-section">Overview</div>
+            <div class="nav-item active" onclick="showPage('dashboard')" id="nav-dashboard">
+                <span class="icon">📊</span> Dashboard
+            </div>
+
+            <div class="nav-section">Execution</div>
+            <div class="nav-item" onclick="showPage('todo')" id="nav-todo">
+                <span class="icon">✅</span> Master TODO
+                <span class="badge badge-amber">10 blocks</span>
+            </div>
+            <div class="nav-item" onclick="showPage('strategic')" id="nav-strategic">
+                <span class="icon">🎯</span> Strategic Plan
+            </div>
+            <div class="nav-item" onclick="showPage('rules')" id="nav-rules">
+                <span class="icon">⚙️</span> Strategy Rules
+            </div>
+
+            <div class="nav-section">Sales Tools</div>
+            <div class="nav-item" onclick="showPage('coldcall')" id="nav-coldcall">
+                <span class="icon">📞</span> Cold Call Scripts
+            </div>
+            <div class="nav-item" onclick="showPage('email')" id="nav-email">
+                <span class="icon">📧</span> Email Sequences
+            </div>
+            <div class="nav-item" onclick="showPage('linkedin')" id="nav-linkedin">
+                <span class="icon">💼</span> LinkedIn Outreach
+            </div>
+            <div class="nav-item" onclick="showPage('whyags')" id="nav-whyags">
+                <span class="icon">📄</span> Why AGS One-Pager
+            </div>
+
+            <div class="nav-section">Database</div>
+            <div class="nav-item" onclick="showPage('outreach')" id="nav-outreach">
+                <span class="icon">🗄️</span> Outreach Database
+                <span class="badge badge-green">538</span>
+            </div>
+            
+            <div class="nav-section">Analysis</div>
+            <div class="nav-item" onclick="showPage('competitive')" id="nav-competitive">
+                <span class="icon">🔍</span> Competitive Analysis
+            </div>
+            <div class="nav-item" onclick="showPage('cashflow')" id="nav-cashflow">
+                <span class="icon">💰</span> Cash Flow Audit
+            </div>
+            <div class="nav-item" onclick="showPage('playbook')" id="nav-playbook">
+                <span class="icon">📕</span> B2B Playbook
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            Total Active Prospects
+            <span class="stat">538</span>
+            Last Updated: May 16, 2026
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+        <div class="topbar">
+            <h2 id="page-title">Dashboard</h2>
+            <div class="search">
+                <span>🔍</span>
+                <input type="text" placeholder="Search across all docs..." id="searchInput" onkeyup="handleSearch(event)">
+            </div>
+        </div>
+
+        <div class="content-area" id="contentArea">
+            <!-- Dashboard -->
+            <div class="page active" id="page-dashboard">
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="label">Total Prospects</div>
+                        <div class="value green">538</div>
+                        <div class="sub">Active in database</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Phases Complete</div>
+                        <div class="value blue">5/5</div>
+                        <div class="sub">All prospecting done</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Existing Customers</div>
+                        <div class="value amber">32</div>
+                        <div class="sub">Tracked separately</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Grand Total Tracked</div>
+                        <div class="value purple">607</div>
+                        <div class="sub">Prospects + customers + DNR</div>
+                    </div>
+                </div>
+
+                <h2 style="color: var(--text-primary); margin-bottom: 16px;">Phase Breakdown</h2>
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="label">Phase 1</div>
+                        <div class="value blue" style="font-size: 24px;">220</div>
+                        <div class="sub">K&B Stores + Cabinets</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Phase 2</div>
+                        <div class="value blue" style="font-size: 24px;">67</div>
+                        <div class="sub">K&B Remodelers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Phase 3</div>
+                        <div class="value blue" style="font-size: 24px;">32</div>
+                        <div class="sub">Interior/Kitchen Designers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Phase 4</div>
+                        <div class="value blue" style="font-size: 24px;">21</div>
+                        <div class="sub">General Contractors</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Phase 5</div>
+                        <div class="value blue" style="font-size: 24px;">36</div>
+                        <div class="sub">Custom Home Builders</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Original Tiers 1-7</div>
+                        <div class="value blue" style="font-size: 24px;">170</div>
+                        <div class="sub">Pre-existing prospects</div>
+                    </div>
+                </div>
+
+                <h2 style="color: var(--text-primary); margin: 24px 0 16px;">Quick Actions</h2>
+                <div class="action-grid">
+                    <div class="action-card" onclick="showPage('coldcall')">
+                        <h3>📞 Start Cold Calling</h3>
+                        <p>Open call scripts and start dialing the 538 prospects</p>
+                    </div>
+                    <div class="action-card" onclick="showPage('email')">
+                        <h3>📧 Launch Email Campaign</h3>
+                        <p>5-email sequence ready — just needs domain + Instantly.ai setup</p>
+                    </div>
+                    <div class="action-card" onclick="showPage('todo')">
+                        <h3>✅ View Next Tasks</h3>
+                        <p>See what's next on the execution checklist</p>
+                    </div>
+                    <div class="action-card" onclick="showPage('outreach')">
+                        <h3>🗄️ Browse Database</h3>
+                        <p>View all 538 prospects with phone numbers</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All other pages get populated by JS -->
+            <div class="page" id="page-todo"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-strategic"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-rules"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-coldcall"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-email"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-linkedin"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-whyags"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-outreach"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-competitive"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-cashflow"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-playbook"><div class="loading">Loading document...</div></div>
+        </div>
+    </main>
+
+    <script>
+        // Page titles
+        const pageTitles = {
+            'dashboard': 'Dashboard',
+            'todo': 'Master TODO — Execution Checklist',
+            'strategic': 'Strategic Plan',
+            'rules': 'Strategy Rules',
+            'coldcall': 'Cold Call Scripts',
+            'email': 'Email Outreach Sequences',
+            'linkedin': 'LinkedIn Outreach Cadence',
+            'whyags': 'Why AGS — One-Pager',
+            'outreach': 'Outreach Database (Scorecard)',
+            'competitive': 'Competitive Analysis',
+            'cashflow': 'Cash Flow Audit',
+            'playbook': 'B2B Playbook'
+        };
+
+        // File mapping — these get loaded from the parent directory
+        const fileMap = {
+            'todo': '../AGS_MASTER_TODO.md',
+            'strategic': '../AGS_STRATEGIC_PLAN.md',
+            'rules': '../STRATEGY_RULES.md',
+            'coldcall': '../AGS_COLD_CALL_SCRIPTS.md',
+            'email': '../AGS_EMAIL_OUTBOUND.md',
+            'linkedin': '../AGS_LINKEDIN_OUTBOUND.md',
+            'whyags': '../AGS_WHY_AGS_ONEPAGER.md',
+            'outreach': '../AGS_MASTER_OUTREACH.md',
+            'competitive': '../AGS_COMPETITIVE_ANALYSIS.md',
+            'cashflow': '../AGS_CASH_FLOW_AUDIT.md',
+            'playbook': '../AGS_MAX_B2B_PLAYBOOK.md'
+        };
+
+        const loadedPages = {};
+
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+            // Show selected
+            document.getElementById('page-' + pageId).classList.add('active');
+            document.getElementById('nav-' + pageId).classList.add('active');
+            document.getElementById('page-title').textContent = pageTitles[pageId] || pageId;
+
+            // Load markdown if not loaded
+            if (fileMap[pageId] && !loadedPages[pageId]) {
+                loadMarkdown(pageId);
+            }
+        }
+
+        async function loadMarkdown(pageId) {
+            const el = document.getElementById('page-' + pageId);
+            try {
+                const resp = await fetch(fileMap[pageId]);
+                if (!resp.ok) throw new Error('File not found');
+                const text = await resp.text();
+                const html = marked.parse(text);
+                el.innerHTML = '<div class="md-content">' + html + '</div>';
+                loadedPages[pageId] = true;
+            } catch (e) {
+                el.innerHTML = `
+                    <div class="md-content">
+                        <h2>⚠️ Could not load file</h2>
+                        <p>This dashboard needs to be served from a local web server to load MD files.</p>
+                        <p>Run this in the AGS folder:</p>
+                        <pre><code>powershell -Command "Start-Process 'http://localhost:8080/dashboard/'; & { Add-Type -AssemblyName System.Net.HttpListener; ... }"</code></pre>
+                        <p>Or use the <strong>build.ps1</strong> script to generate a self-contained version:</p>
+                        <pre><code>powershell -ExecutionPolicy Bypass -File dashboard\\build.ps1</code></pre>
+                    </div>
+                `;
+            }
+        }
+
+        function handleSearch(e) {
+            if (e.key === 'Enter') {
+                const query = document.getElementById('searchInput').value.toLowerCase();
+                // Search across loaded pages
+                for (const [pageId, loaded] of Object.entries(loadedPages)) {
+                    if (!loaded) continue;
+                    const el = document.getElementById('page-' + pageId);
+                    if (el.textContent.toLowerCase().includes(query)) {
+                        showPage(pageId);
+                        // Highlight matches
+                        setTimeout(() => {
+                            const content = el.querySelector('.md-content');
+                            if (content && window.find) {
+                                window.find(query);
+                            }
+                        }, 100);
+                        return;
+                    }
+                }
+            }
+        }
+
+        // Preload the todo page
+        setTimeout(() => loadMarkdown('todo'), 500);
+    </script>
+</body>
+</html>
