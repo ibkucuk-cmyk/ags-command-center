@@ -93,9 +93,41 @@
 - `[x]` **8.6c** ✅ Phase 7: MHIC licensee sweep — **152 new prospects** from kitchen (43), remodel (90), bath (6), cabinet (13) searches. 36 granite/marble competitors added to DNR. **Total: 730 active prospects.**
 - `[ ]` **8.6d** MHIC "construction" + "stone" search — cherry-pick K&B-relevant contractors from results. Add to master outreach.
 - `[ ]` **8.6e** Phase 8: Mine MBIA + NARI trade association directories for net-new prospects
-- `[ ]` **8.7** Start cold calling small contractors (5-10 calls/day, 3 days/week)
-- `[ ]` **8.8** Start K&B store walk-in visits (2-3 stores/week)
+- `[ ]` **8.7** Start outreach — see **OUTREACH PHILOSOPHY** below
+- `[ ]` **8.8** Start K&B store in-person visits (2-3/week) — bring coffee, not a pitch deck
 - `[ ]` **8.9** Start LinkedIn outreach (10-15 touches/week to med/large GCs)
+
+---
+
+## 🔴 BLOCK 8.5: OUTREACH PHILOSOPHY — "Owner to Owner, Not Salesman to Prospect"
+*You're not a salesperson. You're a 20+ year business owner having a conversation with another business owner.*
+
+### The Mindset
+- **NEVER sound like a salesman.** You're a peer — a fellow business owner who's been in the trenches for 20+ years.
+- Talk about **business in general** — how the industry is changing, where things are headed, what you're seeing in the market.
+- Talk about **the future** — AI in construction, how technology is reshaping the trades, what the next decade looks like for K&B.
+- Talk about **shared challenges** — labor shortages, material costs, customer expectations, cash flow cycles.
+- The stone conversation happens **naturally** once trust is built. Never force it.
+
+### The Approach — Relationship-First Outreach
+| Method | How It Works | Frequency |
+|---|---|---|
+| ☕ **Coffee meeting** | "Hey, I'm in the area — want to grab a coffee? I'd love to hear how your business is going." | 2-3/week |
+| 🏌️ **Golf invite** | Invite top-tier targets to a casual round. Business happens on the back 9. | 1-2/month |
+| 🍽️ **Lunch** | Take a prospect to lunch. No pitch. Just two owners talking shop. | 2-3/week |
+| 🏢 **Office/shop visit** | "I'm driving by — mind if I swing in and see your showroom? I've heard great things." | 2-3/week |
+| 📞 **Phone — business talk** | Call to talk about industry trends, AI, business challenges. NOT to sell stone. | 5-10/week |
+
+### What to Talk About
+- "How's business been this year? What are you seeing out there?"
+- "Have you looked into any AI tools for quoting or scheduling? We've been experimenting with some."
+- "The labor market is crazy — how are you handling it?"
+- "I've been in this 20+ years and the industry is shifting fast. What's your take on where things are headed?"
+- "We just put in an indoor slab yard — you should come check it out sometime."
+- The **stone partnership conversation comes last**, after 2-3 touchpoints of genuine relationship building.
+
+### Key Rule
+> **If it sounds like a pitch, you've already lost.** Every interaction should feel like two business owners grabbing coffee and talking shop. The partnership happens because they know you, trust you, and respect your experience — not because you "sold" them.
 
 ---
 
