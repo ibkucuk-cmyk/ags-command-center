@@ -33,18 +33,6 @@
 
 ---
 
-## 🟡 BLOCK 3: Cash Flow Defense
-*Stop the bleeding. Reduce interest expense. Speed up receivables.*
-
-- `[ ]` **3.1** Document current supplier payment terms — who gives extended terms, who doesn't. Create a simple table.
-- `[ ]` **3.2** Identify top 3 suppliers to ask for extended terms (60-90 days). Draft the ask.
-- `[ ]` **3.3** Draft a professional negotiation approach for CCS — request reduced terms (90→60 days) or progress billing.
-- `[ ]` ~~**3.4** Negotiate with Harkins~~ — **DO NOT TOUCH.**
-- `[ ]` **3.5** Research 2-3 invoice factoring / revenue-based financing options (must evaluate business credit, NOT personal credit).
-- `[ ]` **3.6** Calculate break-even: at what factoring fee does it become cheaper than current short-term loan interest?
-- `[ ]` **3.7** Monitor personal credit recovery timeline. When score allows → pursue commercial loan to consolidate all high-interest debt.
-
----
 
 ## 🟡 BLOCK 4: B2B Outbound Campaign (Requires Block 1 Done)
 *Low-cost, high-hustle outbound targeting fast-paying segments first.*

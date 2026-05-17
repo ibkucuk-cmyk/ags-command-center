@@ -16,12 +16,9 @@ AGS added two major GC accounts in the last 2 years (**Harkins Builders** and **
 
 **The math:** New accounts are replacing lost revenue, not growing it. We need a strategy that generates **net-new growth** above the replacement rate.
 
-### The Financial Drag
-* **~$1M in startup losses (2020)** created a debt overhang funded by high-interest, short-term loans.
-* The business is **operationally profitable** but interest expense consumes a significant share of gross profit.
-* **Personal credit damage (divorce)** blocks traditional refinancing, forcing us into creative cash flow strategies.
 
 ---
+
 
 ## The Strategic Architecture (5 Pillars)
 
@@ -74,32 +71,6 @@ AGS added two major GC accounts in the last 2 years (**Harkins Builders** and **
 
 ---
 
-### Pillar 3: Cash Flow Defense (Without Traditional Credit)
-
-**The Problem:** High-interest short-term debt is eating profit. Traditional refinancing is blocked by personal credit damage from the divorce. We need to improve cash flow velocity using business-level levers.
-
-**Strategies:**
-
-1. **Invoice Factoring / Revenue-Based Financing (Selective)**
-   * For slow-paying GC invoices (Harkins = 90 days, CCS = 90 days), consider selling invoices to a factoring company for immediate cash at a 2-5% discount.
-   * **Rule:** Only factor when the cost of factoring < the cost of the short-term debt interest it replaces.
-   * Research options that evaluate **business creditworthiness**, not personal credit.
-
-2. **Payment Term Renegotiation**
-   * **CCS Building Group:** Approach for reduced payment terms (60 days instead of 90, or progress billing). Draft a professional negotiation approach.
-   * **Harkins Builders:** Do NOT touch. Relationship is too valuable to risk.
-
-3. **Supplier Term Extension**
-   * Identify suppliers where we **don't already have** extended terms.
-   * Ask for 60-90 day terms to bridge the GC payment gap — effectively making suppliers fund our receivables float.
-   * Some suppliers already give extended terms — document who does and who doesn't.
-
-4. **Debt Consolidation (When Feasible)**
-   * Monitor personal credit recovery post-divorce.
-   * When score allows, package AGS's 20-year financials + profitable operations to secure a lower-interest commercial loan to retire all short-term high-interest debt.
-   * This is a **medium-term goal**, not an immediate play.
-
----
 
 ### Pillar 4: Smart Showroom Expansion (Channel Conflict Mitigation)
 
@@ -182,10 +153,10 @@ Before adding ANY product line, answer:
 ## Cross-Pillar Dependencies
 
 ```
-Pillar 1 (GC Onboarding) ──► unlocks more GC accounts ──► feeds Pillar 3 (Cash Flow via Factoring)
-Pillar 2 (Fast-Pay Outbound) ──► balances cash mix ──► reduces need for Pillar 3 debt tools
+Pillar 1 (GC Onboarding) ──► unlocks more GC accounts
+Pillar 2 (Fast-Pay Outbound) ──► balances cash mix
 Pillar 5 (Pro Portal) ──► supports Pillar 2 outbound ──► gives prospects a place to convert
 Pillar 6 (Max AI Agents) ──► accelerates all pillars ──► automates follow-up, reports, lead capture
-Pillar 4 (Showroom) ──► long-term play, depends on Pillar 2/3 stabilizing cash first
+Pillar 4 (Showroom) ──► long-term play, depends on revenue growth
 ```
 

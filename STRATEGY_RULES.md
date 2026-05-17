@@ -143,35 +143,36 @@ Every new session, the AI must execute this sequence:
 ## 11. AGS Command Center (Dashboard)
 
 ### What It Is
-A **self-contained HTML dashboard** that renders all AGS MD files in a premium dark-mode tabbed interface. No server needed — just open the `.html` file in a browser.
+A **password-protected, self-contained HTML dashboard** that renders AGS MD files in a premium dark-mode tabbed interface. Accessible from any device via URL.
 
-### File Location
-* Dashboard: `g:\My Drive\AGS\dashboard\ags_dashboard.html`
-* Build script: `g:\My Drive\AGS\dashboard\build.ps1`
-* Template: `g:\My Drive\AGS\dashboard\index.html`
+### Live URL
+**`https://ibkucuk-cmyk.github.io/ags-command-center/dashboard/ags_dashboard.html`**
+* Password: stored in password manager (SHA-256 hashed — never in plaintext)
+* Works on desktop, phone, tablet — no app needed
 
-### How to Rebuild After Editing MD Files
+### File Locations
+* Dashboard output: `dashboard/ags_dashboard.html`
+* Build script: `dashboard/build.ps1`
+* Template: `dashboard/index.html`
+* Push script: `dashboard/push.ps1`
+
+### Included in Public Build (9 files — safe for salespeople)
+`AGS_MASTER_TODO.md`, `AGS_STRATEGIC_PLAN.md`, `AGS_COLD_CALL_SCRIPTS.md`, `AGS_EMAIL_OUTBOUND.md`, `AGS_LINKEDIN_OUTBOUND.md`, `AGS_WHY_AGS_ONEPAGER.md`, `AGS_MASTER_OUTREACH.md`, `AGS_COMPETITIVE_ANALYSIS.md`, `AGS_MAX_B2B_PLAYBOOK.md`
+
+### EXCLUDED from Public Build (sensitive financial data)
+* ❌ `STRATEGY_RULES.md` — contains debt, credit constraints, financial reality
+* ❌ `AGS_CASH_FLOW_AUDIT.md` — contains full financial data
+
+### How to Update After Editing MD Files
 ```powershell
 powershell -ExecutionPolicy Bypass -File "G:\My Drive\AGS\dashboard\build.ps1"
+powershell -ExecutionPolicy Bypass -File "G:\My Drive\AGS\dashboard\push.ps1"
 ```
-This reads all 11 MD files and embeds them into a single HTML. Takes ~3 seconds.
 
-### How to View the Dashboard
-1. **Locally (instant):** Double-click `g:\My Drive\AGS\dashboard\ags_dashboard.html` in File Explorer. Opens in your browser — no server needed.
-2. **GitHub Pages (remote access):** Enable Pages on the private repo for mobile/any-device access. Requires GitHub Pro ($4/mo).
-
-### GitHub Private Repo
-* **Repo URL:** `https://github.com/ibkucuk-cmyk/ags-command-center`
-* **Visibility:** Private — not public-facing. For internal ops only.
-* **Push updates after editing MD files:**
-```powershell
-$env:Path += ";C:\Program Files\Git\cmd"
-cd "G:\My Drive\AGS"
-powershell -ExecutionPolicy Bypass -File dashboard\build.ps1
-git add -A
-git commit -m "Update docs"
-git push
-```
+### GitHub Repo
+* **Repo:** `https://github.com/ibkucuk-cmyk/ags-command-center`
+* **Visibility:** PUBLIC (password-protected via JS gate)
+* **GitHub Pages:** Enabled — deploys from `main` branch
 
 ---
 
