@@ -156,11 +156,22 @@ powershell -ExecutionPolicy Bypass -File "G:\My Drive\AGS\dashboard\build.ps1"
 ```
 This reads all 11 MD files and embeds them into a single HTML. Takes ~3 seconds.
 
+### How to View the Dashboard
+1. **Locally (instant):** Double-click `g:\My Drive\AGS\dashboard\ags_dashboard.html` in File Explorer. Opens in your browser — no server needed.
+2. **GitHub Pages (remote access):** Enable Pages on the private repo for mobile/any-device access. Requires GitHub Pro ($4/mo).
+
 ### GitHub Private Repo
-* **Purpose:** Host dashboard on GitHub Pages for mobile/browser access anywhere
-* **Repo:** Private — not public-facing. For internal ops only.
-* **Setup:** Push the `dashboard/` folder + all AGS `.md` files to the private repo
-* **NOTE:** GitHub Pages requires GitHub Pro ($4/mo) for private repos. Alternatively, just sync via Google Drive and open the HTML locally.
+* **Repo URL:** `https://github.com/ibkucuk-cmyk/ags-command-center`
+* **Visibility:** Private — not public-facing. For internal ops only.
+* **Push updates after editing MD files:**
+```powershell
+$env:Path += ";C:\Program Files\Git\cmd"
+cd "G:\My Drive\AGS"
+powershell -ExecutionPolicy Bypass -File dashboard\build.ps1
+git add -A
+git commit -m "Update docs"
+git push
+```
 
 ---
 

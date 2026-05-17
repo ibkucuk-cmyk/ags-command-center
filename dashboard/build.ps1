@@ -1,6 +1,6 @@
 <#
     AGS Dashboard Build Script
-    Reads all MD files and generates a self-contained index.html
+    Reads all MD files and generates a self-contained ags_dashboard.html
     Run: powershell -ExecutionPolicy Bypass -File dashboard\build.ps1
 #>
 
@@ -27,15 +27,14 @@ $files = [ordered]@{
 
 # Read all files and build JSON-safe data
 $dataLines = @()
-$dataLines += "const mdContent = {};"
+$dataLines += "window.mdContent = {};"
 
 foreach ($key in $files.Keys) {
     $path = Join-Path $agsRoot $files[$key]
     if (Test-Path $path) {
         $raw = Get-Content $path -Raw -Encoding UTF8
-        # JSON-encode the string to handle all special characters
         $jsonStr = $raw | ConvertTo-Json -Compress
-        $dataLines += "mdContent['$key'] = JSON.parse($jsonStr);"
+        $dataLines += "window.mdContent['$key'] = JSON.parse($jsonStr);"
         Write-Host "  [OK] $($files[$key])" -ForegroundColor Green
     } else {
         Write-Host "  [SKIP] $($files[$key]) - not found" -ForegroundColor Yellow
@@ -48,30 +47,10 @@ $dataBlock = $dataLines -join "`n"
 $templatePath = Join-Path $PSScriptRoot "index.html"
 $template = Get-Content $templatePath -Raw -Encoding UTF8
 
-# Build the override script - use single-quoted here-string to prevent PS interpolation
-$overrideJS = @'
-    <script>
-    %%DATABLOCK%%
-
-    // Override loadMarkdown to use embedded content
-    async function loadMarkdown(pid) {
-        var el = document.getElementById('page-' + pid);
-        if (mdContent[pid]) {
-            var h = marked.parse(mdContent[pid]);
-            el.innerHTML = '<div class="md-content">' + h + '</div>';
-            loadedPages[pid] = true;
-        } else {
-            el.innerHTML = '<div class="md-content"><h2>Content not available</h2></div>';
-        }
-    }
-    </script>
-</body>
-'@
-
-$overrideJS = $overrideJS -replace '%%DATABLOCK%%', $dataBlock
-
-# Replace the closing body tag with embedded data
-$output = $template -replace '</body>', $overrideJS
+# Inject data script BEFORE the main script tag (replace first occurrence only)
+$marker = '    <script>'
+$idx = $template.IndexOf($marker)
+$output = $template.Substring(0, $idx) + "<script>`n$dataBlock`n</script>`n" + $template.Substring($idx)
 
 # Write the built file
 $outputPath = Join-Path $PSScriptRoot "ags_dashboard.html"

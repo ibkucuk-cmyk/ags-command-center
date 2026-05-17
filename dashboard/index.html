@@ -644,86 +644,77 @@
             'playbook': 'B2B Playbook'
         };
 
-        // File mapping — these get loaded from the parent directory
+        // File mapping for fetch fallback
         const fileMap = {
-            'todo': '../AGS_MASTER_TODO.md',
-            'strategic': '../AGS_STRATEGIC_PLAN.md',
-            'rules': '../STRATEGY_RULES.md',
-            'coldcall': '../AGS_COLD_CALL_SCRIPTS.md',
-            'email': '../AGS_EMAIL_OUTBOUND.md',
-            'linkedin': '../AGS_LINKEDIN_OUTBOUND.md',
-            'whyags': '../AGS_WHY_AGS_ONEPAGER.md',
-            'outreach': '../AGS_MASTER_OUTREACH.md',
-            'competitive': '../AGS_COMPETITIVE_ANALYSIS.md',
-            'cashflow': '../AGS_CASH_FLOW_AUDIT.md',
-            'playbook': '../AGS_MAX_B2B_PLAYBOOK.md'
+            'todo': 'AGS_MASTER_TODO.md',
+            'strategic': 'AGS_STRATEGIC_PLAN.md',
+            'rules': 'STRATEGY_RULES.md',
+            'coldcall': 'AGS_COLD_CALL_SCRIPTS.md',
+            'email': 'AGS_EMAIL_OUTBOUND.md',
+            'linkedin': 'AGS_LINKEDIN_OUTBOUND.md',
+            'whyags': 'AGS_WHY_AGS_ONEPAGER.md',
+            'outreach': 'AGS_MASTER_OUTREACH.md',
+            'competitive': 'AGS_COMPETITIVE_ANALYSIS.md',
+            'cashflow': 'AGS_CASH_FLOW_AUDIT.md',
+            'playbook': 'AGS_MAX_B2B_PLAYBOOK.md'
         };
+
+        // Embedded content — populated by build.ps1
+        if (!window.mdContent) window.mdContent = {};
 
         const loadedPages = {};
 
         function showPage(pageId) {
-            // Hide all pages
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
-            // Show selected
             document.getElementById('page-' + pageId).classList.add('active');
             document.getElementById('nav-' + pageId).classList.add('active');
             document.getElementById('page-title').textContent = pageTitles[pageId] || pageId;
-
-            // Load markdown if not loaded
             if (fileMap[pageId] && !loadedPages[pageId]) {
                 loadMarkdown(pageId);
             }
         }
 
-        async function loadMarkdown(pageId) {
-            const el = document.getElementById('page-' + pageId);
-            try {
-                const resp = await fetch(fileMap[pageId]);
-                if (!resp.ok) throw new Error('File not found');
-                const text = await resp.text();
-                const html = marked.parse(text);
+        function loadMarkdown(pageId) {
+            var el = document.getElementById('page-' + pageId);
+            // Check embedded content first
+            if (window.mdContent && window.mdContent[pageId]) {
+                var html = marked.parse(window.mdContent[pageId]);
                 el.innerHTML = '<div class="md-content">' + html + '</div>';
                 loadedPages[pageId] = true;
-            } catch (e) {
-                el.innerHTML = `
-                    <div class="md-content">
-                        <h2>⚠️ Could not load file</h2>
-                        <p>This dashboard needs to be served from a local web server to load MD files.</p>
-                        <p>Run this in the AGS folder:</p>
-                        <pre><code>powershell -Command "Start-Process 'http://localhost:8080/dashboard/'; & { Add-Type -AssemblyName System.Net.HttpListener; ... }"</code></pre>
-                        <p>Or use the <strong>build.ps1</strong> script to generate a self-contained version:</p>
-                        <pre><code>powershell -ExecutionPolicy Bypass -File dashboard\\build.ps1</code></pre>
-                    </div>
-                `;
+                return;
             }
+            // Fallback to fetch (for dev server)
+            fetch(fileMap[pageId]).then(function(r) {
+                if (!r.ok) throw new Error('Not found');
+                return r.text();
+            }).then(function(text) {
+                el.innerHTML = '<div class="md-content">' + marked.parse(text) + '</div>';
+                loadedPages[pageId] = true;
+            }).catch(function() {
+                el.innerHTML = '<div class="md-content"><h2>Content not available</h2><p>Run build.ps1 to generate a self-contained dashboard, or serve via a web server.</p></div>';
+            });
         }
 
         function handleSearch(e) {
             if (e.key === 'Enter') {
-                const query = document.getElementById('searchInput').value.toLowerCase();
-                // Search across loaded pages
-                for (const [pageId, loaded] of Object.entries(loadedPages)) {
-                    if (!loaded) continue;
-                    const el = document.getElementById('page-' + pageId);
-                    if (el.textContent.toLowerCase().includes(query)) {
-                        showPage(pageId);
-                        // Highlight matches
-                        setTimeout(() => {
-                            const content = el.querySelector('.md-content');
-                            if (content && window.find) {
-                                window.find(query);
-                            }
-                        }, 100);
-                        return;
+                var query = document.getElementById('searchInput').value.toLowerCase();
+                // Load all pages first for search
+                var allKeys = Object.keys(fileMap);
+                allKeys.forEach(function(pid) { if (!loadedPages[pid]) loadMarkdown(pid); });
+                setTimeout(function() {
+                    for (var i = 0; i < allKeys.length; i++) {
+                        var pid = allKeys[i];
+                        var el = document.getElementById('page-' + pid);
+                        if (el && el.textContent.toLowerCase().indexOf(query) !== -1) {
+                            showPage(pid);
+                            if (window.find) window.find(query);
+                            return;
+                        }
                     }
-                }
+                }, 300);
             }
         }
-
-        // Preload the todo page
-        setTimeout(() => loadMarkdown('todo'), 500);
     </script>
 </body>
 </html>
