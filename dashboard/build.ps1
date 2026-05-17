@@ -10,7 +10,7 @@ if (-not $agsRoot) { $agsRoot = "G:\My Drive\AGS" }
 Write-Host "AGS Dashboard Builder" -ForegroundColor Cyan
 Write-Host "Root: $agsRoot"
 
-# File mapping
+# File mapping - all files included (protected by password gate)
 $files = [ordered]@{
     'todo' = 'AGS_MASTER_TODO.md'
     'strategic' = 'AGS_STRATEGIC_PLAN.md'
@@ -47,10 +47,16 @@ $dataBlock = $dataLines -join "`n"
 $templatePath = Join-Path $PSScriptRoot "index.html"
 $template = Get-Content $templatePath -Raw -Encoding UTF8
 
-# Inject data script BEFORE the main script tag (replace first occurrence only)
-$marker = '    <script>'
+# Find the main app script (after auth script) by looking for "Page titles"
+$marker = '// Page titles'
 $idx = $template.IndexOf($marker)
-$output = $template.Substring(0, $idx) + "<script>`n$dataBlock`n</script>`n" + $template.Substring($idx)
+if ($idx -lt 0) {
+    Write-Host "ERROR: Could not find injection point" -ForegroundColor Red
+    exit 1
+}
+# Find the <script> tag just before it
+$scriptIdx = $template.LastIndexOf('<script>', $idx)
+$output = $template.Substring(0, $scriptIdx) + "<script>`n$dataBlock`n</script>`n" + $template.Substring($scriptIdx)
 
 # Write the built file
 $outputPath = Join-Path $PSScriptRoot "ags_dashboard.html"
@@ -59,4 +65,4 @@ $outputPath = Join-Path $PSScriptRoot "ags_dashboard.html"
 $size = (Get-Item $outputPath).Length / 1MB
 Write-Host ""
 Write-Host "Built: $outputPath ($([math]::Round($size, 1)) MB)" -ForegroundColor Cyan
-Write-Host "Open this file in your browser - no server needed!" -ForegroundColor Green
+Write-Host "Open in browser - password protected!" -ForegroundColor Green

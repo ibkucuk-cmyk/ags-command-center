@@ -454,9 +454,138 @@
             .content-area { padding: 16px; }
             .dashboard-grid { grid-template-columns: 1fr 1fr; }
         }
+
+        /* PASSWORD GATE */
+        .auth-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--bg-primary);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s ease;
+        }
+
+        .auth-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .auth-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 48px 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .auth-box h1 {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .auth-box p {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
+
+        .auth-box input[type="password"] {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+
+        .auth-box input[type="password"]:focus {
+            border-color: var(--accent);
+        }
+
+        .auth-box button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.2s;
+        }
+
+        .auth-box button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .auth-error {
+            color: var(--red);
+            font-size: 12px;
+            margin-top: 12px;
+            display: none;
+        }
     </style>
 </head>
 <body>
+    <!-- PASSWORD GATE -->
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-box">
+            <h1>⬡ AGS Command Center</h1>
+            <p>Enter password to access the operations hub</p>
+            <input type="password" id="authPassword" placeholder="Password" onkeyup="if(event.key==='Enter')checkAuth()">
+            <button onclick="checkAuth()">Access Dashboard</button>
+            <div class="auth-error" id="authError">Incorrect password. Try again.</div>
+        </div>
+    </div>
+
+    <script>
+    var AUTH_HASH = 'f30e2f8686e28a98946c1bf5aceb0cd69af0894bc33d245f1bfda6b71febb686';
+
+    async function sha256(str) {
+        var buf = new TextEncoder().encode(str);
+        var hash = await crypto.subtle.digest('SHA-256', buf);
+        return Array.from(new Uint8Array(hash)).map(function(b) { return b.toString(16).padStart(2,'0'); }).join('');
+    }
+
+    async function checkAuth() {
+        var pw = document.getElementById('authPassword').value;
+        var hash = await sha256(pw);
+        if (hash === AUTH_HASH) {
+            sessionStorage.setItem('ags_auth', 'true');
+            document.getElementById('authOverlay').classList.add('hidden');
+        } else {
+            document.getElementById('authError').style.display = 'block';
+            document.getElementById('authPassword').value = '';
+            document.getElementById('authPassword').focus();
+        }
+    }
+
+    // Check if already authenticated this session
+    if (sessionStorage.getItem('ags_auth') === 'true') {
+        document.getElementById('authOverlay').classList.add('hidden');
+    } else {
+        // Focus password input
+        setTimeout(function() { document.getElementById('authPassword').focus(); }, 100);
+    }
+    </script>
+
     <!-- SIDEBAR -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
