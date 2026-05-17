@@ -1,29 +1,36 @@
-# AGS Private Repo - .gitignore
-# Only track dashboard + MD docs + CSV
+# AGS Repo - .gitignore
+# SECURITY: Only the dashboard HTML goes to GitHub.
+# All raw MD/CSV files stay LOCAL ONLY (Google Drive).
+# The dashboard is self-contained — all content is baked in during build.
 
 # Ignore everything first
 *
 
-# Then whitelist what we want
+# Then whitelist ONLY what we need public
 !.gitignore
 !README.md
 
-# Dashboard files
+# Dashboard files (the only public-facing assets)
 !dashboard/
-!dashboard/**
+!dashboard/ags_dashboard.html
+!dashboard/build.ps1
+!dashboard/push.ps1
+!dashboard/index.html
+!dashboard/existing_names.txt
 
-# AGS documentation
-!AGS_*.md
-!AGS_MASTER_OUTREACH.csv
-
-# EXCLUDE sensitive financial files (keep local only, never push to public repo)
-STRATEGY_RULES.md
-AGS_CASH_FLOW_AUDIT.md
-
-# Ignore build artifacts and temp files
-*.py
-*.ps1
-*.zip
-*.html
-!dashboard/*.html
-!dashboard/*.ps1
+# EVERYTHING ELSE stays local — never pushed to GitHub
+# This includes:
+# - AGS_MASTER_OUTREACH.md (730 prospects)
+# - AGS_MASTER_OUTREACH.csv
+# - AGS_COLD_CALL_SCRIPTS.md
+# - AGS_EMAIL_OUTBOUND.md
+# - AGS_LINKEDIN_OUTBOUND.md
+# - AGS_WHY_AGS_ONEPAGER.md
+# - AGS_STRATEGIC_PLAN.md
+# - AGS_COMPETITIVE_ANALYSIS.md
+# - AGS_PHASE6_PROSPECTING.md
+# - AGS_MAX_B2B_PLAYBOOK.md
+# - AGS_MASTER_TODO.md
+# - STRATEGY_RULES.md
+# - AGS_CASH_FLOW_AUDIT.md
+# - All other .md, .csv, .py, .zip files
