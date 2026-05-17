@@ -22,7 +22,7 @@ Pick **one approach per prospect** based on what feels right for the person. Tes
 **Vibe:** Two veterans comparing notes on where the industry is heading.
 
 ### Opening
-> *"Hey [name], this is Serhan — I run Advanced Granite Solutions out in Edgewood. Been in the stone game about 20 years now. I was actually just driving through [their area] and realized I've never connected with you. How's business been for you this year?"*
+> *"Hey [name], this is Ibo — I run Advanced Granite Solutions out in Edgewood. Been in the stone game about 20 years now. I was actually just driving through [their area] and realized I've never connected with you. How's business been for you this year?"*
 
 ### Let Them Talk
 This is the most important part. **Listen.** Ask follow-up questions. Be genuinely curious. Don't think about stone yet.
@@ -51,7 +51,7 @@ This is the most important part. **Listen.** Ask follow-up questions. Be genuine
 **Vibe:** Two business owners geeking out about where things are heading.
 
 ### Opening
-> *"Hey [name], Serhan here — I run a stone fab shop, Advanced Granite Solutions. I've been in this industry 20-plus years and I have to say, the last couple years have been the most interesting. Have you been paying attention to how fast AI is changing our world?"*
+> *"Hey [name], Ibo here — I run a stone fab shop, Advanced Granite Solutions. I've been in this industry 20-plus years and I have to say, the last couple years have been the most interesting. Have you been paying attention to how fast AI is changing our world?"*
 
 ### Conversation Threads
 - "We've actually been experimenting with AI for quoting and scheduling. It's not perfect yet but the potential is insane."
@@ -75,7 +75,7 @@ This is the most important part. **Listen.** Ask follow-up questions. Be genuine
 **Vibe:** Two people in the same boat — validating each other's challenges.
 
 ### Opening
-> *"Hey [name], Serhan from Advanced Granite. I'll be real with you — I'm not calling to sell you anything. I run a stone shop, been doing it 20 years, and honestly some days I wonder why I do this to myself. *(laugh)* How's your world going?"*
+> *"Hey [name], Ibo from Advanced Granite. I'll be real with you — I'm not calling to sell you anything. I run a stone shop, been doing it 20 years, and honestly some days I wonder why I do this to myself. *(laugh)* How's your world going?"*
 
 ### Conversation Threads
 - "Finding good people is the hardest thing in this business, right? I can find stone all day long but finding reliable installers... man."
@@ -99,7 +99,7 @@ This is the most important part. **Listen.** Ask follow-up questions. Be genuine
 **Vibe:** A neighbor introducing himself, building the local business network.
 
 ### Walk-In Opening
-> *"Hi, I'm Serhan — I run Advanced Granite Solutions. We're a stone fabrication shop over in Edgewood, been here about 20 years. I've driven past your place a bunch of times and kept telling myself I need to stop in and introduce myself. Beautiful showroom, by the way."*
+> *"Hi, I'm Ibo — I run Advanced Granite Solutions. We're a stone fabrication shop over in Edgewood, been here about 20 years. I've driven past your place a bunch of times and kept telling myself I need to stop in and introduce myself. Beautiful showroom, by the way."*
 
 ### Conversation Threads
 - "How long have you been in this location? I love what you've done with the space."
@@ -125,7 +125,7 @@ This is the most important part. **Listen.** Ask follow-up questions. Be genuine
 **Vibe:** Respect their time. Lead with value. Get to the point.
 
 ### Opening
-> *"Hey [name], Serhan from Advanced Granite Solutions. I'll take 60 seconds — you do kitchens and baths, right?"*
+> *"Hey [name], Ibo from Advanced Granite Solutions. I'll take 60 seconds — you do kitchens and baths, right?"*
 
 **If YES →**
 
@@ -168,7 +168,7 @@ Some people hate the warm-up. They respect directness. This approach:
 
 ## Voicemail — Universal (15 seconds max)
 
-> *"Hey [name], Serhan from Advanced Granite. I run a stone shop in Edgewood — been at it 20 years. Just wanted to introduce myself. Give me a call back if you get a chance — [number]. No rush. Have a good one."*
+> *"Hey [name], Ibo from Advanced Granite. I run a stone shop in Edgewood — been at it 20 years. Just wanted to introduce myself. Give me a call back if you get a chance — [number]. No rush. Have a good one."*
 
 **Rule:** ONE voicemail. No follow-up call for 30 days. Add to email list instead.
 

@@ -45,10 +45,10 @@ Geography: MD/PA/DE (50mi) | Industry: Interior Design | Title: Owner, Principal
 > [First Name] — fellow business owner here (stone fabrication, 20 years). I've been connecting with contractors and K&B owners in MD/PA to compare notes on where the industry is headed. Would be good to connect.
 
 ### V4 — The Neighbor
-> Hi [First Name] — I'm Serhan, I run Advanced Granite Solutions in Edgewood. I've been meaning to connect with more local business owners. Let's be in each other's network.
+> Hi [First Name] — I'm Ibo, I run Advanced Granite Solutions in Edgewood. I've been meaning to connect with more local business owners. Let's be in each other's network.
 
 ### V5 — The Direct
-> [First Name] — Serhan, 20-year stone fab shop. If you ever do projects involving countertops, I want to be someone you know. Happy to connect.
+> [First Name] — Ibo, 20-year stone fab shop. If you ever do projects involving countertops, I want to be someone you know. Happy to connect.
 
 ---
 
@@ -116,7 +116,7 @@ Geography: MD/PA/DE (50mi) | Industry: Interior Design | Title: Owner, Principal
 
 | Response | Action |
 |---|---|
-| Positive/Interested | Schedule coffee, lunch, or yard tour. Personal follow-up by Serhan. |
+| Positive/Interested | Schedule coffee, lunch, or yard tour. Personal follow-up by Ibo. |
 | "Tell me more" | Reply conversationally. Do NOT send one-pager yet — save for 2nd meeting. |
 | "Not right now" | "Totally get it. The door's open whenever." → Check back in 90 days. |
 | "Have a fabricator" | "Good to hear. Everyone needs a backup though — keep my number." |
@@ -143,7 +143,7 @@ Geography: MD/PA/DE (50mi) | Industry: Interior Design | Title: Owner, Principal
 5. **Community** — Highlight a partner, share a local business event, celebrate a project
 
 ### Tone Rules
-- Write as Serhan the owner, not "Advanced Granite Solutions the company"
+- Write as Ibo the owner, not "Advanced Granite Solutions the company"
 - Use first person ("I've been thinking about..." not "We are pleased to announce...")
 - Be honest and real — vulnerability performs better than corporate polish on LinkedIn
 - Ask questions — posts with questions get 2-3x more engagement
@@ -155,5 +155,5 @@ Geography: MD/PA/DE (50mi) | Industry: Interior Design | Title: Owner, Principal
 - ✅ All messages comply with §13 Owner-to-Owner philosophy
 - ✅ No slab counts, no price guarantees, no install date promises
 - ✅ No financial claims, no competitor names
-- ✅ Every message reads like a personal note from Serhan
+- ✅ Every message reads like a personal note from Ibo
 - ❌ Never send the same message to multiple people — personalize everything

@@ -16,7 +16,7 @@
 
 ### Step 2: Set Up Email Accounts
 - Use Google Workspace ($6/user/mo) or Zoho Mail (free for up to 5 users)
-- Create: `serhan@agspartners.com`, `info@agspartners.com`
+- Create: `ibo@agspartners.com`, `info@agspartners.com`
 
 ### Step 3: DNS Authentication Records
 
@@ -32,7 +32,7 @@ v=spf1 include:_spf.google.com ~all
 
 **DMARC Record** (TXT record, name: `_dmarc`):
 ```
-v=DMARC1; p=none; rua=mailto:serhan@agspartners.com
+v=DMARC1; p=none; rua=mailto:ibo@agspartners.com
 ```
 *(Start with p=none to monitor, then move to p=quarantine after 30 days)*
 
@@ -73,7 +73,7 @@ v=DMARC1; p=none; rua=mailto:serhan@agspartners.com
 
 Hi [First Name],
 
-I'm Serhan — I run a stone fabrication shop in Edgewood, MD. Been doing this for about 20 years.
+I'm Ibo — I run a stone fabrication shop in Edgewood, MD. Been doing this for about 20 years.
 
 I'm reaching out because I've been connecting with other business owners in the [Baltimore/Harford Co] area and I'm curious — are you seeing the same things I'm seeing right now?
 
@@ -83,7 +83,7 @@ Not trying to sell you anything. Genuinely curious what the view looks like from
 
 If you're ever up for a coffee and some honest shop talk, I'd enjoy that.
 
-— Serhan
+— Ibo
 Advanced Granite Solutions
 [Phone]
 
@@ -105,7 +105,7 @@ That's exactly how I've been running our shop. We stopped chasing volume years a
 
 Would love to hear your take over a coffee sometime. No agenda — just two owners comparing notes.
 
-— Serhan
+— Ibo
 
 *Reply "remove" to unsubscribe.*
 
@@ -125,7 +125,7 @@ No pitch. Just a handshake and a conversation.
 
 Hope you're having a good month.
 
-— Serhan
+— Ibo
 [Phone]
 
 *Reply "remove" to unsubscribe.*
@@ -143,7 +143,7 @@ Hope you're having a good month.
 
 Hi [First Name],
 
-I'm Serhan — 20 years in stone fabrication. Something I've been thinking about a lot lately:
+I'm Ibo — 20 years in stone fabrication. Something I've been thinking about a lot lately:
 
 Our industry is one of the last to adopt technology. Most shops still do everything by phone and paper. Meanwhile, other industries have been using self-serve portals, AI-powered scheduling, and instant quoting for years.
 
@@ -153,7 +153,7 @@ I'm curious — have you been looking into any tech tools for your business? I'm
 
 Would love to grab a coffee and compare notes if you're up for it.
 
-— Serhan
+— Ibo
 Advanced Granite Solutions
 [Phone]
 
@@ -177,7 +177,7 @@ If you're interested in this stuff at all, I'd genuinely enjoy swapping ideas. T
 
 Coffee sometime?
 
-— Serhan
+— Ibo
 
 *Reply "remove" to unsubscribe.*
 
@@ -195,7 +195,7 @@ The indoor slab yard is worth seeing on its own. And I genuinely enjoy talking t
 
 The door's always open. [Address]. Hope to meet you someday.
 
-— Serhan
+— Ibo
 [Phone]
 
 *Reply "remove" to unsubscribe.*
@@ -213,13 +213,13 @@ The door's always open. [Address]. Hope to meet you someday.
 
 Hi [First Name],
 
-I'm Serhan. I run a stone fabrication shop. 20 years. Some days I love it, some days I wonder why I didn't become an accountant. *(Kidding. Mostly.)*
+I'm Ibo. I run a stone fabrication shop. 20 years. Some days I love it, some days I wonder why I didn't become an accountant. *(Kidding. Mostly.)*
 
 I found your business online and I just wanted to reach out — not to sell you anything, but because I've been making an effort to connect with other owners in our area. Running a business can be pretty isolating sometimes.
 
 If you ever want to grab a coffee or lunch and just talk shop — the good, the bad, and the ugly — I'm always down for that.
 
-— Serhan
+— Ibo
 Advanced Granite Solutions
 [Phone]
 
@@ -241,7 +241,7 @@ We do everything in-house. No subs. I've been burned too many times as a custome
 
 Anyway — if that's ever relevant, you've got my number. And the coffee offer still stands.
 
-— Serhan
+— Ibo
 
 *Reply "remove" to unsubscribe.*
 
@@ -261,7 +261,7 @@ That's it. Just trying to be useful.
 
 Have a great week.
 
-— Serhan
+— Ibo
 [Phone]
 
 *Reply "remove" to unsubscribe.*
@@ -279,7 +279,7 @@ Have a great week.
 
 Hi [First Name],
 
-I'm Serhan — I run Advanced Granite Solutions over in Edgewood. We've been here 20 years and honestly, I should have introduced myself a long time ago.
+I'm Ibo — I run Advanced Granite Solutions over in Edgewood. We've been here 20 years and honestly, I should have introduced myself a long time ago.
 
 I've been making an effort to get to know more local business owners, especially in the K&B world. I think there's a lot of potential for businesses like ours to support each other — referrals, shared knowledge, that kind of thing.
 
@@ -287,7 +287,7 @@ I'd love to stop by your showroom sometime and see what you've built. I've heard
 
 No agenda. Just a neighbor saying hi.
 
-— Serhan
+— Ibo
 Advanced Granite Solutions
 [Phone]
 
