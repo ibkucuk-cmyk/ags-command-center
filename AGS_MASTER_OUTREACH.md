@@ -4,7 +4,7 @@
 > **Service Area:** 90 min drive from Edgewood, MD (21040)  
 > **Coverage:** MD (all counties within range), PA (York, Lancaster, Harrisburg, Chester Co, Gettysburg, Reading), DE (New Castle)  
 > **Sources:** Baltimore Magazine, NKBA, Houzz, Google, MBIA, Web Research  
-> **Total Active Prospects:** 662  
+> **Total Active Prospects:** 681  
 > **Existing customers and companies we refuse to work with are EXCLUDED from prospect counts but tracked at bottom for reference.**
 
 ---
@@ -3893,6 +3893,45 @@
 
 ---
 
+### MHIC "BATH" SEARCH — Net-New 6 of 113 (Heavy overlap with "kitchen")
+
+> **Note:** 113 results for "bath" — ~95% already captured in "kitchen" search.
+
+| # | Company | Owner | City | MHIC # | Expires | AGS Angle |
+|---|---|---|---|---|---|---|
+| 687 | Bath Doctor LLC | Robert Ward Sr | Baltimore, MD | — | 2028-04-06 | 3521 Mary Ave — bath specialist. |
+| 688 | Bath 2 Day | Bruce Weiss | Baltimore, MD | 05-123832 | 2028-01-10 | 3305 Taney Rd — bath installer. |
+| 689 | Mako Shower and Bath Inc ⭐ | Shawn Sweeney | Essex, MD | 05-160009 | 2026-09-09 | 613 Virginia Ave — near AGS! |
+| 690 | Maryland Re-Bath ⭐ | Robert Bollinger | Linthicum, MD | 05-120841 | 2027-04-13 | 5191 Raynor Ave — franchise bath. |
+| 691 | P and C Bathtub-Tiles Refinishing ⭐⭐ | Pedro Hernandez | Perry Hall, MD | 05-140379 | 2026-10-20 | 9720 Silver Farm Ct — VERY close! |
+| 692 | Epic Kitchen and Bath Inc | Scott Phucas | Ijamsville, MD | — | 2027-03-07 | 10087 Tyler Ct. |
+
+> **✅ PHASE 7C (MHIC "bath") — 6 net-new from 113 results (#687-692).**
+
+---
+
+### MHIC "CABINET" + "CABINETRY" SEARCH — Net-New 13 of 55
+
+| # | Company | Owner | City | MHIC # | Expires | AGS Angle |
+|---|---|---|---|---|---|---|
+| 693 | The Cabinet Guy LLC ⭐⭐ | Bryan Skinner | Kingsville, MD | 05-151471 | 2027-05-11 | 11809 Cedar Ln — VERY close to AGS! |
+| 694 | Williams Custom Cabinets LLC ⭐⭐ | George Hallgren | Aberdeen, MD | 05-127770 | 2027-06-13 | 101 Fords Ln — Harford Co! |
+| 695 | Cabinet Warehouse Inc ⭐ | Robert Weisman | Essex, MD | 05-130119 | 2028-07-10 | 201 Eyring Ave — near AGS! |
+| 696 | Sakayo Cabinetry ⭐ | Joel Rivas | Baltimore, MD | 05-167772 | 2028-04-01 | 8567 Ramort Dr — Baltimore Co. |
+| 697 | Cabinet Discounters Inc | John Mikk Jr | Columbia, MD | 05-27947 | 2027-12-31 | 9500 Berger Rd — large dealer. |
+| 698 | Innovative Cabinetry by KMC Inc | Kenneth Cebulski | Hampstead, MD | — | 2026-09-06 | 4659 Warpath Dr — Carroll Co. |
+| 699 | Raver Cabinets LLC | Glenn Raver | Manchester, MD | 05-133022 | 2027-12-20 | 4314 Hanover Pike. |
+| 700 | Creative Cabinet Solutions / Rycor | Ryan Corbett | Westminster, MD | 05-128106 | 2028-03-31 | 1718 Yorkland Rd. |
+| 701 | Cooper & Sons Cabinets LLC | Jeffrey Cooper | Baltimore, MD | 05-141985 | 2027-01-14 | 7100 Ft Smallwood Rd. |
+| 702 | USA Cabinet Store (Columbia) | Mahmut Ablimit | Columbia, MD | 05-148431 | 2028-04-06 | 9400 Snowden River Pkwy. |
+| 703 | USA Cabinet Store (Annapolis) | Ali Gulsen | Annapolis, MD | 05-140299 | 2026-10-15 | 508-A Chinquapin Round Rd. |
+| 704 | KJS Granite & Cabinets LLC | Josue Lopez | Mount Airy, MD | 05-162386 | 2027-03-03 | VERIFY — also does granite. |
+| 705 | Dill Cabinetry | Thomas Dill | Port Deposit, MD | — | 2028-05-12 | 431 Jackson Park Rd — Cecil Co. |
+
+> **✅ PHASE 7D (MHIC "cabinet/cabinetry") — 13 net-new from 55 results (#693-705).**
+
+---
+
 ## ⚠️ COMPETITORS & DO NOT CONTACT (Tracked for Reference)
 
 | Company | Location | Reason |
@@ -3979,8 +4018,8 @@
 | 🗺️ **Tier 11-GM — Google Maps Phase 4** | **21** | **General Contractors** |
 | 🗺️ **Tier 12-GM — Google Maps Phase 5** | **36** | **Custom Home Builders** |
 | 🗺️ **Tier 13-SL — Phase 6: Supplier Locators** | **41** | **Cambria + Cosentino + Caesarstone + Fabuwood + Wolf + Daltile** |
-| 🏛️ **Tier 14-MHIC — Phase 7: MHIC Licensees** | **83** | **MHIC "kitchen" (43) + "remodel" cherry-pick (40)** |
-| **TOTAL ACTIVE PROSPECTS** | **662** | **✅ PHASES 1-7B COMPLETE** |
+| 🏛️ **Tier 14-MHIC — Phase 7: MHIC Licensees** | **102** | **kitchen (43) + remodel (40) + bath (6) + cabinet (13)** |
+| **TOTAL ACTIVE PROSPECTS** | **681** | **✅ PHASES 1-7D COMPLETE** |
 | ❌ Competitors/DNR | 37 | Do not contact |
 | ✅ Existing Customers | 32 | Maintain relationship |
 
