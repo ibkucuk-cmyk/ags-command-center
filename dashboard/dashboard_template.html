@@ -918,7 +918,8 @@
             setTimeout(() => {
                 if (window.find) {
                     window.getSelection().removeAllRanges();
-                    window.find(company, false, false, true);
+                    var cleanName = company.replace(/^\d+\.\s*/, '');
+                    window.find(cleanName, false, false, true);
                 }
             }, 300);
         }
