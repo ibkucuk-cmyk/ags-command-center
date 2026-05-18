@@ -547,7 +547,86 @@
             display: none;
         }
     
-/* STATS */
+        /* AUTHENTICATION OVERLAY */
+        .auth-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10, 14, 23, 0.95);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .auth-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .auth-box h1 {
+            color: var(--text-primary);
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .auth-box p {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
+
+        .auth-box input[type="password"] {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+
+        .auth-box input[type="password"]:focus {
+            border-color: var(--accent);
+        }
+
+        .auth-box button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.2s;
+        }
+
+        .auth-box button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .auth-error {
+            color: var(--red);
+            font-size: 12px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        /* STATS */
         .stats-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; padding:16px; }
         .stat-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; }
         .stat-card .label { font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
@@ -608,15 +687,15 @@
 </style>
 </head>
 <body>
-    <!-- AUTH SCREEN -->
-<div class="auth-screen" id="authScreen">
-    <div class="auth-box">
-        <h1>AGS Command Center</h1>
-        <p>Sales CRM — Sign in to continue</p>
-        <input type="email" id="loginEmail" placeholder="Email address">
-        <input type="password" id="loginPw" placeholder="Password" onkeyup="if(event.key==='Enter')doLogin()">
-        <button onclick="doLogin()">Sign In</button>
-        <div class="auth-err" id="authErr"></div>
+        <!-- PASSWORD GATE -->
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-box">
+            <h1>? AGS Command Center</h1>
+            <p>Enter password to access the operations hub</p>
+            <input type="password" id="authPassword" placeholder="Password" onkeyup="if(event.key==='Enter')checkAuth()">
+            <button onclick="checkAuth()">Access Dashboard</button>
+            <div class="auth-error" id="authError">Incorrect password. Try again.</div>
+        </div>
     </div>
 
     <!-- SIDEBAR -->
@@ -1003,214 +1082,61 @@ let allProspects = [];
 let allUsers = [];
 
 // === AUTH ===
-async function doLogin() {
-    const email = document.getElementById('loginEmail').value.trim();
-    const pw = document.getElementById('loginPw').value;
-    document.getElementById('authErr').textContent = '';
-    const { data, error } = await sb.auth.signInWithPassword({ email, password: pw });
-    if (error) {
-        document.getElementById('authErr').textContent = error.message;
-        return;
-    }
-    await initApp();
-}
+    var AUTH_HASH = 'f30e2f8686e28a98946c1bf5aceb0cd69af0894bc33d245f1bfda6b71febb686';
 
-async function doLogout() {
-    await sb.auth.signOut();
-    document.getElementById('sidebar').style.display = 'none'; document.getElementById('main').style.display = 'none';
-    document.getElementById('authScreen').style.display = 'flex';
-}
-
-async function checkSession() {
-    const { data: { session } } = await sb.auth.getSession();
-    if (session) await initApp();
-}
-
-async function initApp() {
-    const { data: { user } } = await sb.auth.getUser();
-    if (!user) return;
-    currentUser = user;
-
-    // Get profile
-    const { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
-    userProfile = profile || { name: user.email, role: 'salesperson' };
-
-    document.getElementById('authScreen').style.display = 'none';
-    document.getElementById('sidebar').style.display = 'flex'; document.getElementById('main').style.display = 'flex';
-    document.getElementById('userName').textContent = userProfile.name;
-
-    const badge = document.getElementById('roleBadge');
-    badge.textContent = userProfile.role;
-    badge.className = 'role-badge role-' + userProfile.role;
-
-    // Hide admin-only features for salespeople
-    if (userProfile.role !== 'admin') {
-        document.getElementById('filterAssigned').style.display = 'none';
+    async function sha256(str) {
+        var buf = new TextEncoder().encode(str);
+        var hash = await crypto.subtle.digest('SHA-256', buf);
+        return Array.from(new Uint8Array(hash)).map(function(b) { return b.toString(16).padStart(2,'0'); }).join('');
     }
 
-    await loadProspects();
-    await loadUsers();
-    renderStats();
-    populateFilters();
-    renderTable();
-}
-
-// === DATA ===
-async function loadProspects() {
-    let query = sb.from('prospects').select('*').order('number', { ascending: true });
-
-    // Salespeople only see assigned prospects
-    if (userProfile.role !== 'admin') {
-        query = query.eq('assigned_to', currentUser.id);
-    }
-
-    const { data, error } = await query.limit(2000);
-    if (error) { console.error('Load error:', error); return; }
-    allProspects = data || [];
-}
-
-async function loadUsers() {
-    if (userProfile.role !== 'admin') return;
-    const { data } = await sb.from('profiles').select('*');
-    allUsers = data || [];
-}
-
-// === RENDER ===
-function renderStats() {
-    const active = allProspects.filter(p => !p.is_customer && !p.is_dnr);
-    const called = active.filter(p => p.called).length;
-    const emailed = active.filter(p => p.emailed).length;
-    const assigned = active.filter(p => p.assigned_to).length;
-
-    document.getElementById('statsRow').innerHTML = `
-        <div class="stat-card"><div class="label">Total Prospects</div><div class="val val-green">${active.length}</div></div>
-        <div class="stat-card"><div class="label">Called</div><div class="val val-blue">${called}</div></div>
-        <div class="stat-card"><div class="label">Emailed</div><div class="val val-purple">${emailed}</div></div>
-        <div class="stat-card"><div class="label">Assigned</div><div class="val val-amber">${assigned}</div></div>
-    `;
-}
-
-function populateFilters() {
-    const tiers = [...new Set(allProspects.map(p => p.tier).filter(Boolean))].sort();
-    const sel = document.getElementById('filterTier');
-    sel.innerHTML = '<option value="">All Tiers</option>' + tiers.map(t =>
-        `<option value="${t}">${t.substring(0, 40)}</option>`
-    ).join('');
-}
-
-function renderTable() {
-    const search = document.getElementById('searchBox').value.toLowerCase();
-    const tier = document.getElementById('filterTier').value;
-    const assigned = document.getElementById('filterAssigned').value;
-    const status = document.getElementById('filterStatus').value;
-
-    let filtered = allProspects.filter(p => {
-        if (search && !(p.company + ' ' + p.phone + ' ' + p.location + ' ' + p.contact + ' ' + p.ags_angle).toLowerCase().includes(search)) return false;
-        if (tier && p.tier !== tier) return false;
-        if (assigned === 'unassigned' && p.assigned_to) return false;
-        if (assigned === 'mine' && p.assigned_to !== currentUser.id) return false;
-        if (status === 'active' && (p.is_customer || p.is_dnr)) return false;
-        if (status === 'customer' && !p.is_customer) return false;
-        if (status === 'dnr' && !p.is_dnr) return false;
-        return true;
-    });
-
-    const tbody = document.getElementById('tableBody');
-    if (filtered.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="11" style="text-align:center;padding:40px;color:var(--muted)">No prospects found</td></tr>';
-        return;
-    }
-
-    tbody.innerHTML = filtered.slice(0, 500).map(p => {
-        const cls = p.is_dnr ? 'is-dnr' : (p.is_customer ? 'is-cust' : '');
-        const starTxt = p.stars === 2 ? '<span class="star-2">★★</span>' : (p.stars === 1 ? '<span class="star-1">★</span>' : '');
-
-        // Assign dropdown (admin only)
-        let assignHtml = '';
-        if (userProfile.role === 'admin') {
-            assignHtml = `<select class="assign-sel" onchange="assignTo(${p.id}, this.value)">
-                <option value="">—</option>
-                ${allUsers.map(u => `<option value="${u.id}" ${p.assigned_to === u.id ? 'selected' : ''}>${u.name}</option>`).join('')}
-            </select>`;
+    async function checkAuth() {
+        var pw = document.getElementById('authPassword').value;
+        var hash = await sha256(pw);
+        if (hash === AUTH_HASH) {
+            sessionStorage.setItem('ags_auth', 'true');
+            document.getElementById('authOverlay').style.display = 'none';
+            document.getElementById('sidebar').style.display = 'flex';
+            document.getElementById('main').style.display = 'flex';
+            await initApp();
         } else {
-            const assignedUser = allUsers.find(u => u.id === p.assigned_to);
-            assignHtml = assignedUser ? assignedUser.name : '—';
+            document.getElementById('authError').style.display = 'block';
+            document.getElementById('authPassword').value = '';
+            document.getElementById('authPassword').focus();
         }
+    }
 
-        return `<tr class="${cls}">
-            <td>${p.number || ''} ${starTxt}</td>
-            <td title="${(p.ags_angle||'').replace(/"/g,'&quot;')}">${p.company}</td>
-            <td>${p.location || ''}</td>
-            <td>${p.phone ? `<a href="tel:${p.phone}" style="color:var(--green)">${p.phone}</a>` : '—'}</td>
-            <td>${p.type || ''}</td>
-            <td><input type="checkbox" class="cb" ${p.called?'checked':''} onchange="toggleField(${p.id},'called',this.checked)"></td>
-            <td><input type="checkbox" class="cb" ${p.emailed?'checked':''} onchange="toggleField(${p.id},'emailed',this.checked)"></td>
-            <td><input type="checkbox" class="cb" ${p.stopped_by?'checked':''} onchange="toggleField(${p.id},'stopped_by',this.checked)"></td>
-            <td><input type="checkbox" class="cb" ${p.linkedin?'checked':''} onchange="toggleField(${p.id},'linkedin',this.checked)"></td>
-            <td>${assignHtml}</td>
-            <td><input class="status-input" value="${p.status||''}" onblur="updateStatus(${p.id},this.value)" placeholder="Notes..."></td>
-        </tr>`;
-    }).join('');
-}
-
-// === ACTIONS ===
-async function toggleField(id, field, val) {
-    await sb.from('prospects').update({ [field]: val }).eq('id', id);
-    const p = allProspects.find(x => x.id === id);
-    if (p) p[field] = val;
-    renderStats();
-}
-
-async function updateStatus(id, val) {
-    await sb.from('prospects').update({ status: val }).eq('id', id);
-    const p = allProspects.find(x => x.id === id);
-    if (p) p.status = val;
-}
-
-async function assignTo(id, userId) {
-    const val = userId || null;
-    await sb.from('prospects').update({ assigned_to: val }).eq('id', id);
-    const p = allProspects.find(x => x.id === id);
-    if (p) p.assigned_to = val;
-    renderStats();
-}
-
-async function addProspect() {
-    const company = document.getElementById('newCompany').value.trim();
-    if (!company) { alert('Company name required'); return; }
-
-    const row = {
-        company,
-        phone: document.getElementById('newPhone').value.trim(),
-        location: document.getElementById('newLocation').value.trim(),
-        contact: document.getElementById('newContact').value.trim(),
-        website: document.getElementById('newWebsite').value.trim(),
-        email: document.getElementById('newEmail').value.trim(),
-        type: document.getElementById('newType').value.trim(),
-        source: document.getElementById('newSource').value.trim(),
-        ags_angle: document.getElementById('newAngle').value.trim(),
-        tier: 'Added by Sales Team',
-        assigned_to: currentUser.id,
+    // Check if already authenticated this session
+    window.onload = async function() {
+        if (sessionStorage.getItem('ags_auth') === 'true') {
+            document.getElementById('authOverlay').style.display = 'none';
+            document.getElementById('sidebar').style.display = 'flex';
+            document.getElementById('main').style.display = 'flex';
+            await initApp();
+        } else {
+            document.getElementById('authOverlay').style.display = 'flex';
+            setTimeout(function() { document.getElementById('authPassword').focus(); }, 100);
+        }
     };
 
-    const { error } = await sb.from('prospects').insert([row]);
-    if (error) { alert('Error: ' + error.message); return; }
+    async function initApp() {
+        // Run dashboard stats
+        if(typeof parseDashboardStats === 'function') parseDashboardStats();
+        
+        // Show initial page
+        var hash = window.location.hash.replace('#', '') || 'dashboard';
+        if(typeof showPage === 'function') showPage(hash);
 
-    // Clear form
-    ['newCompany','newPhone','newLocation','newContact','newWebsite','newEmail','newType','newSource','newAngle'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('addPanel').classList.remove('show');
+        // Try to load prospects (may be empty if Supabase RLS is strictly auth-only)
+        try {
+            await loadProspects();
+            if(document.getElementById('page-crm').classList.contains('active')) renderTable();
+        } catch(e) {
+            console.log("Supabase load failed, skipping CRM data.");
+        }
+    }
 
-    await loadProspects();
-    renderStats();
-    renderTable();
-}
-
-function toggleAddForm() {
-    document.getElementById('addPanel').classList.toggle('show');
-}
-
-// === TABS ===
-function showTab(tab) {
+    function showTab(tab) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     event.target.classList.add('active');
 
@@ -1251,4 +1177,6 @@ checkSession();
 </script>
 </body>
 </html>
+
+
 
