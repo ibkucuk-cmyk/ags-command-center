@@ -917,9 +917,10 @@
             showPage('outreach');
             setTimeout(() => {
                 if (window.find) {
-                    window.find(company);
+                    window.getSelection().removeAllRanges();
+                    window.find(company, false, false, true);
                 }
-            }, 100);
+            }, 300);
         }
 
         function showPage(pageId) {
@@ -1049,7 +1050,6 @@
         function handleSearch(e) {
             if (e.key === 'Enter') {
                 var query = document.getElementById('searchInput').value.toLowerCase();
-                // Load all pages first for search
                 var allKeys = Object.keys(fileMap);
                 allKeys.forEach(function(pid) { if (!loadedPages[pid]) loadMarkdown(pid); });
                 setTimeout(function() {
@@ -1058,10 +1058,16 @@
                         var el = document.getElementById('page-' + pid);
                         if (el && el.textContent.toLowerCase().indexOf(query) !== -1) {
                             showPage(pid);
-                            if (window.find) window.find(query);
+                            setTimeout(function() {
+                                if (window.find) {
+                                    window.getSelection().removeAllRanges();
+                                    window.find(query, false, false, true);
+                                }
+                            }, 100);
                             return;
                         }
                     }
+                    alert('No results found for: ' + query);
                 }, 300);
             }
         }
