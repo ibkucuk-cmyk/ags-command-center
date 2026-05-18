@@ -1109,16 +1109,26 @@ let allUsers = [{id: 'Ibrahim', name: 'Ibrahim'}, {id: 'Chris', name: 'Chris'}, 
     }
 
 async function loadProspects() {
-    let query = sb.from('prospects').select('*').order('number', { ascending: true });
-
-    // Salespeople only see assigned prospects
-    if (userProfile.role !== 'admin') {
-        query = query.eq('assigned_to', currentUser.id);
+    allProspects = [];
+    let page = 0;
+    const pageSize = 1000;
+    
+    while(true) {
+        let query = sb.from('prospects').select('*').order('id', { ascending: true });
+    
+        // Salespeople only see assigned prospects
+        if (userProfile.role !== 'admin') {
+            query = query.eq('assigned_to', currentUser.id);
+        }
+    
+        const { data, error } = await query.range(page * pageSize, (page + 1) * pageSize - 1);
+        if (error) { console.error('Load error:', error); break; }
+        
+        if (!data || data.length === 0) break;
+        allProspects = allProspects.concat(data);
+        if (data.length < pageSize) break;
+        page++;
     }
-
-    const { data, error } = await query.limit(10000);
-    if (error) { console.error('Load error:', error); return; }
-    allProspects = data || [];
 }
 
 async function loadUsers() {
