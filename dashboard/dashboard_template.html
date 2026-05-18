@@ -937,8 +937,16 @@
             setTimeout(() => {
                 if (window.find) {
                     window.getSelection().removeAllRanges();
-                    var cleanName = company.replace(/^\d+\.\s*/, '');
-                    window.find(cleanName, false, false, true);
+                    var cleanName = company.replace(/^\d+\.\s*/, '').trim();
+                    if (window.find(cleanName, false, false, true)) {
+                        var sel = window.getSelection();
+                        if (sel.rangeCount > 0 && sel.focusNode) {
+                            var node = sel.focusNode.parentNode;
+                            if (node && node.scrollIntoView) {
+                                node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                        }
+                    }
                 }
             }, 300);
         }
