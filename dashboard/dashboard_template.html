@@ -1189,7 +1189,7 @@ function renderTable() {
         return;
     }
 
-    tbody.innerHTML = filtered.slice(0, 500).map(p => {
+    tbody.innerHTML = filtered.map(p => {
         const cls = p.is_dnr ? 'is-dnr' : (p.is_customer ? 'is-cust' : '');
         const starTxt = p.stars === 2 ? '<span class="star-2">★★</span>' : (p.stars === 1 ? '<span class="star-1">★</span>' : '');
 
