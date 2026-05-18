@@ -685,6 +685,25 @@
 
         /* MD CONTENT for sales tools */
 </style>
+
+<script>
+    function checkAuth() {
+        var pw = document.getElementById('authPassword').value;
+        if (pw === 'ags2026' || pw === 'AGS2026') {
+            sessionStorage.setItem('ags_auth', 'true');
+            document.getElementById('authOverlay').style.display = 'none';
+            document.getElementById('sidebar').style.display = 'flex';
+            document.getElementById('main').style.display = 'flex';
+            if (typeof initApp === 'function') initApp();
+        } else {
+            var err = document.getElementById('authError');
+            if(err) err.style.display = 'block';
+            var inp = document.getElementById('authPassword');
+            if(inp) { inp.value = ''; inp.focus(); }
+        }
+    }
+</script>
+
 </head>
 <body>
         <!-- PASSWORD GATE -->
@@ -1064,20 +1083,6 @@ let userProfile = null;
 let allProspects = [];
 let allUsers = [{id: 'Ibrahim', name: 'Ibrahim'}, {id: 'Chris', name: 'Chris'}, {id: 'Mike', name: 'Mike'}];
 
-// === AUTH ===
-    async function checkAuth() {
-        var pw = document.getElementById('authPassword').value;
-        if (pw === 'ags2026' || pw === 'AGS2026') {
-            sessionStorage.setItem('ags_auth', 'true');
-            document.getElementById('authOverlay').style.display = 'none';
-            document.getElementById('sidebar').style.display = 'flex';
-            document.getElementById('main').style.display = 'flex';
-            await initApp();
-        } else {
-            document.getElementById('authError').style.display = 'block';
-            document.getElementById('authPassword').value = '';
-            document.getElementById('authPassword').focus();
-        }
     }
 
     // Check if already authenticated this session
