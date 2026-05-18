@@ -937,94 +937,59 @@
 
         // === DYNAMIC DASHBOARD STATS ===
         function parseDashboardStats() {
-            var md = window.mdContent && window.mdContent['outreach'];
-            if (!md) return;
+            if (!allProspects || allProspects.length === 0) return;
 
-            // Parse Last Updated from header
-            var updMatch = md.match(/\*\*Last Updated:\*\*\s*(.+?)[\s\\n]/);
-            if (updMatch) {
-                document.getElementById('sidebar-updated').textContent = 'Updated: ' + updMatch[1].trim();
-            }
+            var customers = allProspects.filter(p => p.is_customer).length;
+            var dnr = allProspects.filter(p => p.is_dnr).length;
+            var active = allProspects.filter(p => !p.is_customer && !p.is_dnr);
+            var totalProspects = active.length;
+            var grandTotal = allProspects.length;
 
-            // Parse the MASTER SCORECARD table
-            var lines = md.split(/\\n|\n/);
-            var scoreRows = [];
-            var inScorecard = false;
-            for (var i = 0; i < lines.length; i++) {
-                if (lines[i].indexOf('MASTER SCORECARD') !== -1) { inScorecard = true; continue; }
-                if (inScorecard && lines[i].indexOf('|') !== -1) {
-                    var cells = lines[i].split('|').map(function(c) { return c.replace(/\*/g, '').trim(); }).filter(Boolean);
-                    if (cells.length >= 2 && cells[0].indexOf('---') === -1) {
-                        scoreRows.push(cells);
-                    }
-                }
-                if (inScorecard && lines[i].indexOf('---') !== -1 && lines[i].indexOf('|') === -1) break;
-            }
+            var tiers = {};
+            active.forEach(p => {
+                var t = p.tier || 'Uncategorized';
+                if (!tiers[t]) tiers[t] = 0;
+                tiers[t]++;
+            });
 
-            // Extract key values from scorecard
-            var totalProspects = 0, customers = 0, dnr = 0, phases = [];
-            for (var j = 0; j < scoreRows.length; j++) {
-                var tier = scoreRows[j][0];
-                var count = parseInt((scoreRows[j][1] || '0').replace(/[^0-9]/g, '')) || 0;
-                var desc = scoreRows[j][2] || '';
+            var sortedTiers = Object.keys(tiers).sort();
 
-                if (tier.indexOf('TOTAL ACTIVE') !== -1) {
-                    totalProspects = count;
-                } else if (tier.indexOf('Competitors') !== -1 || tier.indexOf('DNR') !== -1) {
-                    dnr = count;
-                } else if (tier.indexOf('Existing Customers') !== -1) {
-                    customers = count;
-                } else if (count > 0 && tier.indexOf('Tier') === -1 || tier.indexOf('Tier') !== -1) {
-                    phases.push({ label: tier.replace(/[🔴🟡🟢🔵🟣🏢🟠🏔️🗺️]/g, '').trim(), count: count, desc: desc });
-                }
-            }
+            var st = document.getElementById('sidebar-total');
+            if (st) st.textContent = totalProspects;
+            
+            var np = document.getElementById('nav-badge-prospects');
+            if (np) np.textContent = totalProspects;
 
-            var grandTotal = totalProspects + customers + dnr;
-            var phasesDone = phases.filter(function(p) { return p.count > 0; }).length;
+            var p6 = sortedTiers.find(t => t.includes('Phase 6') || t.includes('MHIC Fresh'));
+            var nb6 = document.getElementById('nav-badge-phase6');
+            if (nb6) nb6.textContent = p6 ? tiers[p6] : 'NEW';
 
-            // Count how many "Phase" or "Tier" entries mention "GM" or "SL" (Google Maps / Supplier Locator phases)
-            var completedPhases = 0;
-            var totalPhases = 0;
-            for (var k = 0; k < phases.length; k++) {
-                if (phases[k].label.indexOf('Phase') !== -1 || phases[k].label.indexOf('GM') !== -1 || phases[k].label.indexOf('SL') !== -1) {
-                    totalPhases++;
-                    if (phases[k].count > 0) completedPhases++;
-                }
-            }
-            if (totalPhases === 0) totalPhases = completedPhases || 1;
-
-            // Populate sidebar
-            document.getElementById('sidebar-total').textContent = totalProspects;
-            document.getElementById('nav-badge-prospects').textContent = totalProspects;
-
-            // Phase 6 badge
-            var p6 = phases.filter(function(p) { return p.label.indexOf('Phase 6') !== -1 || p.label.indexOf('SL') !== -1; });
-            document.getElementById('nav-badge-phase6').textContent = p6.length > 0 ? p6[0].count : 'NEW';
-
-            // Top stat cards
             var topStats = document.getElementById('dash-top-stats');
-            topStats.innerHTML = '<div class="stat-card"><div class="label">Total Prospects</div><div class="value green">' + totalProspects + '</div><div class="sub">Active in database</div></div>' +
-                '<div class="stat-card"><div class="label">Phases Complete</div><div class="value blue">' + completedPhases + '</div><div class="sub">Prospecting phases done</div></div>' +
-                '<div class="stat-card"><div class="label">Existing Customers</div><div class="value amber">' + customers + '</div><div class="sub">Tracked separately</div></div>' +
-                '<div class="stat-card"><div class="label">Grand Total Tracked</div><div class="value purple">' + grandTotal + '</div><div class="sub">Prospects + customers + DNR</div></div>';
-
-            // Phase breakdown cards
-            var phaseGrid = document.getElementById('dash-phase-grid');
-            var phaseHtml = '';
-            for (var m = 0; m < phases.length; m++) {
-                var p = phases[m];
-                if (p.label.indexOf('TOTAL') !== -1 || p.label.indexOf('Competitors') !== -1 || p.label.indexOf('Existing') !== -1) continue;
-                phaseHtml += '<div class="stat-card"><div class="label">' + p.label + '</div><div class="value blue" style="font-size:24px;">' + p.count + '</div><div class="sub">' + p.desc + '</div></div>';
+            if (topStats) {
+                topStats.innerHTML = '<div class="stat-card"><div class="label">Total Prospects</div><div class="value green">' + totalProspects + '</div><div class="sub">Active in database</div></div>' +
+                    '<div class="stat-card"><div class="label">Tiers / Groups</div><div class="value blue">' + sortedTiers.length + '</div><div class="sub">Active segments</div></div>' +
+                    '<div class="stat-card"><div class="label">Existing Customers</div><div class="value amber">' + customers + '</div><div class="sub">Tracked separately</div></div>' +
+                    '<div class="stat-card"><div class="label">Grand Total Tracked</div><div class="value purple">' + grandTotal + '</div><div class="sub">Prospects + customers + DNR</div></div>';
             }
-            phaseGrid.innerHTML = phaseHtml;
 
-            // Quick action sub text
+            var phaseGrid = document.getElementById('dash-phase-grid');
+            if (phaseGrid) {
+                var phaseHtml = '';
+                sortedTiers.forEach(t => {
+                    phaseHtml += '<div class="stat-card"><div class="label">' + t + '</div><div class="value blue" style="font-size:24px;">' + tiers[t] + '</div><div class="sub">Live count</div></div>';
+                });
+                phaseGrid.innerHTML = phaseHtml;
+            }
+
             var actionSub = document.getElementById('action-db-sub');
-            if (actionSub) actionSub.textContent = 'View all ' + totalProspects + ' prospects with phone numbers';
+            if (actionSub) actionSub.textContent = 'View all ' + totalProspects + ' live prospects';
+            
+            var su = document.getElementById('sidebar-updated');
+            if (su) su.textContent = 'Live Database Sync';
         }
 
         // Run after content is loaded
-        setTimeout(parseDashboardStats, 50);
+        
 
         function loadMarkdown(pageId) {
             var el = document.getElementById('page-' + pageId);
@@ -1115,19 +1080,15 @@ let allUsers = [{id: 'Ibrahim', name: 'Ibrahim'}, {id: 'Chris', name: 'Chris'}, 
     };
 
         async function initApp() {
-        // Mock currentUser since we bypassed Supabase Auth
         currentUser = { id: 'admin_user', email: 'admin@advancedgranite.com' };
         userProfile = { name: 'Admin', role: 'admin' };
-        // Run dashboard stats
-        if(typeof parseDashboardStats === 'function') parseDashboardStats();
         
-        // Show initial page
         var hash = window.location.hash.replace('#', '') || 'dashboard';
         if(typeof showPage === 'function') showPage(hash);
 
-        // Try to load prospects (may be empty if Supabase RLS is strictly auth-only)
         try {
             await loadProspects();
+            if(typeof parseDashboardStats === 'function') parseDashboardStats();
             if(document.getElementById('page-crm').classList.contains('active')) renderTable();
         } catch(e) {
             console.log("Supabase load failed, skipping CRM data.");
@@ -1142,7 +1103,7 @@ async function loadProspects() {
         query = query.eq('assigned_to', currentUser.id);
     }
 
-    const { data, error } = await query.limit(2000);
+    const { data, error } = await query.limit(10000);
     if (error) { console.error('Load error:', error); return; }
     allProspects = data || [];
 }
