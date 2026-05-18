@@ -1071,7 +1071,8 @@
 
 const SUPA_URL = 'https://pqqoiaodbxxrxhskloxy.supabase.co';
 const SUPA_KEY = 'sb_publishable_s6mCkH8tRA_WLyVF6q1avg_vqrvUW4q';
-const sb = supabase.createClient(SUPA_URL, SUPA_KEY);
+let sb = null;
+try { sb = supabase.createClient(SUPA_URL, SUPA_KEY); } catch(e) { console.log('Supabase init failed', e); }
 
 let currentUser = null;
 let userProfile = null;
@@ -1079,18 +1080,9 @@ let allProspects = [];
 let allUsers = [{id: 'Ibrahim', name: 'Ibrahim'}, {id: 'Chris', name: 'Chris'}, {id: 'Mike', name: 'Mike'}];
 
 // === AUTH ===
-    var AUTH_HASH = '6ee89779258009d25c56b4b8567039976eebc63dc757dcca2bbb6c3bdaab519e'; // ags2026
-
-    async function sha256(str) {
-        var buf = new TextEncoder().encode(str);
-        var hash = await crypto.subtle.digest('SHA-256', buf);
-        return Array.from(new Uint8Array(hash)).map(function(b) { return b.toString(16).padStart(2,'0'); }).join('');
-    }
-
     async function checkAuth() {
         var pw = document.getElementById('authPassword').value;
-        var hash = await sha256(pw);
-        if (hash === AUTH_HASH) {
+        if (pw === 'ags2026' || pw === 'AGS2026') {
             sessionStorage.setItem('ags_auth', 'true');
             document.getElementById('authOverlay').style.display = 'none';
             document.getElementById('sidebar').style.display = 'flex';
