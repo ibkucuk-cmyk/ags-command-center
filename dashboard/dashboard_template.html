@@ -1123,6 +1123,160 @@ let allUsers = [];
         }
     }
 
+async function loadProspects() {
+    let query = sb.from('prospects').select('*').order('number', { ascending: true });
+
+    // Salespeople only see assigned prospects
+    if (userProfile.role !== 'admin') {
+        query = query.eq('assigned_to', currentUser.id);
+    }
+
+    const { data, error } = await query.limit(2000);
+    if (error) { console.error('Load error:', error); return; }
+    allProspects = data || [];
+}
+
+async function loadUsers() {
+    if (userProfile.role !== 'admin') return;
+    const { data } = await sb.from('profiles').select('*');
+    allUsers = data || [];
+}
+
+// === RENDER ===
+function renderStats() {
+    const active = allProspects.filter(p => !p.is_customer && !p.is_dnr);
+    const called = active.filter(p => p.called).length;
+    const emailed = active.filter(p => p.emailed).length;
+    const assigned = active.filter(p => p.assigned_to).length;
+
+    document.getElementById('statsRow').innerHTML = `
+        <div class="stat-card"><div class="label">Total Prospects</div><div class="val val-green">${active.length}</div></div>
+        <div class="stat-card"><div class="label">Called</div><div class="val val-blue">${called}</div></div>
+        <div class="stat-card"><div class="label">Emailed</div><div class="val val-purple">${emailed}</div></div>
+        <div class="stat-card"><div class="label">Assigned</div><div class="val val-amber">${assigned}</div></div>
+    `;
+}
+
+function populateFilters() {
+    const tiers = [...new Set(allProspects.map(p => p.tier).filter(Boolean))].sort();
+    const sel = document.getElementById('filterTier');
+    sel.innerHTML = '<option value="">All Tiers</option>' + tiers.map(t =>
+        `<option value="${t}">${t.substring(0, 40)}</option>`
+    ).join('');
+}
+
+function renderTable() {
+    const search = document.getElementById('searchBox').value.toLowerCase();
+    const tier = document.getElementById('filterTier').value;
+    const assigned = document.getElementById('filterAssigned').value;
+    const status = document.getElementById('filterStatus').value;
+
+    let filtered = allProspects.filter(p => {
+        if (search && !(p.company + ' ' + p.phone + ' ' + p.location + ' ' + p.contact + ' ' + p.ags_angle).toLowerCase().includes(search)) return false;
+        if (tier && p.tier !== tier) return false;
+        if (assigned === 'unassigned' && p.assigned_to) return false;
+        if (assigned === 'mine' && p.assigned_to !== currentUser.id) return false;
+        if (status === 'active' && (p.is_customer || p.is_dnr)) return false;
+        if (status === 'customer' && !p.is_customer) return false;
+        if (status === 'dnr' && !p.is_dnr) return false;
+        return true;
+    });
+
+    const tbody = document.getElementById('tableBody');
+    if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="11" style="text-align:center;padding:40px;color:var(--muted)">No prospects found</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = filtered.slice(0, 500).map(p => {
+        const cls = p.is_dnr ? 'is-dnr' : (p.is_customer ? 'is-cust' : '');
+        const starTxt = p.stars === 2 ? '<span class="star-2">★★</span>' : (p.stars === 1 ? '<span class="star-1">★</span>' : '');
+
+        // Assign dropdown (admin only)
+        let assignHtml = '';
+        if (userProfile.role === 'admin') {
+            assignHtml = `<select class="assign-sel" onchange="assignTo(${p.id}, this.value)">
+                <option value="">—</option>
+                ${allUsers.map(u => `<option value="${u.id}" ${p.assigned_to === u.id ? 'selected' : ''}>${u.name}</option>`).join('')}
+            </select>`;
+        } else {
+            const assignedUser = allUsers.find(u => u.id === p.assigned_to);
+            assignHtml = assignedUser ? assignedUser.name : '—';
+        }
+
+        return `<tr class="${cls}">
+            <td>${p.number || ''} ${starTxt}</td>
+            <td title="${(p.ags_angle||'').replace(/"/g,'&quot;')}">${p.company}</td>
+            <td>${p.location || ''}</td>
+            <td>${p.phone ? `<a href="tel:${p.phone}" style="color:var(--green)">${p.phone}</a>` : '—'}</td>
+            <td>${p.type || ''}</td>
+            <td><input type="checkbox" class="cb" ${p.called?'checked':''} onchange="toggleField(${p.id},'called',this.checked)"></td>
+            <td><input type="checkbox" class="cb" ${p.emailed?'checked':''} onchange="toggleField(${p.id},'emailed',this.checked)"></td>
+            <td><input type="checkbox" class="cb" ${p.stopped_by?'checked':''} onchange="toggleField(${p.id},'stopped_by',this.checked)"></td>
+            <td><input type="checkbox" class="cb" ${p.linkedin?'checked':''} onchange="toggleField(${p.id},'linkedin',this.checked)"></td>
+            <td>${assignHtml}</td>
+            <td><input class="status-input" value="${p.status||''}" onblur="updateStatus(${p.id},this.value)" placeholder="Notes..."></td>
+        </tr>`;
+    }).join('');
+}
+
+// === ACTIONS ===
+async function toggleField(id, field, val) {
+    await sb.from('prospects').update({ [field]: val }).eq('id', id);
+    const p = allProspects.find(x => x.id === id);
+    if (p) p[field] = val;
+    renderStats();
+}
+
+async function updateStatus(id, val) {
+    await sb.from('prospects').update({ status: val }).eq('id', id);
+    const p = allProspects.find(x => x.id === id);
+    if (p) p.status = val;
+}
+
+async function assignTo(id, userId) {
+    const val = userId || null;
+    await sb.from('prospects').update({ assigned_to: val }).eq('id', id);
+    const p = allProspects.find(x => x.id === id);
+    if (p) p.assigned_to = val;
+    renderStats();
+}
+
+async function addProspect() {
+    const company = document.getElementById('newCompany').value.trim();
+    if (!company) { alert('Company name required'); return; }
+
+    const row = {
+        company,
+        phone: document.getElementById('newPhone').value.trim(),
+        location: document.getElementById('newLocation').value.trim(),
+        contact: document.getElementById('newContact').value.trim(),
+        website: document.getElementById('newWebsite').value.trim(),
+        email: document.getElementById('newEmail').value.trim(),
+        type: document.getElementById('newType').value.trim(),
+        source: document.getElementById('newSource').value.trim(),
+        ags_angle: document.getElementById('newAngle').value.trim(),
+        tier: 'Added by Sales Team',
+        assigned_to: currentUser.id,
+    };
+
+    const { error } = await sb.from('prospects').insert([row]);
+    if (error) { alert('Error: ' + error.message); return; }
+
+    // Clear form
+    ['newCompany','newPhone','newLocation','newContact','newWebsite','newEmail','newType','newSource','newAngle'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('addPanel').classList.remove('show');
+
+    await loadProspects();
+    renderStats();
+    renderTable();
+}
+
+function toggleAddForm() {
+    document.getElementById('addPanel').classList.toggle('show');
+}
+
+
     function showTab(tab) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     event.target.classList.add('active');
@@ -1159,7 +1313,7 @@ async function loadMdTab(tab) {
 }
 
 // === INIT ===
-checkSession();
+
 
 </script>
 </body>
