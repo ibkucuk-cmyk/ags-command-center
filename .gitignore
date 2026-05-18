@@ -12,7 +12,7 @@
 
 # Dashboard files (the only public-facing assets)
 !dashboard/
-!dashboard/ags_dashboard.html
+!dashboard/dashboard_template.html
 !dashboard/crm.html
 !dashboard/build.ps1
 !dashboard/push.ps1
