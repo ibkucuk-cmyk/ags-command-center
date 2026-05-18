@@ -1106,7 +1106,10 @@ let allUsers = [];
         }
     };
 
-    async function initApp() {
+        async function initApp() {
+        // Mock currentUser since we bypassed Supabase Auth
+        currentUser = { id: 'admin_user', email: 'admin@advancedgranite.com' };
+        userProfile = { name: 'Admin', role: 'admin' };
         // Run dashboard stats
         if(typeof parseDashboardStats === 'function') parseDashboardStats();
         
@@ -1318,6 +1321,8 @@ async function loadMdTab(tab) {
 </script>
 </body>
 </html>
+
+
 
 
 
