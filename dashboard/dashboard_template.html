@@ -694,7 +694,13 @@
             document.getElementById('authOverlay').style.display = 'none';
             document.getElementById('sidebar').style.display = 'flex';
             document.getElementById('main').style.display = 'flex';
-            if (typeof initApp === 'function') initApp();
+            
+            var retry = setInterval(function() {
+                if (typeof initApp === 'function') {
+                    clearInterval(retry);
+                    initApp();
+                }
+            }, 50);
         } else {
             var err = document.getElementById('authError');
             if(err) err.style.display = 'block';
