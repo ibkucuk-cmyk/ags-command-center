@@ -1084,7 +1084,6 @@ let userProfile = null;
 let allProspects = [];
 let allUsers = [{id: 'Ibrahim', name: 'Ibrahim'}, {id: 'Chris', name: 'Chris'}, {id: 'Mike', name: 'Mike'}];
 
-    }
 
     // Check if already authenticated this session
     window.onload = async function() {
@@ -1108,10 +1107,12 @@ let allUsers = [{id: 'Ibrahim', name: 'Ibrahim'}, {id: 'Chris', name: 'Chris'}, 
 
         try {
             await loadProspects();
+            renderStats();
+            populateFilters();
             if(typeof parseDashboardStats === 'function') parseDashboardStats();
             if(document.getElementById('page-crm').classList.contains('active')) renderTable();
         } catch(e) {
-            console.log("Supabase load failed, skipping CRM data.");
+            console.log("Supabase load failed, skipping CRM data.", e);
         }
     }
 
