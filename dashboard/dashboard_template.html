@@ -912,6 +912,16 @@
 
         const loadedPages = {};
 
+        
+        function goToOutreach(company) {
+            showPage('outreach');
+            setTimeout(() => {
+                if (window.find) {
+                    window.find(company);
+                }
+            }, 100);
+        }
+
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -1066,7 +1076,7 @@ const sb = supabase.createClient(SUPA_URL, SUPA_KEY);
 let currentUser = null;
 let userProfile = null;
 let allProspects = [];
-let allUsers = [];
+let allUsers = [{id: 'Ibrahim', name: 'Ibrahim'}, {id: 'Chris', name: 'Chris'}, {id: 'Mike', name: 'Mike'}];
 
 // === AUTH ===
     var AUTH_HASH = 'f30e2f8686e28a98946c1bf5aceb0cd69af0894bc33d245f1bfda6b71febb686';
@@ -1140,9 +1150,7 @@ async function loadProspects() {
 }
 
 async function loadUsers() {
-    if (userProfile.role !== 'admin') return;
-    const { data } = await sb.from('profiles').select('*');
-    allUsers = data || [];
+    // Intentionally skipped to use hardcoded users
 }
 
 // === RENDER ===
@@ -1209,7 +1217,7 @@ function renderTable() {
 
         return `<tr class="${cls}">
             <td>${p.number || ''} ${starTxt}</td>
-            <td title="${(p.ags_angle||'').replace(/"/g,'&quot;')}">${p.company}</td>
+            <td title="${(p.ags_angle||'').replace(/"/g,'&quot;')}" style="cursor:pointer; color:var(--accent); text-decoration:underline;" onclick="goToOutreach(`${p.company.replace(/`/g, '\\`')}`)">${p.company}</td>
             <td>${p.location || ''}</td>
             <td>${p.phone ? `<a href="tel:${p.phone}" style="color:var(--green)">${p.phone}</a>` : '—'}</td>
             <td>${p.type || ''}</td>
