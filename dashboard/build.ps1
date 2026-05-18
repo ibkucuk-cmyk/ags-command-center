@@ -58,7 +58,7 @@ foreach ($key in $files.Keys) {
 $dataBlock = $dataLines -join "`n"
 
 # Read the template HTML
-$templatePath = Join-Path $PSScriptRoot "index.html"
+$templatePath = Join-Path $PSScriptRoot "dashboard_template.html"
 $template = [System.IO.File]::ReadAllText($templatePath, [System.Text.Encoding]::UTF8)
 
 # Find the main app script (after auth script)
@@ -72,7 +72,7 @@ $scriptIdx = $template.LastIndexOf('<script>', $idx)
 $output = $template.Substring(0, $scriptIdx) + "<script>`n$dataBlock`n</script>`n" + $template.Substring($scriptIdx)
 
 # Write the built file
-$outputPath = Join-Path $PSScriptRoot "ags_dashboard.html"
+$outputPath = Join-Path $PSScriptRoot "index.html"
 [System.IO.File]::WriteAllText($outputPath, $output, [System.Text.Encoding]::UTF8)
 
 $size = [math]::Round((Get-Item $outputPath).Length / 1MB, 1)
