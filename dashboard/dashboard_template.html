@@ -1217,7 +1217,7 @@ function renderTable() {
 
         return `<tr class="${cls}">
             <td>${p.number || ''} ${starTxt}</td>
-            <td title="${(p.ags_angle||'').replace(/"/g,'&quot;')}" style="cursor:pointer; color:var(--accent); text-decoration:underline;" onclick="goToOutreach(`${p.company.replace(/`/g, '\\`')}`)">${p.company}</td>
+            <td title="${(p.ags_angle||'').replace(/"/g,'&quot;')}" style="cursor:pointer; color:var(--accent); text-decoration:underline;" onclick="goToOutreach(this.textContent)">${p.company}</td>
             <td>${p.location || ''}</td>
             <td>${p.phone ? `<a href="tel:${p.phone}" style="color:var(--green)">${p.phone}</a>` : '—'}</td>
             <td>${p.type || ''}</td>
