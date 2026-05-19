@@ -1152,6 +1152,7 @@ let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Mel'}, {id: 'Afet
 
         try {
             await loadProspects();
+            enrichFromMarkdown(); // Merge rich details from markdown into Supabase data
             renderStats();
             populateFilters();
             if(typeof parseDashboardStats === 'function') parseDashboardStats();
@@ -1159,6 +1160,60 @@ let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Mel'}, {id: 'Afet
         } catch(e) {
             console.log("Supabase load failed, skipping CRM data.", e);
         }
+    }
+
+    // Enrich Supabase prospects with full Details from markdown
+    function enrichFromMarkdown() {
+        if (!window.mdContent || !window.mdContent['outreach']) return;
+        var md = window.mdContent['outreach'];
+        var lines = md.split(/\n/);
+        var detailMap = {}; // number -> { category, details }
+
+        for (var i = 0; i < lines.length; i++) {
+            var line = lines[i].trim();
+            if (!line.startsWith('|')) continue;
+            var cells = line.split('|').map(function(c){ return c.trim(); });
+            if (cells[0] === '') cells.shift();
+            if (cells.length > 0 && cells[cells.length-1] === '') cells.pop();
+            if (cells.length < 3) continue;
+
+            var numMatch = cells[0].match(/(\d+)/);
+            if (!numMatch) continue;
+            var num = parseInt(numMatch[1]);
+
+            var cat = '', det = '';
+            if (cells.length >= 9) {
+                // Rich format: # | Company | Contact | Address | Phone | Email | Website | Category | Details
+                cat = cells[7] || '';
+                det = cells[8] || '';
+            } else if (cells.length >= 7) {
+                // Simpler: # | Company | Rating | Address | Phone | Category | AGS Angle
+                cat = cells[5] || '';
+                det = cells[6] || '';
+            }
+
+            var full = '';
+            if (cat && cat !== '\u2014' && cat !== '-') full = 'Services: ' + cat;
+            if (det && det !== '\u2014' && det !== '-') {
+                if (full) full += '\n' + det.replace(/\u2223/g, '\n');
+                else full = det.replace(/\u2223/g, '\n');
+            }
+            if (full.trim()) detailMap[num] = full.trim();
+        }
+
+        // Merge into allProspects
+        var enriched = 0;
+        allProspects.forEach(function(p) {
+            if (p.number && detailMap[p.number]) {
+                var mdDetail = detailMap[p.number];
+                // Only overwrite if markdown has more data
+                if (!p.ags_angle || mdDetail.length > (p.ags_angle || '').length) {
+                    p.ags_angle = mdDetail;
+                    enriched++;
+                }
+            }
+        });
+        console.log('Enriched ' + enriched + ' prospects with markdown details');
     }
 
 async function loadProspects() {
