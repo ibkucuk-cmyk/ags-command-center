@@ -1229,7 +1229,9 @@ let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Mel'}, {id: 'Afet
             if (full.trim()) {
                 detailMap[num] = full.trim();
                 var cleanName = companyRaw.toLowerCase().replace(/[^a-z0-9]/g, '');
-                if (cleanName) nameMap[cleanName] = full.trim();
+                if (cleanName && (!nameMap[cleanName] || full.trim().length > nameMap[cleanName].length)) {
+                    nameMap[cleanName] = full.trim();
+                }
             }
         }
 
@@ -1441,7 +1443,7 @@ function showDetail(id) {
     });
 
     overlay.innerHTML = '<div class="detail-card">' +
-        '<button class="close-btn" onclick="document.getElementById(\'detailOverlay\').classList.remove(\'show\')">&times;</button>' +
+        '<button class="close-btn" onclick="closeDetail()">&times;</button>' +
         '<h2>' + (p.company || 'Prospect Details') + '</h2>' +
         detailRows +
         (agsHtml ? '<div class="detail-full" style="border-top:1px solid var(--border);padding-top:12px;margin-top:12px">' +
@@ -1451,6 +1453,11 @@ function showDetail(id) {
     '</div>';
 
     overlay.classList.add('show');
+}
+
+function closeDetail() {
+    var el = document.getElementById('detailOverlay');
+    if (el) el.classList.remove('show');
 }
 
 // === ACTIONS ===
