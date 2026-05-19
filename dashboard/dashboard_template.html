@@ -641,12 +641,36 @@
 
         /* TABLE */
         .table-wrap { flex:1; overflow:auto; padding:0 8px 80px; }
-        table { width:100%; border-collapse:collapse; font-size:12px; min-width:800px; }
+        table { width:100%; border-collapse:collapse; font-size:12px; min-width:1200px; }
         thead th { background:var(--bg2); padding:8px 10px; text-align:left; font-weight:600; color:var(--text2); border-bottom:2px solid var(--border); position:sticky; top:0; z-index:10; white-space:nowrap; }
-        tbody td { padding:7px 10px; border-bottom:1px solid var(--border); color:var(--text2); max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        tbody td { padding:7px 10px; border-bottom:1px solid var(--border); color:var(--text2); max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
         tbody tr:hover { background:var(--hover); }
         tbody tr.is-dnr { opacity:0.4; }
         tbody tr.is-cust { background:rgba(245,158,11,0.05); }
+
+        /* HOVER TOOLTIP for truncated cells */
+        td.has-tip { position:relative; cursor:default; }
+        td.has-tip:hover::after {
+            content: attr(data-tip);
+            position: absolute;
+            left: 0; top: 100%;
+            z-index: 999;
+            background: #1a1f2e;
+            color: #e2e8f0;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 12px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-break: break-word;
+            max-width: 380px;
+            min-width: 180px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            pointer-events: none;
+            animation: tipFadeIn 0.15s ease;
+        }
+        @keyframes tipFadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
 
         /* CHECKBOXES */
         .cb { width:16px; height:16px; cursor:pointer; accent-color:var(--green); }
@@ -874,9 +898,9 @@
         <div class="table-wrap">
             <table>
                 <thead><tr>
-                    <th>#</th><th>Company</th><th>Location</th><th>Phone</th><th>Type</th>
-                    <th>Called</th><th>Email</th><th>Visit</th><th>LI</th>
-                    <th>Assigned</th><th>Status</th>
+                    <th>#</th><th>Company</th><th>Contact</th><th>Location</th><th>Phone</th><th>Email</th><th>Website</th><th>Type</th>
+                    <th>📞</th><th>📧</th><th>🚗</th><th>💼</th>
+                    <th>Assigned</th><th>Notes</th>
                 </tr></thead>
                 <tbody id="tableBody"></tbody>
             </table>
@@ -1189,6 +1213,16 @@ function renderTable() {
         return;
     }
 
+    // Helper: make a tooltip cell for long text
+    function tipCell(text, maxLen) {
+        if (!text) return '<td>—</td>';
+        const safe = text.replace(/"/g, '&quot;').replace(/</g, '&lt;');
+        if (text.length > (maxLen || 25)) {
+            return `<td class="has-tip" data-tip="${safe}">${text.substring(0, maxLen || 25)}…</td>`;
+        }
+        return `<td>${text}</td>`;
+    }
+
     tbody.innerHTML = filtered.map(p => {
         const cls = p.is_dnr ? 'is-dnr' : (p.is_customer ? 'is-cust' : '');
         const starTxt = p.stars === 2 ? '<span class="star-2">★★</span>' : (p.stars === 1 ? '<span class="star-1">★</span>' : '');
@@ -1205,12 +1239,26 @@ function renderTable() {
             assignHtml = assignedUser ? assignedUser.name : '—';
         }
 
+        // Build AGS angle + notes combined for tooltip on company name
+        const angleText = (p.ags_angle || '').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+
+        // Email display
+        const emailHtml = p.email ? `<a href="mailto:${p.email}" style="color:var(--accent)">${p.email.length > 22 ? p.email.substring(0,22)+'…' : p.email}</a>` : '—';
+        const emailTip = p.email && p.email.length > 22 ? ` class="has-tip" data-tip="${p.email.replace(/"/g,'&quot;')}"` : '';
+
+        // Website display
+        const webRaw = (p.website || '').replace(/^https?:\/\//, '').replace(/\/$/,'');
+        const webHtml = webRaw && webRaw !== '—' ? `<a href="${p.website.startsWith('http')?p.website:'https://'+p.website}" target="_blank" style="color:var(--green)">${webRaw.length > 18 ? webRaw.substring(0,18)+'…' : webRaw}</a>` : '—';
+
         return `<tr class="${cls}">
             <td>${p.number || ''} ${starTxt}</td>
-            <td title="${(p.ags_angle||'').replace(/"/g,'&quot;')}" style="cursor:pointer; color:var(--accent); text-decoration:underline;" onclick="goToOutreach(this.textContent)">${p.company}</td>
-            <td>${p.location || ''}</td>
+            <td class="has-tip" data-tip="${angleText || p.company}" style="cursor:pointer; color:var(--accent);" onclick="goToOutreach(this.textContent)">${p.company}</td>
+            ${tipCell(p.contact, 20)}
+            ${tipCell(p.location, 25)}
             <td>${p.phone ? `<a href="tel:${p.phone}" style="color:var(--green)">${p.phone}</a>` : '—'}</td>
-            <td>${p.type || ''}</td>
+            <td${emailTip}>${emailHtml}</td>
+            <td>${webHtml}</td>
+            ${tipCell(p.type, 22)}
             <td><input type="checkbox" class="cb" ${p.called?'checked':''} onchange="toggleField(${p.id},'called',this.checked)"></td>
             <td><input type="checkbox" class="cb" ${p.emailed?'checked':''} onchange="toggleField(${p.id},'emailed',this.checked)"></td>
             <td><input type="checkbox" class="cb" ${p.stopped_by?'checked':''} onchange="toggleField(${p.id},'stopped_by',this.checked)"></td>
