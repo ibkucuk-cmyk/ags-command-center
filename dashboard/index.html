@@ -648,13 +648,12 @@
         tbody tr.is-dnr { opacity:0.4; }
         tbody tr.is-cust { background:rgba(245,158,11,0.05); }
 
-        /* HOVER TOOLTIP for truncated cells */
-        td.has-tip { position:relative; cursor:default; }
-        td.has-tip:hover::after {
-            content: attr(data-tip);
-            position: absolute;
-            left: 0; top: 100%;
-            z-index: 999;
+        /* FLOATING TOOLTIP (JS-powered, lives outside table) */
+        td.has-tip { cursor:default; }
+        #floatTip {
+            display: none;
+            position: fixed;
+            z-index: 99999;
             background: #1a1f2e;
             color: #e2e8f0;
             border: 1px solid #334155;
@@ -664,13 +663,11 @@
             line-height: 1.5;
             white-space: pre-wrap;
             word-break: break-word;
-            max-width: 380px;
-            min-width: 180px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            max-width: 400px;
+            min-width: 150px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
             pointer-events: none;
-            animation: tipFadeIn 0.15s ease;
         }
-        @keyframes tipFadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
 
         /* CHECKBOXES */
         .cb { width:16px; height:16px; cursor:pointer; accent-color:var(--green); }
@@ -746,6 +743,9 @@
             <div class="auth-error" id="authError">Incorrect password. Try again.</div>
         </div>
     </div>
+
+    <!-- FLOATING TOOLTIP -->
+    <div id="floatTip"></div>
 
     <!-- SIDEBAR -->
     <nav class="sidebar" style="display:none;" id="sidebar">
@@ -1119,7 +1119,7 @@ try { sb = supabase.createClient(SUPA_URL, SUPA_KEY); } catch(e) { console.log('
 let currentUser = null;
 let userProfile = null;
 let allProspects = [];
-let allUsers = [{id: 'Ibrahim', name: 'Ibrahim'}, {id: 'Chris', name: 'Chris'}, {id: 'Mike', name: 'Mike'}];
+let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Mel'}, {id: 'Afet', name: 'Afet'}, {id: 'Tati', name: 'Tati'}, {id: 'Haley', name: 'Haley'}, {id: 'Estela', name: 'Estela'}];
 
 
     // Check if already authenticated this session
@@ -1139,7 +1139,7 @@ let allUsers = [{id: 'Ibrahim', name: 'Ibrahim'}, {id: 'Chris', name: 'Chris'}, 
         currentUser = { id: 'admin_user', email: 'admin@advancedgranite.com' };
         userProfile = { name: 'Admin', role: 'admin' };
         
-        var hash = window.location.hash.replace('#', '') || 'dashboard';
+        var hash = window.location.hash.replace('#', '') || 'crm';
         if(typeof showPage === 'function') showPage(hash);
 
         try {
@@ -1376,6 +1376,34 @@ async function loadMdTab(tab) {
 
 // === INIT ===
 
+
+// === FLOATING TOOLTIP (works despite overflow:hidden on td) ===
+(function() {
+    var tip = document.getElementById('floatTip');
+    document.addEventListener('mouseover', function(e) {
+        var td = e.target.closest('td.has-tip');
+        if (!td) { tip.style.display = 'none'; return; }
+        var text = td.getAttribute('data-tip');
+        if (!text || text === '—') { tip.style.display = 'none'; return; }
+        tip.textContent = text;
+        tip.style.display = 'block';
+        var r = td.getBoundingClientRect();
+        var tipW = tip.offsetWidth;
+        var tipH = tip.offsetHeight;
+        var left = r.left;
+        var top = r.bottom + 6;
+        // Keep tooltip in viewport
+        if (left + tipW > window.innerWidth - 16) left = window.innerWidth - tipW - 16;
+        if (left < 8) left = 8;
+        if (top + tipH > window.innerHeight - 16) top = r.top - tipH - 6;
+        tip.style.left = left + 'px';
+        tip.style.top = top + 'px';
+    });
+    document.addEventListener('mouseout', function(e) {
+        var td = e.target.closest('td.has-tip');
+        if (td) tip.style.display = 'none';
+    });
+})();
 
 </script>
 </body>
