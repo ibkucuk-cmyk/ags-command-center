@@ -702,6 +702,20 @@
         .otab-content { display:none; }
         .otab-content.active { display:block; }
 
+        /* DETAIL POPUP */
+        .detail-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999; align-items:center; justify-content:center; padding:20px; }
+        .detail-overlay.show { display:flex; }
+        .detail-card { background:var(--card); border:1px solid var(--accent); border-radius:16px; max-width:600px; width:100%; max-height:80vh; overflow-y:auto; padding:28px; position:relative; }
+        .detail-card h2 { font-size:18px; font-weight:700; color:var(--accent); margin-bottom:16px; padding-right:30px; }
+        .detail-card .close-btn { position:absolute; top:12px; right:16px; background:none; border:none; color:var(--muted); font-size:24px; cursor:pointer; line-height:1; }
+        .detail-card .close-btn:hover { color:var(--text); }
+        .detail-card .detail-row { display:flex; gap:8px; margin:6px 0; font-size:13px; line-height:1.6; }
+        .detail-card .detail-label { color:var(--accent); font-weight:600; min-width:100px; white-space:nowrap; }
+        .detail-card .detail-value { color:var(--text2); flex:1; word-break:break-word; }
+        .detail-card .detail-full { margin:10px 0; font-size:13px; color:var(--text2); line-height:1.7; white-space:pre-line; border-top:1px solid var(--border); padding-top:12px; }
+        .details-btn { background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.3); color:var(--accent); padding:3px 8px; border-radius:4px; font-size:11px; cursor:pointer; white-space:nowrap; font-family:inherit; }
+        .details-btn:hover { background:rgba(59,130,246,0.3); }
+
         /* MOBILE */
         @media(max-width:768px) {
             .stats-row { grid-template-columns:1fr 1fr; }
@@ -1180,7 +1194,8 @@ let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Mel'}, {id: 'Afet
         if (!window.mdContent || !window.mdContent['outreach']) return;
         var md = window.mdContent['outreach'];
         var lines = md.split(/\n/);
-        var detailMap = {}; // number -> { category, details }
+        var detailMap = {};   // number -> rich text
+        var nameMap = {};     // cleaned company name -> rich text (fallback)
 
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i].trim();
@@ -1193,14 +1208,13 @@ let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Mel'}, {id: 'Afet
             var numMatch = cells[0].match(/(\d+)/);
             if (!numMatch) continue;
             var num = parseInt(numMatch[1]);
+            var companyRaw = (cells[1] || '').replace(/[\u2B50\u2605]+/g, '').trim();
 
             var cat = '', det = '';
             if (cells.length >= 9) {
-                // Rich format: # | Company | Contact | Address | Phone | Email | Website | Category | Details
                 cat = cells[7] || '';
                 det = cells[8] || '';
             } else if (cells.length >= 7) {
-                // Simpler: # | Company | Rating | Address | Phone | Category | AGS Angle
                 cat = cells[5] || '';
                 det = cells[6] || '';
             }
@@ -1208,22 +1222,30 @@ let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Mel'}, {id: 'Afet
             var full = '';
             if (cat && cat !== '\u2014' && cat !== '-') full = 'Services: ' + cat;
             if (det && det !== '\u2014' && det !== '-') {
-                if (full) full += '\n' + det.replace(/\u2223/g, '\n');
-                else full = det.replace(/\u2223/g, '\n');
+                var detExpanded = det.replace(/\u2223/g, '\n').replace(/ \u2223 /g, '\n');
+                if (full) full += '\n' + detExpanded;
+                else full = detExpanded;
             }
-            if (full.trim()) detailMap[num] = full.trim();
+            if (full.trim()) {
+                detailMap[num] = full.trim();
+                var cleanName = companyRaw.toLowerCase().replace(/[^a-z0-9]/g, '');
+                if (cleanName) nameMap[cleanName] = full.trim();
+            }
         }
 
-        // Merge into allProspects
+        // Merge into allProspects — match by number first, then by company name
         var enriched = 0;
         allProspects.forEach(function(p) {
+            var mdDetail = null;
             if (p.number && detailMap[p.number]) {
-                var mdDetail = detailMap[p.number];
-                // Only overwrite if markdown has more data
-                if (!p.ags_angle || mdDetail.length > (p.ags_angle || '').length) {
-                    p.ags_angle = mdDetail;
-                    enriched++;
-                }
+                mdDetail = detailMap[p.number];
+            } else if (p.company) {
+                var cleanComp = p.company.toLowerCase().replace(/[^a-z0-9]/g, '');
+                if (nameMap[cleanComp]) mdDetail = nameMap[cleanComp];
+            }
+            if (mdDetail && (!p.ags_angle || mdDetail.length > (p.ags_angle || '').length)) {
+                p.ags_angle = mdDetail;
+                enriched++;
             }
         });
         console.log('Enriched ' + enriched + ' prospects with markdown details');
@@ -1304,51 +1326,54 @@ function renderTable() {
 
     // Helper: make a tooltip cell for long text
     function tipCell(text, maxLen) {
-        if (!text) return '<td>—</td>';
+        if (!text) return '<td>\u2014</td>';
         const safe = text.replace(/"/g, '&quot;').replace(/</g, '&lt;');
         if (text.length > (maxLen || 25)) {
-            return `<td class="has-tip" data-tip="${safe}">${text.substring(0, maxLen || 25)}…</td>`;
+            return `<td title="${safe}">${text.substring(0, maxLen || 25)}\u2026</td>`;
         }
         return `<td>${text}</td>`;
     }
 
     tbody.innerHTML = filtered.map(p => {
         const cls = p.is_dnr ? 'is-dnr' : (p.is_customer ? 'is-cust' : '');
-        const starTxt = p.stars === 2 ? '<span class="star-2">★★</span>' : (p.stars === 1 ? '<span class="star-1">★</span>' : '');
+        const starTxt = p.stars === 2 ? '<span class="star-2">\u2605\u2605</span>' : (p.stars === 1 ? '<span class="star-1">\u2605</span>' : '');
 
         // Assign dropdown (admin only)
         let assignHtml = '';
         if (userProfile.role === 'admin') {
             assignHtml = `<select class="assign-sel" onchange="assignTo(${p.id}, this.value)">
-                <option value="">—</option>
+                <option value="">\u2014</option>
                 ${allUsers.map(u => `<option value="${u.id}" ${p.assigned_to === u.id ? 'selected' : ''}>${u.name}</option>`).join('')}
             </select>`;
         } else {
             const assignedUser = allUsers.find(u => u.id === p.assigned_to);
-            assignHtml = assignedUser ? assignedUser.name : '—';
+            assignHtml = assignedUser ? assignedUser.name : '\u2014';
         }
 
-        // Build AGS angle + notes combined for tooltip on company name
-        const angleText = (p.ags_angle || '').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+        // Details button — shows popup with full AGS angle on click
+        const hasDetails = p.ags_angle && p.ags_angle.length > 3;
+        const detailBtn = hasDetails
+            ? `<button class="details-btn" onclick="showDetail(${p.id})">View Details</button>`
+            : '\u2014';
 
         // Email display
-        const emailHtml = p.email ? `<a href="mailto:${p.email}" style="color:var(--accent)">${p.email.length > 22 ? p.email.substring(0,22)+'…' : p.email}</a>` : '—';
-        const emailTip = p.email && p.email.length > 22 ? ` class="has-tip" data-tip="${p.email.replace(/"/g,'&quot;')}"` : '';
+        const emailHtml = p.email ? `<a href="mailto:${p.email}" style="color:var(--accent)">${p.email.length > 22 ? p.email.substring(0,22)+'\u2026' : p.email}</a>` : '\u2014';
+        const emailTip = p.email && p.email.length > 22 ? ` title="${p.email.replace(/"/g,'&quot;')}"` : '';
 
         // Website display
         const webRaw = (p.website || '').replace(/^https?:\/\//, '').replace(/\/$/,'');
-        const webHtml = webRaw && webRaw !== '—' ? `<a href="${p.website.startsWith('http')?p.website:'https://'+p.website}" target="_blank" style="color:var(--green)">${webRaw.length > 18 ? webRaw.substring(0,18)+'…' : webRaw}</a>` : '—';
+        const webHtml = webRaw && webRaw !== '\u2014' ? `<a href="${p.website.startsWith('http')?p.website:'https://'+p.website}" target="_blank" style="color:var(--green)">${webRaw.length > 18 ? webRaw.substring(0,18)+'\u2026' : webRaw}</a>` : '\u2014';
 
         return `<tr class="${cls}">
             <td>${p.number || ''} ${starTxt}</td>
-            <td class="has-tip" data-tip="${angleText || p.company}" style="cursor:pointer; color:var(--accent);">${p.company}</td>
+            <td style="cursor:pointer; color:var(--accent);" onclick="showDetail(${p.id})">${p.company}</td>
             ${tipCell(p.contact, 20)}
             ${tipCell(p.location, 25)}
-            <td>${p.phone ? `<a href="tel:${p.phone}" style="color:var(--green)">${p.phone}</a>` : '—'}</td>
+            <td>${p.phone ? `<a href="tel:${p.phone}" style="color:var(--green)">${p.phone}</a>` : '\u2014'}</td>
             <td${emailTip}>${emailHtml}</td>
             <td>${webHtml}</td>
             ${tipCell(p.type, 22)}
-            ${tipCell(p.ags_angle, 28)}
+            <td>${detailBtn}</td>
             <td><input type="checkbox" class="cb" ${p.called?'checked':''} onchange="toggleField(${p.id},'called',this.checked)"></td>
             <td><input type="checkbox" class="cb" ${p.emailed?'checked':''} onchange="toggleField(${p.id},'emailed',this.checked)"></td>
             <td><input type="checkbox" class="cb" ${p.stopped_by?'checked':''} onchange="toggleField(${p.id},'stopped_by',this.checked)"></td>
@@ -1357,6 +1382,75 @@ function renderTable() {
             <td><input class="status-input" value="${p.status||''}" onblur="updateStatus(${p.id},this.value)" placeholder="Notes..."></td>
         </tr>`;
     }).join('');
+}
+
+// === DETAIL POPUP ===
+function showDetail(id) {
+    const p = allProspects.find(x => x.id === id);
+    if (!p) return;
+
+    let overlay = document.getElementById('detailOverlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'detailOverlay';
+        overlay.className = 'detail-overlay';
+        overlay.onclick = function(e) { if (e.target === overlay) overlay.classList.remove('show'); };
+        document.body.appendChild(overlay);
+    }
+
+    // Parse the ags_angle into label:value pairs where possible
+    const angle = p.ags_angle || '';
+    const lines = angle.split('\n').filter(l => l.trim());
+
+    let detailRows = '';
+    // Always show key fields from the prospect
+    const fields = [
+        ['Company', p.company],
+        ['Contact', p.contact],
+        ['Phone', p.phone],
+        ['Email', p.email],
+        ['Website', p.website],
+        ['Address', p.location],
+        ['Type', p.type],
+        ['Tier', p.tier],
+    ];
+    fields.forEach(function(f) {
+        if (f[1] && f[1] !== '—') {
+            var val = f[1];
+            if (f[0] === 'Phone') val = '<a href="tel:' + f[1] + '" style="color:var(--green)">' + f[1] + '</a>';
+            if (f[0] === 'Email') val = '<a href="mailto:' + f[1] + '" style="color:var(--accent)">' + f[1] + '</a>';
+            if (f[0] === 'Website') {
+                var url = f[1].startsWith('http') ? f[1] : 'https://' + f[1];
+                val = '<a href="' + url + '" target="_blank" style="color:var(--green)">' + f[1] + '</a>';
+            }
+            detailRows += '<div class="detail-row"><div class="detail-label">' + f[0] + '</div><div class="detail-value">' + val + '</div></div>';
+        }
+    });
+
+    // Parse AGS angle lines into structured label:value if possible
+    let agsHtml = '';
+    lines.forEach(function(line) {
+        var colonIdx = line.indexOf(':');
+        if (colonIdx > 0 && colonIdx < 25) {
+            var label = line.substring(0, colonIdx).trim();
+            var value = line.substring(colonIdx + 1).trim();
+            agsHtml += '<div class="detail-row"><div class="detail-label">' + label + '</div><div class="detail-value">' + value + '</div></div>';
+        } else if (line.trim()) {
+            agsHtml += '<div class="detail-row"><div class="detail-value" style="color:var(--text)">' + line + '</div></div>';
+        }
+    });
+
+    overlay.innerHTML = '<div class="detail-card">' +
+        '<button class="close-btn" onclick="document.getElementById(\'detailOverlay\').classList.remove(\'show\')">&times;</button>' +
+        '<h2>' + (p.company || 'Prospect Details') + '</h2>' +
+        detailRows +
+        (agsHtml ? '<div class="detail-full" style="border-top:1px solid var(--border);padding-top:12px;margin-top:12px">' +
+            '<div style="color:var(--accent);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">AGS Intelligence</div>' +
+            agsHtml +
+        '</div>' : '') +
+    '</div>';
+
+    overlay.classList.add('show');
 }
 
 // === ACTIONS ===
