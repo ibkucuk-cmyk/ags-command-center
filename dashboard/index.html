@@ -756,7 +756,10 @@
 
         <div class="nav-items">
             <div class="nav-section">Overview</div>
-            <div class="nav-item" onclick="showPage('crm')" id="nav-crm"><span class="icon">👥</span> CRM Prospects</div>
+            <div class="nav-item" onclick="showPage('outreach')" id="nav-outreach">
+                <span class="icon">🗄️</span> Outreach Database
+                <span class="badge badge-green" id="nav-badge-prospects">—</span>
+            </div>
             <div class="nav-item active" onclick="showPage('dashboard')" id="nav-dashboard">
                 <span class="icon">📊</span> Dashboard
             </div>
@@ -785,11 +788,7 @@
                 <span class="icon">📄</span> Why AGS One-Pager
             </div>
 
-            <div class="nav-section">Database</div>
-            <div class="nav-item" onclick="showPage('outreach')" id="nav-outreach">
-                <span class="icon">🗄️</span> Outreach Database
-                <span class="badge badge-green" id="nav-badge-prospects">—</span>
-            </div>
+            <div class="nav-section">Reference</div>
             <div class="nav-item" onclick="showPage('phase6')" id="nav-phase6">
                 <span class="icon">🚀</span> Phase 6+ Prospecting
                 <span class="badge badge-amber" id="nav-badge-phase6">—</span>
@@ -850,19 +849,19 @@
                     </div>
                     <div class="action-card" onclick="showPage('outreach')">
                         <h3>🗄️ Browse Database</h3>
-                        <p id="action-db-sub">View all prospects with phone numbers</p>
+                        <p id="action-db-sub">View all prospects with tracking</p>
                     </div>
                 </div>
             </div>
 
-            <!-- All other pages get populated by JS -->
-            <div class="page" id="page-crm">
+            <!-- CRM TABLE is now Outreach Database -->
+            <div class="page" id="page-outreach">
 
     <div id="tab-prospects">
         <div class="stats-row" id="statsRow"></div>
 
         <div class="filters">
-            <input type="text" id="searchBox" placeholder="Search company, phone, location..." oninput="renderTable()">
+            <input type="text" id="searchBox" placeholder="Search company, phone, location, notes..." oninput="renderTable()">
             <select id="filterTier" onchange="renderTable()"><option value="">All Tiers</option></select>
             <select id="filterAssigned" onchange="renderTable()">
                 <option value="">All</option>
@@ -898,7 +897,7 @@
         <div class="table-wrap">
             <table>
                 <thead><tr>
-                    <th>#</th><th>Company</th><th>Contact</th><th>Location</th><th>Phone</th><th>Email</th><th>Website</th><th>Type</th>
+                    <th>#</th><th>Company</th><th>Contact</th><th>Location</th><th>Phone</th><th>Email</th><th>Website</th><th>Type</th><th>Details</th>
                     <th>📞</th><th>📧</th><th>🚗</th><th>💼</th>
                     <th>Assigned</th><th>Notes</th>
                 </tr></thead>
@@ -915,7 +914,7 @@
             <div class="page" id="page-email"><div class="loading">Loading document...</div></div>
             <div class="page" id="page-linkedin"><div class="loading">Loading document...</div></div>
             <div class="page" id="page-whyags"><div class="loading">Loading document...</div></div>
-            <div class="page" id="page-outreach"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-outreach-ref"><div class="loading">Loading document...</div></div>
             <div class="page" id="page-phase6"><div class="loading">Loading document...</div></div>
             <div class="page" id="page-competitive"><div class="loading">Loading document...</div></div>
 
@@ -940,7 +939,7 @@ window.mdContent['playbook'] = "# AGS × Max AI — B2B Customer Acquisition Pla
         // Page titles
         const pageTitles = {
             'dashboard': 'Dashboard',
-            'crm': 'CRM Prospects',
+            'outreach': 'Outreach Database',
             'todo': 'Master TODO — Execution Checklist',
             'strategic': 'Strategic Plan',
             'rules': 'Strategy Rules',
@@ -948,7 +947,7 @@ window.mdContent['playbook'] = "# AGS × Max AI — B2B Customer Acquisition Pla
             'email': 'Email Outreach Sequences',
             'linkedin': 'LinkedIn Outreach Cadence',
             'whyags': 'Why AGS — One-Pager',
-            'outreach': 'Outreach Database (Scorecard)',
+            'outreach-ref': 'Outreach Reference (Full Detail)',
             'competitive': 'Competitive Analysis',
             'phase6': 'Phase 6+ Prospecting Plan',
             'playbook': 'B2B Playbook'
@@ -963,7 +962,7 @@ window.mdContent['playbook'] = "# AGS × Max AI — B2B Customer Acquisition Pla
             'email': 'AGS_EMAIL_OUTBOUND.md',
             'linkedin': 'AGS_LINKEDIN_OUTBOUND.md',
             'whyags': 'AGS_WHY_AGS_ONEPAGER.md',
-            'outreach': 'AGS_MASTER_OUTREACH.md',
+            'outreach-ref': 'AGS_MASTER_OUTREACH.md',
             'competitive': 'AGS_COMPETITIVE_ANALYSIS.md',
             'phase6': 'AGS_PHASE6_PROSPECTING.md',
             'playbook': 'AGS_MAX_B2B_PLAYBOOK.md'
@@ -976,22 +975,9 @@ window.mdContent['playbook'] = "# AGS × Max AI — B2B Customer Acquisition Pla
 
         
         function goToOutreach(company) {
-            showPage('outreach');
-            setTimeout(() => {
-                if (window.find) {
-                    window.getSelection().removeAllRanges();
-                    var cleanName = company.replace(/^\d+\.\s*/, '').trim();
-                    if (window.find(cleanName, false, false, true)) {
-                        var sel = window.getSelection();
-                        if (sel.rangeCount > 0 && sel.focusNode) {
-                            var node = sel.focusNode.parentNode;
-                            if (node && node.scrollIntoView) {
-                                node.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            }
-                        }
-                    }
-                }
-            }, 300);
+            // Already on outreach page — just search for the company
+            var box = document.getElementById('searchBox');
+            if (box) { box.value = company.replace(/^\d+\.\s*/, '').trim(); renderTable(); }
         }
 
         function showPage(pageId) {
@@ -1000,7 +986,7 @@ window.mdContent['playbook'] = "# AGS × Max AI — B2B Customer Acquisition Pla
             document.getElementById('page-' + pageId).classList.add('active');
             document.getElementById('nav-' + pageId).classList.add('active');
             document.getElementById('page-title').textContent = pageTitles[pageId] || pageId;
-            if (pageId === 'crm' && typeof renderTable === 'function') renderTable();
+            if (pageId === 'outreach' && typeof renderTable === 'function') renderTable();
             if (fileMap[pageId] && !loadedPages[pageId]) {
                 loadMarkdown(pageId);
             }
@@ -1139,7 +1125,7 @@ let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Mel'}, {id: 'Afet
         currentUser = { id: 'admin_user', email: 'admin@advancedgranite.com' };
         userProfile = { name: 'Admin', role: 'admin' };
         
-        var hash = window.location.hash.replace('#', '') || 'crm';
+        var hash = window.location.hash.replace('#', '') || 'outreach';
         if(typeof showPage === 'function') showPage(hash);
 
         try {
@@ -1147,7 +1133,7 @@ let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Mel'}, {id: 'Afet
             renderStats();
             populateFilters();
             if(typeof parseDashboardStats === 'function') parseDashboardStats();
-            if(document.getElementById('page-crm').classList.contains('active')) renderTable();
+            if(document.getElementById('page-outreach').classList.contains('active')) renderTable();
         } catch(e) {
             console.log("Supabase load failed, skipping CRM data.", e);
         }
@@ -1210,7 +1196,7 @@ function renderTable() {
     const status = document.getElementById('filterStatus').value;
 
     let filtered = allProspects.filter(p => {
-        if (search && !(p.company + ' ' + p.phone + ' ' + p.location + ' ' + p.contact + ' ' + p.ags_angle).toLowerCase().includes(search)) return false;
+        if (search && !(p.company + ' ' + p.phone + ' ' + p.location + ' ' + p.contact + ' ' + p.ags_angle + ' ' + p.email + ' ' + p.website + ' ' + p.type + ' ' + p.status).toLowerCase().includes(search)) return false;
         if (tier && p.tier !== tier) return false;
         if (assigned === 'unassigned' && p.assigned_to) return false;
         if (assigned === 'mine' && p.assigned_to !== currentUser.id) return false;
@@ -1222,7 +1208,7 @@ function renderTable() {
 
     const tbody = document.getElementById('tableBody');
     if (filtered.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="11" style="text-align:center;padding:40px;color:var(--muted)">No prospects found</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="15" style="text-align:center;padding:40px;color:var(--muted)">No prospects found</td></tr>';
         return;
     }
 
@@ -1265,13 +1251,14 @@ function renderTable() {
 
         return `<tr class="${cls}">
             <td>${p.number || ''} ${starTxt}</td>
-            <td class="has-tip" data-tip="${angleText || p.company}" style="cursor:pointer; color:var(--accent);" onclick="goToOutreach(this.textContent)">${p.company}</td>
+            <td class="has-tip" data-tip="${angleText || p.company}" style="cursor:pointer; color:var(--accent);">${p.company}</td>
             ${tipCell(p.contact, 20)}
             ${tipCell(p.location, 25)}
             <td>${p.phone ? `<a href="tel:${p.phone}" style="color:var(--green)">${p.phone}</a>` : '—'}</td>
             <td${emailTip}>${emailHtml}</td>
             <td>${webHtml}</td>
             ${tipCell(p.type, 22)}
+            ${tipCell(p.ags_angle, 28)}
             <td><input type="checkbox" class="cb" ${p.called?'checked':''} onchange="toggleField(${p.id},'called',this.checked)"></td>
             <td><input type="checkbox" class="cb" ${p.emailed?'checked':''} onchange="toggleField(${p.id},'emailed',this.checked)"></td>
             <td><input type="checkbox" class="cb" ${p.stopped_by?'checked':''} onchange="toggleField(${p.id},'stopped_by',this.checked)"></td>
