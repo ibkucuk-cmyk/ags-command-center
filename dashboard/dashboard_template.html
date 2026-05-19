@@ -694,6 +694,14 @@
         .btn-add { background:var(--green); border:none; color:#fff; padding:10px 20px; border-radius:8px; font-weight:600; cursor:pointer; margin-top:10px; font-family:inherit; }
         .btn-toggle-add { background:var(--card); border:1px solid var(--border); color:var(--green); padding:8px 16px; border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; margin-left:16px; margin-bottom:8px; font-family:inherit; }
 
+        /* OUTREACH TABS */
+        .otabs { display:flex; gap:4px; padding:0 16px 12px; }
+        .otab { background:var(--card); border:1px solid var(--border); color:var(--text-muted); padding:10px 20px; border-radius:8px 8px 0 0; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; transition:all 0.2s; }
+        .otab:hover { color:var(--text); background:var(--bg2); }
+        .otab.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+        .otab-content { display:none; }
+        .otab-content.active { display:block; }
+
         /* MOBILE */
         @media(max-width:768px) {
             .stats-row { grid-template-columns:1fr 1fr; }
@@ -854,10 +862,17 @@
                 </div>
             </div>
 
-            <!-- CRM TABLE is now Outreach Database -->
+            <!-- OUTREACH DATABASE: unified with tabs -->
             <div class="page" id="page-outreach">
 
-    <div id="tab-prospects">
+    <!-- Tab switcher -->
+    <div class="otabs">
+        <button class="otab active" id="otab-tracker" onclick="switchOutreachTab('tracker')">📊 Tracker</button>
+        <button class="otab" id="otab-fulldb" onclick="switchOutreachTab('fulldb')">📋 Full Database</button>
+    </div>
+
+    <!-- TAB 1: Supabase CRM tracker -->
+    <div class="otab-content active" id="otab-content-tracker">
         <div class="stats-row" id="statsRow"></div>
 
         <div class="filters">
@@ -906,6 +921,11 @@
         </div>
     </div>
 
+    <!-- TAB 2: Full markdown outreach database with all rich data -->
+    <div class="otab-content" id="otab-content-fulldb">
+        <div class="md-content" id="content-outreach-full"></div>
+    </div>
+
     </div>
             <div class="page" id="page-todo"><div class="loading">Loading document...</div></div>
             <div class="page" id="page-strategic"><div class="loading">Loading document...</div></div>
@@ -914,7 +934,6 @@
             <div class="page" id="page-email"><div class="loading">Loading document...</div></div>
             <div class="page" id="page-linkedin"><div class="loading">Loading document...</div></div>
             <div class="page" id="page-whyags"><div class="loading">Loading document...</div></div>
-            <div class="page" id="page-outreach-ref"><div class="loading">Loading document...</div></div>
             <div class="page" id="page-phase6"><div class="loading">Loading document...</div></div>
             <div class="page" id="page-competitive"><div class="loading">Loading document...</div></div>
 
@@ -934,7 +953,6 @@
             'email': 'Email Outreach Sequences',
             'linkedin': 'LinkedIn Outreach Cadence',
             'whyags': 'Why AGS — One-Pager',
-            'outreach-ref': 'Outreach Reference (Full Detail)',
             'competitive': 'Competitive Analysis',
             'phase6': 'Phase 6+ Prospecting Plan',
             'playbook': 'B2B Playbook'
@@ -949,7 +967,6 @@
             'email': 'AGS_EMAIL_OUTBOUND.md',
             'linkedin': 'AGS_LINKEDIN_OUTBOUND.md',
             'whyags': 'AGS_WHY_AGS_ONEPAGER.md',
-            'outreach-ref': 'AGS_MASTER_OUTREACH.md',
             'competitive': 'AGS_COMPETITIVE_ANALYSIS.md',
             'phase6': 'AGS_PHASE6_PROSPECTING.md',
             'playbook': 'AGS_MAX_B2B_PLAYBOOK.md'
@@ -976,6 +993,24 @@
             if (pageId === 'outreach' && typeof renderTable === 'function') renderTable();
             if (fileMap[pageId] && !loadedPages[pageId]) {
                 loadMarkdown(pageId);
+            }
+        }
+
+        // Outreach tab switching (Tracker vs Full Database)
+        var outreachFullLoaded = false;
+        function switchOutreachTab(tab) {
+            document.querySelectorAll('.otab').forEach(function(b) { b.classList.remove('active'); });
+            document.querySelectorAll('.otab-content').forEach(function(c) { c.classList.remove('active'); });
+            document.getElementById('otab-' + tab).classList.add('active');
+            document.getElementById('otab-content-' + tab).classList.add('active');
+            if (tab === 'fulldb' && !outreachFullLoaded) {
+                var el = document.getElementById('content-outreach-full');
+                if (window.mdContent && window.mdContent['outreach']) {
+                    el.innerHTML = marked.parse(window.mdContent['outreach']);
+                } else {
+                    el.innerHTML = '<p style="color:var(--muted);padding:40px;text-align:center">Full database content not embedded. Run build.ps1.</p>';
+                }
+                outreachFullLoaded = true;
             }
         }
 
