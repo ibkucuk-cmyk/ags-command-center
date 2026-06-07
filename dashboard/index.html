@@ -742,6 +742,17 @@
         .copy-icon:hover { background:rgba(59,130,246,0.15); border-color:var(--accent); color:var(--accent); }
         .toast { position:fixed; bottom:32px; left:50%; transform:translateX(-50%) translateY(80px); background:linear-gradient(135deg,#10b981,#059669); color:#fff; padding:12px 28px; border-radius:12px; font-size:14px; font-weight:600; font-family:'Inter',sans-serif; z-index:99999; pointer-events:none; opacity:0; transition:all 0.35s cubic-bezier(0.4,0,0.2,1); box-shadow:0 8px 30px rgba(16,185,129,0.4); }
         .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+        
+        #content-outreach-full table td:nth-child(2) {
+            cursor: pointer;
+            color: var(--accent);
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: text-decoration-color 0.2s;
+        }
+        #content-outreach-full table td:nth-child(2):hover {
+            text-decoration-color: var(--accent);
+        }
 </style>
 
 <script>
@@ -1082,6 +1093,27 @@ window.mdContent['playbook'] = "# AGS × Max AI — B2B Customer Acquisition Pla
                 var el = document.getElementById('content-outreach-full');
                 if (window.mdContent && window.mdContent['outreach']) {
                     el.innerHTML = marked.parse(window.mdContent['outreach']);
+                    
+                    // Click listener to jump and search inside the dynamic CRM Tracker
+                    el.addEventListener('click', function(e) {
+                        var td = e.target.closest('td');
+                        if (!td) return;
+                        var tr = td.closest('tr');
+                        if (!tr) return;
+                        var cells = tr.querySelectorAll('td');
+                        // Second cell is Company Name (nth-child(2))
+                        if (cells.length > 1 && cells[1] === td) {
+                            var companyName = td.textContent.replace(/[\u2B50\u2605]+/g, '').replace(/TOP TARGET/g, '').trim();
+                            if (companyName) {
+                                switchOutreachTab('tracker');
+                                var box = document.getElementById('searchBox');
+                                if (box) {
+                                    box.value = companyName;
+                                    renderTable();
+                                }
+                            }
+                        }
+                    });
                 } else {
                     el.innerHTML = '<p style="color:var(--muted);padding:40px;text-align:center">Full database content not embedded. Run build.ps1.</p>';
                 }
