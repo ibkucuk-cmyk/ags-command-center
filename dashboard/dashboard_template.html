@@ -1501,7 +1501,7 @@ function renderTable() {
         const actionEditable = (userProfile.role === 'admin' || p.assigned_to === currentUser.id);
         const disabledAttr = actionEditable ? '' : 'disabled style="opacity:0.7; cursor:not-allowed;"';
 
-        // Assign dropdown or claim lead options
+        // Assign dropdown (admin only)
         let assignHtml = '';
         if (userProfile.role === 'admin') {
             assignHtml = `<select class="assign-sel" onchange="assignTo(${p.id}, this.value)">
@@ -1509,20 +1509,8 @@ function renderTable() {
                 ${allUsers.map(u => `<option value="${u.id}" ${p.assigned_to === u.id ? 'selected' : ''}>${u.name}</option>`).join('')}
             </select>`;
         } else {
-            if (!p.assigned_to) {
-                assignHtml = `<select class="assign-sel" onchange="assignTo(${p.id}, this.value)">
-                    <option value="">\u2014</option>
-                    <option value="${currentUser.id}">Claim Lead</option>
-                </select>`;
-            } else if (p.assigned_to === currentUser.id) {
-                assignHtml = `<select class="assign-sel" onchange="assignTo(${p.id}, this.value)">
-                    <option value="${currentUser.id}">${userProfile.name}</option>
-                    <option value="">Unassign</option>
-                </select>`;
-            } else {
-                const assignedUser = allUsers.find(u => u.id === p.assigned_to);
-                assignHtml = assignedUser ? assignedUser.name : p.assigned_to;
-            }
+            const assignedUser = allUsers.find(u => u.id === p.assigned_to);
+            assignHtml = assignedUser ? assignedUser.name : '\u2014';
         }
 
         // Assigned date display
