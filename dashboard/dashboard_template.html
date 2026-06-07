@@ -654,6 +654,20 @@
         tbody tr.is-dnr { opacity:0.4; }
         tbody tr.is-cust { background:rgba(245,158,11,0.05); }
 
+        /* Column width limits to prevent overflow */
+        table th:nth-child(2), table td:nth-child(2) {
+            max-width: 170px !important;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        table th:nth-child(5), table td:nth-child(5) {
+            max-width: 110px !important;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
         /* FLOATING TOOLTIP (JS-powered, lives outside table) */
         td.has-tip { cursor:default; }
         #floatTip {
@@ -683,7 +697,7 @@
         .assign-sel:focus { border-color:var(--accent); }
 
         /* STATUS INPUT */
-        .status-input { background:transparent; border:1px solid transparent; color:var(--text2); padding:2px 4px; border-radius:4px; font-size:11px; width:140px; font-family:inherit; }
+        .status-input { background:transparent; border:1px solid transparent; color:var(--text2); padding:2px 4px; border-radius:4px; font-size:11px; width:280px; font-family:inherit; }
         .status-input:focus { border-color:var(--accent); background:var(--bg); color:var(--text); }
 
         /* STARS */
@@ -1262,8 +1276,15 @@ let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Melanie'}, {id: '
             btnToggleAdd.style.display = userProfile.role === 'admin' ? '' : 'none';
         }
 
-        
-        
+        // Show/hide outreach tabs based on role
+        const otabsEl = document.querySelector('.otabs');
+        if (otabsEl) {
+            otabsEl.style.display = userProfile.role === 'admin' ? 'flex' : 'none';
+        }
+        if (userProfile.role !== 'admin') {
+            if (typeof switchOutreachTab === 'function') switchOutreachTab('tracker');
+        }
+
         var hash = window.location.hash.replace('#', '') || 'outreach';
         if(typeof showPage === 'function') showPage(hash);
 
@@ -1419,7 +1440,10 @@ let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Melanie'}, {id: '
                 assigned_to: null,
                 assigned_date: null,
                 status: ''
-            });
+        }
+        // Role-based filtering fallback: salespeople can only see their own prospects
+        if (userProfile && userProfile.role !== 'admin') {
+            allProspects = allProspects.filter(p => p.assigned_to === currentUser.id);
         }
         console.log('Loaded ' + allProspects.length + ' prospects from markdown fallback.');
     }
@@ -1438,6 +1462,11 @@ async function loadProspects() {
         allProspects = allProspects.concat(data);
         if (data.length < pageSize) break;
         page++;
+    }
+
+    // Role-based filtering: salespeople can only see their own prospects
+    if (userProfile && userProfile.role !== 'admin') {
+        allProspects = allProspects.filter(p => p.assigned_to === currentUser.id);
     }
 }
 
@@ -1478,13 +1507,13 @@ function populateAssignedFilter() {
             <option value="mine">My Prospects</option>
             ${allUsers.map(u => `<option value="${u.id}">${u.name}</option>`).join('')}
         `;
+        sel.style.display = '';
     } else {
         sel.innerHTML = `
             <option value="mine">My Prospects</option>
-            <option value="">All Prospects</option>
-            <option value="unassigned">Unassigned</option>
         `;
         sel.value = 'mine';
+        sel.style.display = 'none';
     }
 }
 
@@ -1550,10 +1579,10 @@ function renderTable() {
 
         return `<tr class="${cls}">
             <td>${p.number || ''} ${starTxt} <button class="copy-icon" onclick="event.stopPropagation();copyProspect(${p.id})" title="Copy info">📋</button></td>
-            <td style="cursor:pointer; color:var(--accent);" onclick="showDetail(${p.id})">${p.company}</td>
+            <td style="cursor:pointer; color:var(--accent);" onclick="showDetail(${p.id})" title="${p.company}">${p.company}</td>
             ${tipCell(p.contact, 20)}
             ${tipCell(p.location, 22)}
-            <td>${p.phone ? `<a href="tel:${p.phone}" style="color:var(--green)">${p.phone}</a>` : '\u2014'}</td>
+            <td>${p.phone ? `<a href="tel:${p.phone}" style="color:var(--green)" title="${p.phone}">${p.phone}</a>` : '\u2014'}</td>
             ${tipCell(p.type, 18)}
             ${tipCell(p.ags_angle, 30)}
             <td><input type="checkbox" class="cb" ${p.called?'checked':''} onchange="toggleField(${p.id},'called',this.checked)" ${disabledAttr}></td>
