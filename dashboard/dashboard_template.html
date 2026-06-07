@@ -29,6 +29,9 @@
             --red-glow: rgba(239, 68, 68, 0.15);
             --purple: #8b5cf6;
             --sidebar-width: 260px;
+            /* Aliases for CRM tracker styles */
+            --bg: #0a0e17; --bg2: #111827; --card: #1a2236; --hover: #1e293b;
+            --text: #f1f5f9; --text2: #94a3b8; --muted: #64748b;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -345,6 +348,9 @@
             padding: 8px 12px;
             border-bottom: 1px solid var(--border);
             color: var(--text-secondary);
+            white-space: normal;
+            word-break: break-word;
+            line-height: 1.6;
         }
 
         .md-content tbody tr:hover {
@@ -641,9 +647,9 @@
 
         /* TABLE */
         .table-wrap { flex:1; overflow:auto; padding:0 8px 80px; }
-        table { width:100%; border-collapse:collapse; font-size:12px; min-width:1200px; }
+        table { width:100%; border-collapse:collapse; font-size:12px; min-width:1400px; }
         thead th { background:var(--bg2); padding:8px 10px; text-align:left; font-weight:600; color:var(--text2); border-bottom:2px solid var(--border); position:sticky; top:0; z-index:10; white-space:nowrap; }
-        tbody td { padding:7px 10px; border-bottom:1px solid var(--border); color:var(--text2); max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        tbody td { padding:7px 10px; border-bottom:1px solid var(--border); color:var(--text2); white-space:nowrap; }
         tbody tr:hover { background:var(--hover); }
         tbody tr.is-dnr { opacity:0.4; }
         tbody tr.is-cust { background:rgba(245,158,11,0.05); }
@@ -663,7 +669,7 @@
             line-height: 1.5;
             white-space: pre-wrap;
             word-break: break-word;
-            max-width: 400px;
+            max-width: 520px;
             min-width: 150px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.6);
             pointer-events: none;
@@ -677,7 +683,7 @@
         .assign-sel:focus { border-color:var(--accent); }
 
         /* STATUS INPUT */
-        .status-input { background:transparent; border:1px solid transparent; color:var(--text2); padding:2px 4px; border-radius:4px; font-size:11px; width:100px; font-family:inherit; }
+        .status-input { background:transparent; border:1px solid transparent; color:var(--text2); padding:2px 4px; border-radius:4px; font-size:11px; width:140px; font-family:inherit; }
         .status-input:focus { border-color:var(--accent); background:var(--bg); color:var(--text); }
 
         /* STARS */
@@ -705,7 +711,7 @@
         /* DETAIL POPUP */
         .detail-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999; align-items:center; justify-content:center; padding:20px; }
         .detail-overlay.show { display:flex; }
-        .detail-card { background:var(--card); border:1px solid var(--accent); border-radius:16px; max-width:600px; width:100%; max-height:80vh; overflow-y:auto; padding:28px; position:relative; }
+        .detail-card { background:var(--card); border:1px solid var(--accent); border-radius:16px; max-width:700px; width:100%; max-height:80vh; overflow-y:auto; padding:28px; position:relative; }
         .detail-card h2 { font-size:18px; font-weight:700; color:var(--accent); margin-bottom:16px; padding-right:30px; }
         .detail-card .close-btn { position:absolute; top:12px; right:16px; background:none; border:none; color:var(--muted); font-size:24px; cursor:pointer; line-height:1; }
         .detail-card .close-btn:hover { color:var(--text); }
@@ -727,6 +733,15 @@
         .loading { text-align:center; padding:60px; color:var(--muted); }
 
         /* MD CONTENT for sales tools */
+
+        /* COPY BUTTON & TOAST */
+        .copy-btn { display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg,#3b82f6,#8b5cf6); border:none; color:#fff; padding:10px 20px; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; transition:all 0.2s; margin-bottom:16px; }
+        .copy-btn:hover { transform:translateY(-1px); box-shadow:0 4px 15px rgba(59,130,246,0.4); }
+        .copy-btn:active { transform:scale(0.97); }
+        .copy-icon { background:none; border:1px solid transparent; color:var(--muted); padding:2px 5px; border-radius:4px; font-size:11px; cursor:pointer; transition:all 0.15s; line-height:1; vertical-align:middle; margin-left:4px; }
+        .copy-icon:hover { background:rgba(59,130,246,0.15); border-color:var(--accent); color:var(--accent); }
+        .toast { position:fixed; bottom:32px; left:50%; transform:translateX(-50%) translateY(80px); background:linear-gradient(135deg,#10b981,#059669); color:#fff; padding:12px 28px; border-radius:12px; font-size:14px; font-weight:600; font-family:'Inter',sans-serif; z-index:99999; pointer-events:none; opacity:0; transition:all 0.35s cubic-bezier(0.4,0,0.2,1); box-shadow:0 8px 30px rgba(16,185,129,0.4); }
+        .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 </style>
 
 <script>
@@ -768,6 +783,7 @@
 
     <!-- FLOATING TOOLTIP -->
     <div id="floatTip"></div>
+    <div class="toast" id="toast"></div>
 
     <!-- SIDEBAR -->
     <nav class="sidebar" style="display:none;" id="sidebar">
@@ -926,9 +942,9 @@
         <div class="table-wrap">
             <table>
                 <thead><tr>
-                    <th>#</th><th>Company</th><th>Contact</th><th>Location</th><th>Phone</th><th>Email</th><th>Website</th><th>Type</th><th>Details</th>
+                    <th>#</th><th>Company</th><th>Contact</th><th>Location</th><th>Phone</th><th>Type</th><th>AGS Angle</th>
                     <th>📞</th><th>📧</th><th>🚗</th><th>💼</th>
-                    <th>Assigned</th><th>Notes</th>
+                    <th>Assigned</th><th>Date</th><th>Notes</th>
                 </tr></thead>
                 <tbody id="tableBody"></tbody>
             </table>
@@ -1309,18 +1325,21 @@ function renderTable() {
 
     const tbody = document.getElementById('tableBody');
     if (filtered.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="15" style="text-align:center;padding:40px;color:var(--muted)">No prospects found</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="14" style="text-align:center;padding:40px;color:var(--muted)">No prospects found</td></tr>';
         return;
     }
 
-    // Helper: make a tooltip cell for long text
+    // Helper: make a tooltip cell with floating tooltip on hover
     function tipCell(text, maxLen) {
         if (!text) return '<td>\u2014</td>';
-        const safe = text.replace(/"/g, '&quot;').replace(/</g, '&lt;');
-        if (text.length > (maxLen || 25)) {
-            return `<td title="${safe}">${text.substring(0, maxLen || 25)}\u2026</td>`;
+        // Split pipe-delimited data into newlines for the tooltip
+        var tipText = text.replace(/\s*[∣|]\s*/g, '\n');
+        var safe = tipText.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+        var preview = text.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
+        if (preview.length > (maxLen || 25)) {
+            return '<td class="has-tip" data-tip="' + safe + '">' + preview.substring(0, maxLen || 25) + '\u2026</td>';
         }
-        return `<td>${text}</td>`;
+        return '<td>' + preview + '</td>';
     }
 
     tbody.innerHTML = filtered.map(p => {
@@ -1339,35 +1358,23 @@ function renderTable() {
             assignHtml = assignedUser ? assignedUser.name : '\u2014';
         }
 
-        // Details button — shows popup with full AGS angle on click
-        const hasDetails = p.ags_angle && p.ags_angle.length > 3;
-        const detailBtn = hasDetails
-            ? `<button class="details-btn" onclick="showDetail(${p.id})">View Details</button>`
-            : '\u2014';
-
-        // Email display
-        const emailHtml = p.email ? `<a href="mailto:${p.email}" style="color:var(--accent)">${p.email.length > 22 ? p.email.substring(0,22)+'\u2026' : p.email}</a>` : '\u2014';
-        const emailTip = p.email && p.email.length > 22 ? ` title="${p.email.replace(/"/g,'&quot;')}"` : '';
-
-        // Website display
-        const webRaw = (p.website || '').replace(/^https?:\/\//, '').replace(/\/$/,'');
-        const webHtml = webRaw && webRaw !== '\u2014' ? `<a href="${p.website.startsWith('http')?p.website:'https://'+p.website}" target="_blank" style="color:var(--green)">${webRaw.length > 18 ? webRaw.substring(0,18)+'\u2026' : webRaw}</a>` : '\u2014';
+        // Assigned date display
+        const dateStr = p.assigned_date ? new Date(p.assigned_date).toLocaleDateString('en-US', {month:'short', day:'numeric'}) : '\u2014';
 
         return `<tr class="${cls}">
-            <td>${p.number || ''} ${starTxt}</td>
+            <td>${p.number || ''} ${starTxt} <button class="copy-icon" onclick="event.stopPropagation();copyProspect(${p.id})" title="Copy info">📋</button></td>
             <td style="cursor:pointer; color:var(--accent);" onclick="showDetail(${p.id})">${p.company}</td>
             ${tipCell(p.contact, 20)}
-            ${tipCell(p.location, 25)}
+            ${tipCell(p.location, 22)}
             <td>${p.phone ? `<a href="tel:${p.phone}" style="color:var(--green)">${p.phone}</a>` : '\u2014'}</td>
-            <td${emailTip}>${emailHtml}</td>
-            <td>${webHtml}</td>
-            ${tipCell(p.type, 22)}
-            <td>${detailBtn}</td>
+            ${tipCell(p.type, 18)}
+            ${tipCell(p.ags_angle, 30)}
             <td><input type="checkbox" class="cb" ${p.called?'checked':''} onchange="toggleField(${p.id},'called',this.checked)"></td>
             <td><input type="checkbox" class="cb" ${p.emailed?'checked':''} onchange="toggleField(${p.id},'emailed',this.checked)"></td>
             <td><input type="checkbox" class="cb" ${p.stopped_by?'checked':''} onchange="toggleField(${p.id},'stopped_by',this.checked)"></td>
             <td><input type="checkbox" class="cb" ${p.linkedin?'checked':''} onchange="toggleField(${p.id},'linkedin',this.checked)"></td>
             <td>${assignHtml}</td>
+            <td style="font-size:11px;color:var(--muted)">${dateStr}</td>
             <td><input class="status-input" value="${p.status||''}" onblur="updateStatus(${p.id},this.value)" placeholder="Notes..."></td>
         </tr>`;
     }).join('');
@@ -1387,8 +1394,8 @@ function showDetail(id) {
         document.body.appendChild(overlay);
     }
 
-    // Parse the ags_angle into label:value pairs where possible
-    const angle = p.ags_angle || '';
+    // Parse the ags_angle — split pipe-delimited text into separate lines
+    const angle = (p.ags_angle || '').replace(/\s*[\u2223|]\s*/g, '\n');
     const lines = angle.split('\n').filter(l => l.trim());
 
     let detailRows = '';
@@ -1415,6 +1422,11 @@ function showDetail(id) {
             detailRows += '<div class="detail-row"><div class="detail-label">' + f[0] + '</div><div class="detail-value">' + val + '</div></div>';
         }
     });
+    // Assigned info & notes in popup
+    var au = allUsers.find(function(u) { return u.id === p.assigned_to; });
+    if (au) detailRows += '<div class="detail-row"><div class="detail-label">Assigned To</div><div class="detail-value">' + au.name + '</div></div>';
+    if (p.assigned_date) detailRows += '<div class="detail-row"><div class="detail-label">Assigned Date</div><div class="detail-value">' + new Date(p.assigned_date).toLocaleDateString() + '</div></div>';
+    if (p.status) detailRows += '<div class="detail-row"><div class="detail-label">Notes</div><div class="detail-value">' + p.status.replace(/</g, '&lt;') + '</div></div>';
 
     // Parse AGS angle lines into structured label:value if possible
     let agsHtml = '';
@@ -1432,6 +1444,7 @@ function showDetail(id) {
     overlay.innerHTML = '<div class="detail-card">' +
         '<button class="close-btn" onclick="closeDetail()">&times;</button>' +
         '<h2>' + (p.company || 'Prospect Details') + '</h2>' +
+        '<button class="copy-btn" onclick="copyProspect(' + p.id + ')">📋 Copy to Send</button>' +
         detailRows +
         (agsHtml ? '<div class="detail-full" style="border-top:1px solid var(--border);padding-top:12px;margin-top:12px">' +
             '<div style="color:var(--accent);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">AGS Intelligence</div>' +
@@ -1445,6 +1458,47 @@ function showDetail(id) {
 function closeDetail() {
     var el = document.getElementById('detailOverlay');
     if (el) el.classList.remove('show');
+}
+
+function copyProspect(id) {
+    const p = allProspects.find(x => x.id === id);
+    if (!p) return;
+    let lines = ['📋 AGS Prospect — ' + p.company];
+    if (p.contact && p.contact !== '—') lines.push('Contact: ' + p.contact);
+    if (p.phone && p.phone !== '—') lines.push('Phone: ' + p.phone);
+    if (p.email && p.email !== '—') lines.push('Email: ' + p.email);
+    if (p.website && p.website !== '—') lines.push('Website: ' + p.website);
+    if (p.location && p.location !== '—') lines.push('Location: ' + p.location);
+    if (p.type && p.type !== '—') lines.push('Type: ' + p.type);
+    if (p.tier && p.tier !== '—') lines.push('Tier: ' + p.tier);
+    var au = allUsers.find(function(u) { return u.id === p.assigned_to; });
+    if (au) lines.push('Assigned To: ' + au.name);
+    if (p.assigned_date) lines.push('Assigned Date: ' + new Date(p.assigned_date).toLocaleDateString());
+    if (p.status) lines.push('Notes: ' + p.status);
+    if (p.ags_angle && p.ags_angle.length > 3) {
+        lines.push('---');
+        lines.push('AGS Intelligence:');
+        lines.push(p.ags_angle);
+    }
+    const text = lines.join('\n');
+    // Fallback method for file:// protocol compatibility
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('✓ Copied — ' + p.company);
+}
+
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._tid);
+    t._tid = setTimeout(function() { t.classList.remove('show'); }, 2200);
 }
 
 // === ACTIONS ===
@@ -1463,10 +1517,16 @@ async function updateStatus(id, val) {
 
 async function assignTo(id, userId) {
     const val = userId || null;
-    await sb.from('prospects').update({ assigned_to: val }).eq('id', id);
+    const dateVal = val ? new Date().toISOString() : null;
+    // Try saving assigned_date; fall back if column doesn't exist in Supabase yet
+    let { error } = await sb.from('prospects').update({ assigned_to: val, assigned_date: dateVal }).eq('id', id);
+    if (error) {
+        await sb.from('prospects').update({ assigned_to: val }).eq('id', id);
+    }
     const p = allProspects.find(x => x.id === id);
-    if (p) p.assigned_to = val;
+    if (p) { p.assigned_to = val; p.assigned_date = dateVal; }
     renderStats();
+    renderTable();
 }
 
 async function addProspect() {
