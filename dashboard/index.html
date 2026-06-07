@@ -745,10 +745,37 @@
 </style>
 
 <script>
+    const passwordMap = {
+        'ags2026': { id: 'admin_user', name: 'Admin', role: 'admin' },
+        'admin2026': { id: 'admin_user', name: 'Admin', role: 'admin' },
+        'admin': { id: 'admin_user', name: 'Admin', role: 'admin' },
+        'todd2026': { id: 'Todd', name: 'Todd', role: 'sales' },
+        'todd': { id: 'Todd', name: 'Todd', role: 'sales' },
+        'melanie2026': { id: 'Mel', name: 'Melanie', role: 'sales' },
+        'mel2026': { id: 'Mel', name: 'Melanie', role: 'sales' },
+        'mel': { id: 'Mel', name: 'Melanie', role: 'sales' },
+        'melanie': { id: 'Mel', name: 'Melanie', role: 'sales' },
+        'ibo2026': { id: 'Ibo', name: 'Ibo', role: 'sales' },
+        'ibo': { id: 'Ibo', name: 'Ibo', role: 'sales' },
+        'tati2026': { id: 'Tati', name: 'Tati', role: 'sales' },
+        'tati': { id: 'Tati', name: 'Tati', role: 'sales' },
+        'estela2026': { id: 'Estela', name: 'Estela', role: 'sales' },
+        'estela': { id: 'Estela', name: 'Estela', role: 'sales' },
+        'haley2026': { id: 'Haley', name: 'Haley', role: 'sales' },
+        'haley': { id: 'Haley', name: 'Haley', role: 'sales' },
+        'afet2026': { id: 'Afet', name: 'Afet', role: 'sales' },
+        'afet': { id: 'Afet', name: 'Afet', role: 'sales' }
+    };
+
     function checkAuth() {
-        var pw = document.getElementById('authPassword').value;
-        if (pw === 'ags2026' || pw === 'AGS2026') {
+        var pw = document.getElementById('authPassword').value.trim().toLowerCase();
+        if (passwordMap[pw]) {
+            var user = passwordMap[pw];
             sessionStorage.setItem('ags_auth', 'true');
+            sessionStorage.setItem('ags_user_id', user.id);
+            sessionStorage.setItem('ags_user_name', user.name);
+            sessionStorage.setItem('ags_user_role', user.role);
+
             document.getElementById('authOverlay').style.display = 'none';
             document.getElementById('sidebar').style.display = 'flex';
             document.getElementById('main').style.display = 'flex';
@@ -765,6 +792,11 @@
             var inp = document.getElementById('authPassword');
             if(inp) { inp.value = ''; inp.focus(); }
         }
+    }
+
+    function doLogout() {
+        sessionStorage.clear();
+        window.location.reload();
     }
 </script>
 
@@ -1170,7 +1202,7 @@ try { sb = supabase.createClient(SUPA_URL, SUPA_KEY); } catch(e) { console.log('
 let currentUser = null;
 let userProfile = null;
 let allProspects = [];
-let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Mel'}, {id: 'Afet', name: 'Afet'}, {id: 'Tati', name: 'Tati'}, {id: 'Haley', name: 'Haley'}, {id: 'Estela', name: 'Estela'}];
+let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Melanie'}, {id: 'Ibo', name: 'Ibo'}, {id: 'Tati', name: 'Tati'}, {id: 'Estela', name: 'Estela'}, {id: 'Haley', name: 'Haley'}, {id: 'Afet', name: 'Afet'}];
 
 
     // Check if already authenticated this session
@@ -1187,8 +1219,31 @@ let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Mel'}, {id: 'Afet
     };
 
         async function initApp() {
-        currentUser = { id: 'admin_user', email: 'admin@advancedgranite.com' };
-        userProfile = { name: 'Admin', role: 'admin' };
+        const storedId = sessionStorage.getItem('ags_user_id') || 'admin_user';
+        const storedName = sessionStorage.getItem('ags_user_name') || 'Admin';
+        const storedRole = sessionStorage.getItem('ags_user_role') || 'admin';
+
+        currentUser = { id: storedId, email: storedId + '@advancedgranite.com' };
+        userProfile = { name: storedName, role: storedRole };
+        
+        // Update user badge and name in the header
+        document.getElementById('userName').textContent = userProfile.name;
+        const rb = document.getElementById('roleBadge');
+        if (rb) {
+            rb.textContent = userProfile.role.toUpperCase();
+            rb.style.background = userProfile.role === 'admin' ? 'var(--red-glow)' : 'var(--green-glow)';
+            rb.style.color = userProfile.role === 'admin' ? 'var(--red)' : 'var(--green)';
+            rb.style.border = userProfile.role === 'admin' ? '1px solid var(--red)' : '1px solid var(--green)';
+            rb.style.display = 'inline-block';
+        }
+
+        // Show add prospect button only for admin
+        const btnToggleAdd = document.querySelector('.btn-toggle-add');
+        if (btnToggleAdd) {
+            btnToggleAdd.style.display = userProfile.role === 'admin' ? '' : 'none';
+        }
+
+        
         
         var hash = window.location.hash.replace('#', '') || 'outreach';
         if(typeof showPage === 'function') showPage(hash);
@@ -1196,13 +1251,16 @@ let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Mel'}, {id: 'Afet
         try {
             await loadProspects();
             enrichFromMarkdown(); // Merge rich details from markdown into Supabase data
-            renderStats();
-            populateFilters();
-            if(typeof parseDashboardStats === 'function') parseDashboardStats();
-            if(document.getElementById('page-outreach').classList.contains('active')) renderTable();
         } catch(e) {
-            console.log("Supabase load failed, skipping CRM data.", e);
+            console.log("Supabase load failed, falling back to markdown data.", e);
+            loadProspectsFromMarkdown();
         }
+
+        renderStats();
+        populateFilters();
+        populateAssignedFilter(); // Dynamically setup assignment filter options
+        if(typeof parseDashboardStats === 'function') parseDashboardStats();
+        if(document.getElementById('page-outreach').classList.contains('active')) renderTable();
     }
 
     // Enrich Supabase prospects with full Details from markdown
@@ -1269,6 +1327,84 @@ let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Mel'}, {id: 'Afet
         console.log('Enriched ' + enriched + ' prospects with markdown details');
     }
 
+    function loadProspectsFromMarkdown() {
+        if (!window.mdContent || !window.mdContent['outreach']) return;
+        var md = window.mdContent['outreach'];
+        var lines = md.split(/\n/);
+        allProspects = [];
+
+        var currentTier = 'General Outreach';
+        for (var i = 0; i < lines.length; i++) {
+            var line = lines[i].trim();
+            var headerMatch = line.match(/^##\s*(?:🔴|🟡|🟢|🔵|🟣)?\s*(.*)/);
+            if (headerMatch) {
+                currentTier = headerMatch[1].trim();
+                continue;
+            }
+
+            if (!line.startsWith('|')) continue;
+            var cells = line.split('|').map(function(c){ return c.trim(); });
+            if (cells[0] === '') cells.shift();
+            if (cells.length > 0 && cells[cells.length-1] === '') cells.pop();
+            if (cells.length < 3 || cells[0] === 'Company' || cells[0] === '#') continue;
+
+            var numMatch = cells[0].match(/(\d+)/);
+            var num = numMatch ? parseInt(numMatch[1]) : 0;
+            if (!num) continue;
+            
+            var companyRaw = (cells[1] || '').replace(/[\u2B50\u2605]+/g, '').trim();
+            var stars = 0;
+            if (cells[1].includes('⭐⭐') || (cells[8] && cells[8].includes('TOP TARGET'))) stars = 2;
+            else if (cells[1].includes('⭐')) stars = 1;
+
+            var is_customer = currentTier.toLowerCase().includes('customer') || currentTier.toLowerCase().includes('existing');
+            var is_dnr = currentTier.toLowerCase().includes('dnr') || currentTier.toLowerCase().includes('competitor') || currentTier.toLowerCase().includes('do not');
+
+            var cat = '', det = '';
+            if (cells.length >= 9) {
+                cat = cells[7] || '';
+                det = cells[8] || '';
+            } else if (cells.length >= 7) {
+                cat = cells[5] || '';
+                det = cells[6] || '';
+            }
+
+            var full = '';
+            if (cat && cat !== '\u2014' && cat !== '-') full = 'Services: ' + cat;
+            if (det && det !== '\u2014' && det !== '-') {
+                var detExpanded = det.replace(/\u2223/g, '\n').replace(/ \u2223 /g, '\n');
+                if (full) full += '\n' + detExpanded;
+                else full = detExpanded;
+            }
+
+            allProspects.push({
+                id: num,
+                number: num,
+                tier: currentTier,
+                company: companyRaw.replace(/TOP TARGET/g, '').trim(),
+                contact: cells[2] === '—' ? '' : cells[2] || '',
+                location: cells[3] === '—' ? '' : cells[3] || '',
+                phone: cells[4] === '—' ? '' : cells[4] || '',
+                email: cells[5] === '—' ? '' : cells[5] || '',
+                website: cells[6] === '—' ? '' : cells[6] || '',
+                type: cat === '—' ? '' : cat || '',
+                source: 'Markdown Fallback',
+                ags_angle: full.trim(),
+                stars: stars,
+                is_customer: is_customer,
+                is_dnr: is_dnr,
+                called: false,
+                emailed: false,
+                stopped_by: false,
+                linkedin: false,
+                assigned_to: null,
+                assigned_date: null,
+                status: ''
+            });
+        }
+        console.log('Loaded ' + allProspects.length + ' prospects from markdown fallback.');
+    }
+
 async function loadProspects() {
     allProspects = [];
     let page = 0;
@@ -1276,12 +1412,6 @@ async function loadProspects() {
     
     while(true) {
         let query = sb.from('prospects').select('*').order('id', { ascending: true });
-    
-        // Salespeople only see assigned prospects
-        if (userProfile.role !== 'admin') {
-            query = query.eq('assigned_to', currentUser.id);
-        }
-    
         const { data, error } = await query.range(page * pageSize, (page + 1) * pageSize - 1);
         if (error) { console.error('Load error:', error); break; }
         
@@ -1319,6 +1449,26 @@ function populateFilters() {
     ).join('');
 }
 
+function populateAssignedFilter() {
+    const sel = document.getElementById('filterAssigned');
+    if (!sel) return;
+    if (userProfile.role === 'admin') {
+        sel.innerHTML = `
+            <option value="">All Assignments</option>
+            <option value="unassigned">Unassigned</option>
+            <option value="mine">My Prospects</option>
+            ${allUsers.map(u => `<option value="${u.id}">${u.name}</option>`).join('')}
+        `;
+    } else {
+        sel.innerHTML = `
+            <option value="mine">My Prospects</option>
+            <option value="">All Prospects</option>
+            <option value="unassigned">Unassigned</option>
+        `;
+        sel.value = 'mine';
+    }
+}
+
 function renderTable() {
     const search = document.getElementById('searchBox').value.toLowerCase();
     const tier = document.getElementById('filterTier').value;
@@ -1330,6 +1480,7 @@ function renderTable() {
         if (tier && p.tier !== tier) return false;
         if (assigned === 'unassigned' && p.assigned_to) return false;
         if (assigned === 'mine' && p.assigned_to !== currentUser.id) return false;
+        if (assigned && assigned !== 'unassigned' && assigned !== 'mine' && p.assigned_to !== assigned) return false;
         if (status === 'active' && (p.is_customer || p.is_dnr)) return false;
         if (status === 'customer' && !p.is_customer) return false;
         if (status === 'dnr' && !p.is_dnr) return false;
@@ -1359,7 +1510,11 @@ function renderTable() {
         const cls = p.is_dnr ? 'is-dnr' : (p.is_customer ? 'is-cust' : '');
         const starTxt = p.stars === 2 ? '<span class="star-2">\u2605\u2605</span>' : (p.stars === 1 ? '<span class="star-1">\u2605</span>' : '');
 
-        // Assign dropdown (admin only)
+        // Action and Notes editable check
+        const actionEditable = (userProfile.role === 'admin' || p.assigned_to === currentUser.id);
+        const disabledAttr = actionEditable ? '' : 'disabled style="opacity:0.7; cursor:not-allowed;"';
+
+        // Assign dropdown or claim lead options
         let assignHtml = '';
         if (userProfile.role === 'admin') {
             assignHtml = `<select class="assign-sel" onchange="assignTo(${p.id}, this.value)">
@@ -1367,8 +1522,20 @@ function renderTable() {
                 ${allUsers.map(u => `<option value="${u.id}" ${p.assigned_to === u.id ? 'selected' : ''}>${u.name}</option>`).join('')}
             </select>`;
         } else {
-            const assignedUser = allUsers.find(u => u.id === p.assigned_to);
-            assignHtml = assignedUser ? assignedUser.name : '\u2014';
+            if (!p.assigned_to) {
+                assignHtml = `<select class="assign-sel" onchange="assignTo(${p.id}, this.value)">
+                    <option value="">\u2014</option>
+                    <option value="${currentUser.id}">Claim Lead</option>
+                </select>`;
+            } else if (p.assigned_to === currentUser.id) {
+                assignHtml = `<select class="assign-sel" onchange="assignTo(${p.id}, this.value)">
+                    <option value="${currentUser.id}">${userProfile.name}</option>
+                    <option value="">Unassign</option>
+                </select>`;
+            } else {
+                const assignedUser = allUsers.find(u => u.id === p.assigned_to);
+                assignHtml = assignedUser ? assignedUser.name : p.assigned_to;
+            }
         }
 
         // Assigned date display
@@ -1382,13 +1549,13 @@ function renderTable() {
             <td>${p.phone ? `<a href="tel:${p.phone}" style="color:var(--green)">${p.phone}</a>` : '\u2014'}</td>
             ${tipCell(p.type, 18)}
             ${tipCell(p.ags_angle, 30)}
-            <td><input type="checkbox" class="cb" ${p.called?'checked':''} onchange="toggleField(${p.id},'called',this.checked)"></td>
-            <td><input type="checkbox" class="cb" ${p.emailed?'checked':''} onchange="toggleField(${p.id},'emailed',this.checked)"></td>
-            <td><input type="checkbox" class="cb" ${p.stopped_by?'checked':''} onchange="toggleField(${p.id},'stopped_by',this.checked)"></td>
-            <td><input type="checkbox" class="cb" ${p.linkedin?'checked':''} onchange="toggleField(${p.id},'linkedin',this.checked)"></td>
+            <td><input type="checkbox" class="cb" ${p.called?'checked':''} onchange="toggleField(${p.id},'called',this.checked)" ${disabledAttr}></td>
+            <td><input type="checkbox" class="cb" ${p.emailed?'checked':''} onchange="toggleField(${p.id},'emailed',this.checked)" ${disabledAttr}></td>
+            <td><input type="checkbox" class="cb" ${p.stopped_by?'checked':''} onchange="toggleField(${p.id},'stopped_by',this.checked)" ${disabledAttr}></td>
+            <td><input type="checkbox" class="cb" ${p.linkedin?'checked':''} onchange="toggleField(${p.id},'linkedin',this.checked)" ${disabledAttr}></td>
             <td>${assignHtml}</td>
             <td style="font-size:11px;color:var(--muted)">${dateStr}</td>
-            <td><input class="status-input" value="${p.status||''}" onblur="updateStatus(${p.id},this.value)" placeholder="Notes..."></td>
+            <td><input class="status-input" value="${p.status||''}" onblur="updateStatus(${p.id},this.value)" placeholder="Notes..." ${disabledAttr}></td>
         </tr>`;
     }).join('');
 }
