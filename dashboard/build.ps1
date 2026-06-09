@@ -22,6 +22,16 @@ $files = [ordered]@{
     'competitive' = 'AGS_COMPETITIVE_ANALYSIS.md'
     'phase6' = 'AGS_PHASE6_PROSPECTING.md'
     'playbook' = 'AGS_MAX_B2B_PLAYBOOK.md'
+    'script_outside_call' = 'SCRIPT_OUTSIDE_CALL.md'
+    'script_outside_email' = 'SCRIPT_OUTSIDE_EMAIL.md'
+    'script_outside_linkedin' = 'SCRIPT_OUTSIDE_LINKEDIN.md'
+    'script_inside_call' = 'SCRIPT_INSIDE_CALL.md'
+    'script_inside_call_es' = 'SCRIPT_INSIDE_CALL_ES.md'
+    'script_inside_email' = 'SCRIPT_INSIDE_EMAIL.md'
+    'script_cs_followup' = 'SCRIPT_CS_FOLLOWUP.md'
+    'script_cs_followup_es' = 'SCRIPT_CS_FOLLOWUP_ES.md'
+    'script_scheduler' = 'SCRIPT_SCHEDULER.md'
+    'script_recovery' = 'SCRIPT_RECOVERY.md'
 }
 # EXCLUDED from public build:
 #   STRATEGY_RULES.md     - contains debt, credit, financial constraints

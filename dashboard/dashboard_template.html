@@ -771,25 +771,25 @@
 
 <script>
     const passwordMap = {
-        'ags2026': { id: 'admin_user', name: 'Admin', role: 'admin' },
-        'admin2026': { id: 'admin_user', name: 'Admin', role: 'admin' },
-        'admin': { id: 'admin_user', name: 'Admin', role: 'admin' },
-        'todd2026': { id: 'Todd', name: 'Todd', role: 'sales' },
-        'todd': { id: 'Todd', name: 'Todd', role: 'sales' },
-        'melanie2026': { id: 'Mel', name: 'Melanie', role: 'sales' },
-        'mel2026': { id: 'Mel', name: 'Melanie', role: 'sales' },
-        'mel': { id: 'Mel', name: 'Melanie', role: 'sales' },
-        'melanie': { id: 'Mel', name: 'Melanie', role: 'sales' },
-        'ibo2026': { id: 'Ibo', name: 'Ibo', role: 'sales' },
-        'ibo': { id: 'Ibo', name: 'Ibo', role: 'sales' },
-        'tati2026': { id: 'Tati', name: 'Tati', role: 'sales' },
-        'tati': { id: 'Tati', name: 'Tati', role: 'sales' },
-        'estela2026': { id: 'Estela', name: 'Estela', role: 'sales' },
-        'estela': { id: 'Estela', name: 'Estela', role: 'sales' },
-        'haley2026': { id: 'Haley', name: 'Haley', role: 'sales' },
-        'haley': { id: 'Haley', name: 'Haley', role: 'sales' },
-        'afet2026': { id: 'Afet', name: 'Afet', role: 'sales' },
-        'afet': { id: 'Afet', name: 'Afet', role: 'sales' }
+        'ags2026': { id: 'admin_user', name: 'Admin', role: 'admin', salesRole: 'admin' },
+        'admin2026': { id: 'admin_user', name: 'Admin', role: 'admin', salesRole: 'admin' },
+        'admin': { id: 'admin_user', name: 'Admin', role: 'admin', salesRole: 'admin' },
+        'todd2026': { id: 'Todd', name: 'Todd', role: 'sales', salesRole: 'outside_sales' },
+        'todd': { id: 'Todd', name: 'Todd', role: 'sales', salesRole: 'outside_sales' },
+        'melanie2026': { id: 'Mel', name: 'Melanie', role: 'sales', salesRole: 'outside_sales' },
+        'mel2026': { id: 'Mel', name: 'Melanie', role: 'sales', salesRole: 'outside_sales' },
+        'mel': { id: 'Mel', name: 'Melanie', role: 'sales', salesRole: 'outside_sales' },
+        'melanie': { id: 'Mel', name: 'Melanie', role: 'sales', salesRole: 'outside_sales' },
+        'ibo2026': { id: 'Ibo', name: 'Ibo', role: 'admin', salesRole: 'admin' },
+        'ibo': { id: 'Ibo', name: 'Ibo', role: 'admin', salesRole: 'admin' },
+        'tati2026': { id: 'Tati', name: 'Tati', role: 'sales', salesRole: 'inside_sales' },
+        'tati': { id: 'Tati', name: 'Tati', role: 'sales', salesRole: 'inside_sales' },
+        'estela2026': { id: 'Estela', name: 'Estela', role: 'sales', salesRole: 'cs_sales' },
+        'estela': { id: 'Estela', name: 'Estela', role: 'sales', salesRole: 'cs_sales' },
+        'haley2026': { id: 'Haley', name: 'Haley', role: 'sales', salesRole: 'scheduler' },
+        'haley': { id: 'Haley', name: 'Haley', role: 'sales', salesRole: 'scheduler' },
+        'afet2026': { id: 'Afet', name: 'Afet', role: 'sales', salesRole: 'recovery' },
+        'afet': { id: 'Afet', name: 'Afet', role: 'sales', salesRole: 'recovery' }
     };
 
     function checkAuth() {
@@ -800,6 +800,7 @@
             sessionStorage.setItem('ags_user_id', user.id);
             sessionStorage.setItem('ags_user_name', user.name);
             sessionStorage.setItem('ags_user_role', user.role);
+            sessionStorage.setItem('ags_sales_role', user.salesRole || user.role);
 
             document.getElementById('authOverlay').style.display = 'none';
             document.getElementById('sidebar').style.display = 'flex';
@@ -849,52 +850,100 @@
             <p>B2B Operations Hub</p>
         </div>
 
-        <div class="nav-items">
-            <div class="nav-section">Overview</div>
-            <div class="nav-item" onclick="showPage('outreach')" id="nav-outreach">
-                <span class="icon">🗄️</span> Outreach Database
+        <div class="nav-items" id="navItems">
+            <!-- Overview section -->
+            <div class="nav-section" data-roles="all">Overview</div>
+            <div class="nav-item" onclick="showPage('outreach')" id="nav-outreach" data-roles="all">
+                <span class="icon">🗄️</span> My Prospects
                 <span class="badge badge-green" id="nav-badge-prospects">—</span>
             </div>
-            <div class="nav-item active" onclick="showPage('dashboard')" id="nav-dashboard">
+            <div class="nav-item active" onclick="showPage('dashboard')" id="nav-dashboard" data-roles="admin">
                 <span class="icon">📊</span> Dashboard
             </div>
 
-            <div class="nav-section">Execution</div>
-            <div class="nav-item" onclick="showPage('todo')" id="nav-todo">
+            <!-- Execution section (admin only) -->
+            <div class="nav-section" data-roles="admin">Execution</div>
+            <div class="nav-item" onclick="showPage('todo')" id="nav-todo" data-roles="admin">
                 <span class="icon">✅</span> Master TODO
                 <span class="badge badge-amber">10 blocks</span>
             </div>
-            <div class="nav-item" onclick="showPage('strategic')" id="nav-strategic">
+            <div class="nav-item" onclick="showPage('strategic')" id="nav-strategic" data-roles="admin">
                 <span class="icon">🎯</span> Strategic Plan
             </div>
 
-
-            <div class="nav-section">Sales Tools</div>
-            <div class="nav-item" onclick="showPage('coldcall')" id="nav-coldcall">
+            <!-- Admin Sales Tools (Ibo's original scripts) -->
+            <div class="nav-section" data-roles="admin">Admin Scripts</div>
+            <div class="nav-item" onclick="showPage('coldcall')" id="nav-coldcall" data-roles="admin">
                 <span class="icon">📞</span> Cold Call Scripts
             </div>
-            <div class="nav-item" onclick="showPage('email')" id="nav-email">
+            <div class="nav-item" onclick="showPage('email')" id="nav-email" data-roles="admin">
                 <span class="icon">📧</span> Email Sequences
             </div>
-            <div class="nav-item" onclick="showPage('linkedin')" id="nav-linkedin">
+            <div class="nav-item" onclick="showPage('linkedin')" id="nav-linkedin" data-roles="admin">
                 <span class="icon">💼</span> LinkedIn Outreach
             </div>
-            <div class="nav-item" onclick="showPage('whyags')" id="nav-whyags">
+            <div class="nav-item" onclick="showPage('whyags')" id="nav-whyags" data-roles="admin,outside_sales,inside_sales,cs_sales">
                 <span class="icon">📄</span> Why AGS One-Pager
             </div>
 
-            <div class="nav-section">Reference</div>
-            <div class="nav-item" onclick="showPage('phase6')" id="nav-phase6">
+            <!-- Outside Sales Scripts (Todd & Mel) -->
+            <div class="nav-section" data-roles="outside_sales">Your Scripts</div>
+            <div class="nav-item" onclick="showPage('script_outside_call')" id="nav-script_outside_call" data-roles="outside_sales">
+                <span class="icon">📞</span> Call & Visit Scripts
+            </div>
+            <div class="nav-item" onclick="showPage('script_outside_email')" id="nav-script_outside_email" data-roles="outside_sales">
+                <span class="icon">📧</span> Email Sequences
+            </div>
+            <div class="nav-item" onclick="showPage('script_outside_linkedin')" id="nav-script_outside_linkedin" data-roles="outside_sales">
+                <span class="icon">💼</span> LinkedIn Outreach
+            </div>
+
+            <!-- Inside Sales Scripts (Tati) -->
+            <div class="nav-section" data-roles="inside_sales">Your Scripts</div>
+            <div class="nav-item" onclick="showPage('script_inside_call')" id="nav-script_inside_call" data-roles="inside_sales">
+                <span class="icon">📞</span> Phone Scripts
+            </div>
+            <div class="nav-item" onclick="showPage('script_inside_call_es')" id="nav-script_inside_call_es" data-roles="inside_sales">
+                <span class="icon">🇪🇸</span> Guiones en Español
+            </div>
+            <div class="nav-item" onclick="showPage('script_inside_email')" id="nav-script_inside_email" data-roles="inside_sales">
+                <span class="icon">📧</span> Email Follow-up
+            </div>
+
+            <!-- CS/Sales Scripts (Estela) -->
+            <div class="nav-section" data-roles="cs_sales">Your Scripts</div>
+            <div class="nav-item" onclick="showPage('script_cs_followup')" id="nav-script_cs_followup" data-roles="cs_sales">
+                <span class="icon">📞</span> Customer Follow-up
+            </div>
+            <div class="nav-item" onclick="showPage('script_cs_followup_es')" id="nav-script_cs_followup_es" data-roles="cs_sales">
+                <span class="icon">🇪🇸</span> Seguimiento en Español
+            </div>
+
+            <!-- Scheduler Scripts (Haley) -->
+            <div class="nav-section" data-roles="scheduler">Your Scripts</div>
+            <div class="nav-item" onclick="showPage('script_scheduler')" id="nav-script_scheduler" data-roles="scheduler">
+                <span class="icon">📅</span> Appointment Setting
+            </div>
+
+            <!-- Recovery Scripts (Afet) -->
+            <div class="nav-section" data-roles="recovery">Your Scripts</div>
+            <div class="nav-item" onclick="showPage('script_recovery')" id="nav-script_recovery" data-roles="recovery">
+                <span class="icon">🔄</span> Account Re-engagement
+            </div>
+
+            <!-- Reference (admin only) -->
+            <div class="nav-section" data-roles="admin">Reference</div>
+            <div class="nav-item" onclick="showPage('phase6')" id="nav-phase6" data-roles="admin">
                 <span class="icon">🚀</span> Phase 6+ Prospecting
                 <span class="badge badge-amber" id="nav-badge-phase6">—</span>
             </div>
             
-            <div class="nav-section">Analysis</div>
-            <div class="nav-item" onclick="showPage('competitive')" id="nav-competitive">
+            <!-- Analysis (admin only) -->
+            <div class="nav-section" data-roles="admin">Analysis</div>
+            <div class="nav-item" onclick="showPage('competitive')" id="nav-competitive" data-roles="admin">
                 <span class="icon">🔍</span> Competitive Analysis
             </div>
-
-            <div class="nav-item" onclick="showPage('playbook')" id="nav-playbook">
+            <div class="nav-item" onclick="showPage('playbook')" id="nav-playbook" data-roles="admin">
                 <span class="icon">📕</span> B2B Playbook
             </div>
         </div>
@@ -1023,8 +1072,19 @@
             <div class="page" id="page-whyags"><div class="loading">Loading document...</div></div>
             <div class="page" id="page-phase6"><div class="loading">Loading document...</div></div>
             <div class="page" id="page-competitive"><div class="loading">Loading document...</div></div>
-
             <div class="page" id="page-playbook"><div class="loading">Loading document...</div></div>
+
+            <!-- Custom Script Pages -->
+            <div class="page" id="page-script_outside_call"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-script_outside_email"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-script_outside_linkedin"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-script_inside_call"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-script_inside_call_es"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-script_inside_email"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-script_cs_followup"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-script_cs_followup_es"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-script_scheduler"><div class="loading">Loading document...</div></div>
+            <div class="page" id="page-script_recovery"><div class="loading">Loading document...</div></div>
         </div>
     </main>
 
@@ -1042,7 +1102,17 @@
             'whyags': 'Why AGS — One-Pager',
             'competitive': 'Competitive Analysis',
             'phase6': 'Phase 6+ Prospecting Plan',
-            'playbook': 'B2B Playbook'
+            'playbook': 'B2B Playbook',
+            'script_outside_call': 'Call & Visit Scripts',
+            'script_outside_email': 'Email Sequences',
+            'script_outside_linkedin': 'LinkedIn Outreach',
+            'script_inside_call': 'Phone Scripts',
+            'script_inside_call_es': 'Guiones de Llamada',
+            'script_inside_email': 'Email Follow-up',
+            'script_cs_followup': 'Customer Follow-up Scripts',
+            'script_cs_followup_es': 'Guiones de Seguimiento',
+            'script_scheduler': 'Appointment Setting Scripts',
+            'script_recovery': 'Account Re-engagement Scripts'
         };
 
         // File mapping for fetch fallback
@@ -1056,7 +1126,17 @@
             'whyags': 'AGS_WHY_AGS_ONEPAGER.md',
             'competitive': 'AGS_COMPETITIVE_ANALYSIS.md',
             'phase6': 'AGS_PHASE6_PROSPECTING.md',
-            'playbook': 'AGS_MAX_B2B_PLAYBOOK.md'
+            'playbook': 'AGS_MAX_B2B_PLAYBOOK.md',
+            'script_outside_call': 'SCRIPT_OUTSIDE_CALL.md',
+            'script_outside_email': 'SCRIPT_OUTSIDE_EMAIL.md',
+            'script_outside_linkedin': 'SCRIPT_OUTSIDE_LINKEDIN.md',
+            'script_inside_call': 'SCRIPT_INSIDE_CALL.md',
+            'script_inside_call_es': 'SCRIPT_INSIDE_CALL_ES.md',
+            'script_inside_email': 'SCRIPT_INSIDE_EMAIL.md',
+            'script_cs_followup': 'SCRIPT_CS_FOLLOWUP.md',
+            'script_cs_followup_es': 'SCRIPT_CS_FOLLOWUP_ES.md',
+            'script_scheduler': 'SCRIPT_SCHEDULER.md',
+            'script_recovery': 'SCRIPT_RECOVERY.md'
         };
 
         // Embedded content — populated by build.ps1
@@ -1071,11 +1151,53 @@
             if (box) { box.value = company.replace(/^\d+\.\s*/, '').trim(); renderTable(); }
         }
 
+        // Role-based page access control
+        const rolePageAccess = {
+            admin: null, // null = access everything
+            outside_sales: ['outreach', 'script_outside_call', 'script_outside_email', 'script_outside_linkedin', 'whyags'],
+            inside_sales: ['outreach', 'script_inside_call', 'script_inside_call_es', 'script_inside_email', 'whyags'],
+            cs_sales: ['outreach', 'script_cs_followup', 'script_cs_followup_es', 'whyags'],
+            scheduler: ['outreach', 'script_scheduler'],
+            recovery: ['outreach', 'script_recovery']
+        };
+
+        function canAccessPage(pageId) {
+            var sr = (userProfile && userProfile.salesRole) || 'admin';
+            if (sr === 'admin') return true;
+            var allowed = rolePageAccess[sr];
+            return allowed && allowed.indexOf(pageId) !== -1;
+        }
+
+        function buildSidebar() {
+            var sr = (userProfile && userProfile.salesRole) || 'admin';
+            var items = document.querySelectorAll('#navItems [data-roles]');
+            items.forEach(function(el) {
+                var roles = el.getAttribute('data-roles');
+                if (roles === 'all') {
+                    el.style.display = '';
+                } else {
+                    var roleList = roles.split(',').map(function(r) { return r.trim(); });
+                    el.style.display = roleList.indexOf(sr) !== -1 ? '' : 'none';
+                }
+            });
+        }
+
+        function getDefaultPage() {
+            var sr = (userProfile && userProfile.salesRole) || 'admin';
+            return sr === 'admin' ? 'outreach' : 'outreach';
+        }
+
         function showPage(pageId) {
+            // Enforce role-based access
+            if (!canAccessPage(pageId)) {
+                pageId = getDefaultPage();
+            }
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.getElementById('page-' + pageId).classList.add('active');
-            document.getElementById('nav-' + pageId).classList.add('active');
+            var pageEl = document.getElementById('page-' + pageId);
+            var navEl = document.getElementById('nav-' + pageId);
+            if (pageEl) pageEl.classList.add('active');
+            if (navEl) navEl.classList.add('active');
             document.getElementById('page-title').textContent = pageTitles[pageId] || pageId;
             if (pageId === 'outreach' && typeof renderTable === 'function') renderTable();
             if (fileMap[pageId] && !loadedPages[pageId]) {
@@ -1255,20 +1377,32 @@ let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Melanie'}, {id: '
         const storedId = sessionStorage.getItem('ags_user_id') || 'admin_user';
         const storedName = sessionStorage.getItem('ags_user_name') || 'Admin';
         const storedRole = sessionStorage.getItem('ags_user_role') || 'admin';
+        const storedSalesRole = sessionStorage.getItem('ags_sales_role') || storedRole;
 
         currentUser = { id: storedId, email: storedId + '@advancedgranite.com' };
-        userProfile = { name: storedName, role: storedRole };
+        userProfile = { name: storedName, role: storedRole, salesRole: storedSalesRole };
         
         // Update user badge and name in the header
         document.getElementById('userName').textContent = userProfile.name;
         const rb = document.getElementById('roleBadge');
         if (rb) {
-            rb.textContent = userProfile.role.toUpperCase();
+            var roleLabels = {
+                'admin': 'ADMIN',
+                'outside_sales': 'OUTSIDE SALES',
+                'inside_sales': 'INSIDE SALES',
+                'cs_sales': 'CS / SALES',
+                'scheduler': 'SCHEDULER',
+                'recovery': 'RECOVERY'
+            };
+            rb.textContent = roleLabels[userProfile.salesRole] || userProfile.role.toUpperCase();
             rb.style.background = userProfile.role === 'admin' ? 'var(--red-glow)' : 'var(--green-glow)';
             rb.style.color = userProfile.role === 'admin' ? 'var(--red)' : 'var(--green)';
             rb.style.border = userProfile.role === 'admin' ? '1px solid var(--red)' : '1px solid var(--green)';
             rb.style.display = 'inline-block';
         }
+
+        // Build sidebar based on role
+        if (typeof buildSidebar === 'function') buildSidebar();
 
         // Show add prospect button only for admin
         const btnToggleAdd = document.querySelector('.btn-toggle-add');
@@ -1285,7 +1419,11 @@ let allUsers = [{id: 'Todd', name: 'Todd'}, {id: 'Mel', name: 'Melanie'}, {id: '
             if (typeof switchOutreachTab === 'function') switchOutreachTab('tracker');
         }
 
-        var hash = window.location.hash.replace('#', '') || 'outreach';
+        // Default page based on role
+        var hash = window.location.hash.replace('#', '');
+        if (!hash || !canAccessPage(hash)) {
+            hash = getDefaultPage();
+        }
         if(typeof showPage === 'function') showPage(hash);
 
         try {
