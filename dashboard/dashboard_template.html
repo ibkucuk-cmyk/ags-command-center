@@ -697,8 +697,10 @@
         .assign-sel:focus { border-color:var(--accent); }
 
         /* STATUS INPUT */
-        .status-input { background:transparent; border:1px solid transparent; color:var(--text2); padding:2px 4px; border-radius:4px; font-size:11px; width:280px; font-family:inherit; }
-        .status-input:focus { border-color:var(--accent); background:var(--bg); color:var(--text); }
+        .status-input { background:transparent; border:1px dashed var(--border); color:var(--text2); padding:4px 6px; border-radius:4px; font-size:11px; width:280px; font-family:inherit; cursor:text; }
+        .status-input:hover { border-color:var(--text-muted); background:rgba(255,255,255,0.03); }
+        .status-input:focus { border-color:var(--accent); border-style:solid; background:var(--bg); color:var(--text); outline:none; }
+        .status-input::placeholder { color:var(--text-muted); opacity:0.6; }
 
         /* STARS */
         .star-2 { color:var(--amber); font-weight:700; }
@@ -1726,7 +1728,7 @@ function renderTable() {
             <td><input type="checkbox" class="cb" ${p.linkedin?'checked':''} onchange="toggleField(${p.id},'linkedin',this.checked)" ${disabledAttr}></td>
             <td>${assignHtml}</td>
             <td style="font-size:11px;color:var(--muted)">${dateStr}</td>
-            <td><input class="status-input" value="${p.status||''}" onblur="updateStatus(${p.id},this.value)" placeholder="Notes..." ${disabledAttr}></td>
+            <td><input class="status-input" value="${p.status||''}" onblur="updateStatus(${p.id},this.value)" placeholder="Add notes..."></td>
         </tr>`;
     }).join('');
 }
